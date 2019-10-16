@@ -2,6 +2,7 @@ use crate::api_request::delete::Delete;
 use crate::api_request::get::Get;
 use crate::api_request::patch::Patch;
 use crate::api_request::post::Post;
+use crate::consts;
 use std::error;
 
 use serde::Serialize;
