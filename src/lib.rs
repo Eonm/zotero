@@ -59,7 +59,6 @@
 
 mod api_error_parser;
 mod api_request;
-mod consts;
 pub mod data_structure;
 mod zotero_api;
 pub use api_request::delete::Delete;
