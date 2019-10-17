@@ -12,7 +12,9 @@ extern crate zotero;
 use zotero::ZoteroInit;
 use zotero::Post;
 use zotero::data_structure::item::{BookData, BookDataBuilder, Creator, CreatorBuilder};
+
 let z = ZoteroInit::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
+
 let creators : Vec<Creator> = vec![
     CreatorBuilder::default()
         .creator_type("author")
@@ -21,12 +23,14 @@ let creators : Vec<Creator> = vec![
         .build()
         .unwrap()
 ];
+
 let new_book : BookData = BookDataBuilder::default()
     .title("Sample_2")
     .creators(creators)
     .item_type("book")
     .build()
     .unwrap();
+    
 z.create_new_item(new_book);
 ```
 
@@ -38,8 +42,11 @@ use zotero::ZoteroInit;
 use zotero::Patch;
 use zotero::Get;
 use zotero::data_structure::item::ItemType;
+
 let z = ZoteroInit::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
+
 let item = z.get_item("Q8GNE36F", None);
+
 if let Ok(mut result) = item {
     if let ItemType::Book(bookdata) = &mut result.data {
         bookdata.title = "A new title".to_string();
