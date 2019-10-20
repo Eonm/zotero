@@ -42,9 +42,6 @@ pub struct Collection {
 }
 
 ///! This struct can be used to create a new Zotero collection
-/// ```no_run
-///
-/// ```
 #[derive(Default, Deserialize, Serialize, Debug, Builder, Clone)]
 #[serde(rename_all(deserialize = "camelCase", serialize = "camelCase"))]
 #[builder(setter(into), default)]
