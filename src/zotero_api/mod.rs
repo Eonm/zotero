@@ -28,10 +28,20 @@ impl<'a> Get<'a> for Zotero<'a> {
         };
 
         let client = reqwest::Client::new();
-        let mut res = client
-            .get(&url)
-            .bearer_auth(&self.library_type.get_api_key().unwrap())
-            .send()?;
+
+        let mut res = match &self.library_type.get_api_key() {
+            Some(key) => {
+                client
+                    .get(&url)
+                    .bearer_auth(key)
+                    .send()?
+            },
+            None => {
+                client
+                    .get(&url)
+                    .send()?
+            },
+        };
 
         Ok(res.json()?)
     }
@@ -106,7 +116,6 @@ impl<'a> Delete<'a> for Zotero<'a> {
             .header("If-Unmodified-Since-Version", last_version)
             .send()?;
 
-        println!("{:?}", res);
         Ok(res.json()?)
     }
 
