@@ -3,6 +3,9 @@ name = "zotero"
 version = "0.0.1-alpha"
 authors = ["eonm <eon.mathis@gmail.com>"]
 edition = "2018"
+license = "MIT"
+description = "Communicate with Zotero API"
+repository = "https://github.com/Eonm/zotero"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
