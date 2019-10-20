@@ -1,6 +1,6 @@
 [package]
 name = "zotero"
-version = "0.0.3-alpha"
+version = "0.0.1"
 authors = ["eonm <eon.mathis@gmail.com>"]
 edition = "2018"
 license = "MIT"
