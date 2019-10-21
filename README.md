@@ -4,6 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/Eonm/zotero/badge.svg?branch=master)](https://coveralls.io/github/Eonm/zotero?branch=master)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/Eonm/zotero/issues)
+[![API](https://docs.rs/zotero/badge.svg)](https://docs.rs/zotero)
 
 [API documentation](https://docs.rs/zotero/)
 
