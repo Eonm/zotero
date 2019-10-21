@@ -38,6 +38,7 @@
 //! ```
 //!
 //! ## Updating items and collections
+//! 
 //! ```no_run
 //! extern crate zotero;
 //!
@@ -62,8 +63,9 @@
 mod api_error_parser;
 mod api_request;
 mod consts;
-pub mod data_structure;
 mod zotero_api;
+
+pub mod data_structure;
 pub use api_request::delete::Delete;
 pub use api_request::get::Get;
 pub use api_request::patch::Patch;
