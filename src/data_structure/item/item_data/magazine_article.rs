@@ -1,4 +1,4 @@
-use crate::data_structure::item::Creator;
+use crate::data_structure::item::{Creator, Tag};
 use serde::Deserialize;
 use serde::Serialize;
 use std::collections::HashMap;
@@ -15,8 +15,8 @@ pub struct MagazineArticleData {
     #[builder(setter(skip))]
     pub version: usize,
     #[builder(setter(skip))]
-    #[serde(default = "default_document_type")]
-    pub item_type: String,
+   #[serde(default = "default_document_type")]
+   pub item_type: String,
     #[serde(skip_serializing_if = "String::is_empty", default)]
     pub title: String,
     #[serde(skip_serializing_if = "Vec::is_empty", default)]
@@ -55,7 +55,7 @@ pub struct MagazineArticleData {
     pub rights: String,
     #[serde(skip_serializing_if = "String::is_empty", default)]
     pub extra: String,
-    pub tags: Vec<String>,
+  pub tags: Vec<HashMap<String, Tag>>,
     pub collections: Vec<String>,
     pub relations: HashMap<String, String>,
     #[serde(skip_serializing)]

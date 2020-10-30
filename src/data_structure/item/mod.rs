@@ -209,10 +209,28 @@ pub struct Creator {
 pub struct ItemMeta {
     pub creator_summary: Option<String>,
     pub parsed_date: Option<String>,
-    pub num_children: Option<usize>,
+    pub num_children: NumChildren,
     // The following part concerns collections
     pub num_collections: Option<usize>,
     pub num_items: Option<usize>,
+}
+
+#[derive(Debug, Deserialize, Serialize, Clone, PartialEq)]
+#[serde(untagged)]
+pub enum NumChildren {
+    Usize(usize),
+    Bool(bool),
+}
+
+#[derive(Debug, Deserialize, Serialize, Clone, PartialEq)]
+#[serde(untagged)]
+pub enum Tag {
+    String(String),
+    Usize(usize)
+}
+
+impl Default for Tag {
+    fn default() -> Self { Tag::Usize(1) }
 }
 
 #[cfg(test)]

@@ -1,3 +1,4 @@
+use crate::data_structure::item::Tag;
 use derive_builder::Builder;
 use serde::Deserialize;
 use serde::Serialize;
@@ -19,6 +20,7 @@ pub struct AttachmentData {
     pub date_modified: Option<String>,
     #[serde(skip_serializing_if = "String::is_empty", default)]
     pub filename: String,
+    #[serde(default = "default_document_type")]
     pub item_type: String,
     #[serde(skip_serializing_if = "String::is_empty", default)]
     pub key: String,
@@ -31,8 +33,8 @@ pub struct AttachmentData {
     #[serde(skip_serializing_if = "String::is_empty", default)]
     pub parent_item: String,
     pub relations: HashMap<String, String>,
-    pub collection: Vec<String>,
-    pub tags: Vec<String>,
+    pub collection: Option<Vec<String>>,
+    pub tags: Vec<HashMap<String, Tag>>,
     #[serde(skip_serializing_if = "String::is_empty", default)]
     pub title: String,
     #[serde(skip_serializing_if = "String::is_empty", default)]
@@ -42,3 +44,7 @@ pub struct AttachmentData {
 
 use crate::data_structure::ToJson;
 impl ToJson for AttachmentData {}
+
+fn default_document_type() -> String {
+    "attachment".to_string()
+}

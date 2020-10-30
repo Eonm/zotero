@@ -1,4 +1,4 @@
-use crate::data_structure::item::Creator;
+use crate::data_structure::item::{Creator, Tag};
 use derive_builder::Builder;
 use serde::Deserialize;
 use serde::Serialize;
@@ -6,7 +6,6 @@ use std::collections::HashMap;
 
 /// A proposed piece of legislation.
 #[derive(Default, Deserialize, Serialize, Clone, Debug, Builder)]
-// #[serde(rename_all(deserialize = "camelCase", serialize = "camelCase"))]
 #[serde(rename_all(deserialize = "snake_case", serialize = "camelCase"))]
 #[builder(setter(into), default)]
 pub struct BillData {
@@ -53,7 +52,7 @@ pub struct BillData {
     pub rights: String,
     #[serde(skip_serializing_if = "String::is_empty", default)]
     pub extra: String,
-    pub tags: Vec<String>,
+  pub tags: Vec<HashMap<String, Tag>>,
     #[serde(skip_serializing_if = "Vec::is_empty", default)]
     pub collections: Vec<String>,
     pub relations: HashMap<String, String>,

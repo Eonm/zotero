@@ -50,6 +50,7 @@ pub trait Get<'a> {
     ) -> Result<Item, Box<dyn error::Error>> {
         let params: String = format!("/items/{}", item_id);
         let response = self.get_request(&params, extra_params.into())?;
+        println!("({:?})", response);
         Ok(serde_json::from_value(response)?)
     }
 
@@ -66,6 +67,7 @@ pub trait Get<'a> {
     ) -> Result<Vec<Item>, Box<dyn error::Error>> {
         let params = format!("/items");
         let response = self.get_request(&params, extra_params.into())?;
+        println!("{:#?}", response);
         Ok(serde_json::from_value(response)?)
     }
 
