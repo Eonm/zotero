@@ -2,9 +2,9 @@ use derive_builder::Builder;
 use std::collections::HashMap;
 
 use serde::de;
-use serde::Deserialize;
-use serde::Deserializer;
-use serde::Serialize;
+use serde::{Deserializer};
+use serde_derive::Serialize;
+use serde_derive::Deserialize;
 use serde_json::value::Value;
 
 #[derive(Default, Deserialize, Serialize, Debug, Clone)]
@@ -80,7 +80,7 @@ fn deserialize_collection_parent<'de, D>(deserializer: D) -> Result<StringOrBool
 where
     D: Deserializer<'de>,
 {
-    let s: Value = Deserialize::deserialize(deserializer)?;
+    let s: Value = serde::Deserialize::deserialize(deserializer)?;
     if s.is_boolean() {
         Ok(StringOrBool::Bool(
             serde_json::from_value::<bool>(s).map_err(de::Error::custom)?,

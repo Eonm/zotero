@@ -1,7 +1,7 @@
 use crate::data_structure::item::Creator;
 use derive_builder::Builder;
-use serde::Deserialize;
-use serde::Serialize;
+use serde_derive::Deserialize;
+use serde_derive::Serialize;
 use std::collections::HashMap;
 
 /// A piece of artwork (e.g., an oil painting, photograph, or sculpture). Also use this item type for other types of images or visual items (e.g., scientific figures).

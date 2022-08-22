@@ -1,5 +1,5 @@
-use serde::Deserialize;
-use serde::Serialize;
+use serde_derive::Deserialize;
+use serde_derive::Serialize;
 
 #[derive(Deserialize, Serialize, Debug, Clone, PartialEq)]
 pub struct Library {

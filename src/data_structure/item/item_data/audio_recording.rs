@@ -1,7 +1,7 @@
 use crate::data_structure::item::Creator;
 use derive_builder::Builder;
-use serde::Deserialize;
-use serde::Serialize;
+use serde_derive::Deserialize;
+use serde_derive::Serialize;
 use std::collections::HashMap;
 
 /// Any form of audio recording, including music, spoken word, sound effects, archival recordings, or audio-based scientific figures.

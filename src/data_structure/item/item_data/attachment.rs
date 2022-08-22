@@ -1,6 +1,6 @@
 use derive_builder::Builder;
-use serde::Deserialize;
-use serde::Serialize;
+use serde_derive::Deserialize;
+use serde_derive::Serialize;
 use std::collections::HashMap;
 
 /// A standalone attachment file (e.g., a PDF, JPEG, DOCX, PPTX, XLSX, or ODT file). Standalone attachment files have limited functionality in Zotero (e.g., they cannot be properly searched or cited). Always attach files to proper Zotero items.

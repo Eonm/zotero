@@ -27,7 +27,7 @@ impl<'a> Get<'a> for Zotero<'a> {
             Some(extra_par) => format!("{}{}?{}", base_url, params, extra_par),
         };
 
-        let client = reqwest::Client::new();
+        let client = reqwest::blocking::Client::new();
 
         let mut res = match &self.library_type.get_api_key() {
             Some(key) => {
@@ -63,7 +63,7 @@ impl<'a> Post<'a> for Zotero<'a> {
     ) -> Result<Value, Box<dyn error::Error>> {
         let url = format!("{}{}", self.library_type.get_base_url(), params);
 
-        let client = reqwest::Client::new();
+        let client = reqwest::blocking::Client::new();
         let mut res = client
             .post(&url)
             .bearer_auth(&self.library_type.get_api_key().unwrap())
@@ -86,7 +86,7 @@ impl<'a> Patch<'a> for Zotero<'a> {
     ) -> Result<Value, Box<dyn error::Error>> {
         let url = format!("{}{}", self.library_type.get_base_url(), params);
 
-        let client = reqwest::Client::new();
+        let client = reqwest::blocking::Client::new();
         let mut res = client
             .patch(&url)
             .bearer_auth(&self.library_type.get_api_key().unwrap())
@@ -109,7 +109,7 @@ impl<'a> Delete<'a> for Zotero<'a> {
     ) -> Result<Value, Box<dyn error::Error>> {
         let url = format!("{}{}", self.library_type.get_base_url(), params);
 
-        let client = reqwest::Client::new();
+        let client = reqwest::blocking::Client::new();
         let mut res = client
             .delete(&url)
             .bearer_auth(&self.library_type.get_api_key().unwrap())

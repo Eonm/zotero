@@ -1,7 +1,7 @@
 use crate::data_structure::item::Creator;
 use derive_builder::Builder;
-use serde::Deserialize;
-use serde::Serialize;
+use serde_derive::Deserialize;
+use serde_derive::Serialize;
 use std::collections::HashMap;
 
 /// A section of a book. Usually chapters, but also forewords, prefaces, introductions, appendices, afterwords, comments, etc.

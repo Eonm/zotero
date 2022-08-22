@@ -100,8 +100,8 @@ pub use item_data::WebpageDataBuilder;
 use crate::data_structure::shared_fields::{Library, Links};
 
 use derive_builder::Builder;
-use serde::Deserialize;
-use serde::Serialize;
+use serde_derive::Deserialize;
+use serde_derive::Serialize;
 
 #[derive(Deserialize, Serialize, Debug, Clone)]
 #[serde(rename_all = "camelCase", tag = "itemType")]

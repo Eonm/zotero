@@ -1,7 +1,7 @@
 use crate::data_structure::item::Creator;
 use derive_builder::Builder;
-use serde::Deserialize;
-use serde::Serialize;
+use serde_derive::Deserialize;
+use serde_derive::Serialize;
 use std::collections::HashMap;
 
 /// An article or entry posted to a personal blog website. For online articles published as part of a larger online publication (e.g., NYT Blogs), using Magazine Article or Newspaper Article generally yields better results
