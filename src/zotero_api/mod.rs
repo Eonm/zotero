@@ -29,7 +29,7 @@ impl<'a> Get<'a> for Zotero<'a> {
 
         let client = reqwest::blocking::Client::new();
 
-        let mut res = match &self.library_type.get_api_key() {
+        let res = match &self.library_type.get_api_key() {
             Some(key) => {
                 client
                     .get(&url)
@@ -64,7 +64,7 @@ impl<'a> Post<'a> for Zotero<'a> {
         let url = format!("{}{}", self.library_type.get_base_url(), params);
 
         let client = reqwest::blocking::Client::new();
-        let mut res = client
+        let res = client
             .post(&url)
             .bearer_auth(&self.library_type.get_api_key().unwrap())
             .json(&json_body)
@@ -87,7 +87,7 @@ impl<'a> Patch<'a> for Zotero<'a> {
         let url = format!("{}{}", self.library_type.get_base_url(), params);
 
         let client = reqwest::blocking::Client::new();
-        let mut res = client
+        let res = client
             .patch(&url)
             .bearer_auth(&self.library_type.get_api_key().unwrap())
             .json(&json_body)
@@ -110,7 +110,7 @@ impl<'a> Delete<'a> for Zotero<'a> {
         let url = format!("{}{}", self.library_type.get_base_url(), params);
 
         let client = reqwest::blocking::Client::new();
-        let mut res = client
+        let res = client
             .delete(&url)
             .bearer_auth(&self.library_type.get_api_key().unwrap())
             .header("If-Unmodified-Since-Version", last_version)
