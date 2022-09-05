@@ -1,6 +1,5 @@
-use serde_derive::Deserialize;
-use serde_derive::Serialize;
 use std::collections::HashMap;
+use serde::{Deserialize, Serialize};
 
 use derive_builder::Builder;
 

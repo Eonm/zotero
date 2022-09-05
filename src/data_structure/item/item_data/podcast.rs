@@ -1,6 +1,5 @@
 use crate::data_structure::item::Creator;
-use serde_derive::Deserialize;
-use serde_derive::Serialize;
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 use derive_builder::Builder;

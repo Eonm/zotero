@@ -1,8 +1,7 @@
 use crate::data_structure::item::Creator;
 use derive_builder::Builder;
-use serde_derive::Deserialize;
-use serde_derive::Serialize;
 use std::collections::HashMap;
+use serde::{Deserialize, Serialize};
 
 /// A proposed piece of legislation.
 #[derive(Default, Deserialize, Serialize, Clone, Debug, Builder)]

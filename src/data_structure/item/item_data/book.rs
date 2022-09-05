@@ -1,8 +1,7 @@
 use crate::data_structure::item::Creator;
 use derive_builder::Builder;
-use serde_derive::Deserialize;
-use serde_derive::Serialize;
 use std::collections::HashMap;
+use serde::{Deserialize, Serialize};
 
 /// A book or similar published item. For government documents, technical reports, manuals, etc., use Report instead. This item type can also be adapted to fit many types of unusual items.
 #[derive(Default, Deserialize, Serialize, Clone, Debug, Builder)]

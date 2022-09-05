@@ -2,9 +2,8 @@ use derive_builder::Builder;
 use std::collections::HashMap;
 
 use serde::de;
-use serde::{Deserializer};
-use serde_derive::Serialize;
-use serde_derive::Deserialize;
+use serde::Deserializer;
+use serde::{Deserialize, Serialize};
 use serde_json::value::Value;
 
 #[derive(Default, Deserialize, Serialize, Debug, Clone)]

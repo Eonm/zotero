@@ -97,11 +97,12 @@ pub use item_data::VideoRecordingDataBuilder;
 pub use item_data::WebpageData;
 pub use item_data::WebpageDataBuilder;
 
+use serde::Deserialize;
+use serde::Serialize;
+
 use crate::data_structure::shared_fields::{Library, Links};
 
 use derive_builder::Builder;
-use serde_derive::Deserialize;
-use serde_derive::Serialize;
 
 #[derive(Deserialize, Serialize, Debug, Clone)]
 #[serde(rename_all = "camelCase", tag = "itemType")]
