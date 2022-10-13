@@ -1,3 +1,4 @@
+use crate::data_structure::shared_fields::Tag;
 use crate::data_structure::item::Creator;
 use std::collections::HashMap;
 use serde::{Deserialize, Serialize};
@@ -58,8 +59,8 @@ pub struct MapData {
     pub rights: String,
     #[serde(skip_serializing_if = "String::is_empty", default)]
     pub extra: String,
-    pub tags: Vec<String>,
-    pub collections: Vec<String>,
+    pub tags: Vec<Tag>,
+    pub collections: Option<Vec<String>>,
     pub relations: HashMap<String, String>,
     #[serde(skip_serializing)]
     pub date_added: String,

@@ -23,6 +23,11 @@ pub struct Link {
     pub r#type: String,
 }
 
+#[derive(Deserialize, Serialize, Debug, Clone, PartialEq)]
+pub struct Tag {
+    pub tag: String
+}
+
 #[cfg(test)]
 mod test_shared_fields_deserialization {
     use super::*;

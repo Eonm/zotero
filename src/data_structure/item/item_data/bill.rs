@@ -1,3 +1,4 @@
+use crate::data_structure::shared_fields::Tag;
 use crate::data_structure::item::Creator;
 use derive_builder::Builder;
 use std::collections::HashMap;
@@ -52,9 +53,9 @@ pub struct BillData {
     pub rights: String,
     #[serde(skip_serializing_if = "String::is_empty", default)]
     pub extra: String,
-    pub tags: Vec<String>,
-    #[serde(skip_serializing_if = "Vec::is_empty", default)]
-    pub collections: Vec<String>,
+    pub tags: Vec<Tag>,
+    #[serde(skip_serializing_if = "Option::is_none", default)]
+    pub collections: Option<Vec<String>>,
     pub relations: HashMap<String, String>,
     #[serde(skip_serializing_if = "String::is_empty", default)]
     pub date_added: String,

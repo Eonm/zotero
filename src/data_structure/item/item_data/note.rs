@@ -1,3 +1,4 @@
+use crate::data_structure::shared_fields::Tag;
 use std::collections::HashMap;
 use serde::{Deserialize, Serialize};
 
@@ -19,7 +20,7 @@ pub struct NoteData {
     pub item_type: String,
     #[serde(skip_serializing_if = "String::is_empty", default)]
     pub note: String,
-    pub tags: Vec<String>,
+    pub tags: Vec<Tag>,
     pub relations: HashMap<String, String>,
     #[serde(skip_serializing)]
     pub date_added: String,

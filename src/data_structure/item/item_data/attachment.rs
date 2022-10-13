@@ -1,3 +1,4 @@
+use crate::data_structure::shared_fields::Tag;
 use derive_builder::Builder;
 use std::collections::HashMap;
 use serde::{Deserialize, Serialize};
@@ -18,25 +19,31 @@ pub struct AttachmentData {
     pub date_modified: Option<String>,
     #[serde(skip_serializing_if = "String::is_empty", default)]
     pub filename: String,
+    #[serde(default = "default_document_type")]
     pub item_type: String,
     #[serde(skip_serializing_if = "String::is_empty", default)]
     pub key: String,
     #[serde(skip_serializing_if = "String::is_empty", default)]
     pub link_mode: String,
     pub md5: Option<String>,
-    pub mtime: Option<String>,
+    pub mtime: Option<i64>,
     #[serde(skip_serializing_if = "String::is_empty", default)]
     pub note: String,
     #[serde(skip_serializing_if = "String::is_empty", default)]
     pub parent_item: String,
     pub relations: HashMap<String, String>,
-    pub collection: Vec<String>,
-    pub tags: Vec<String>,
+    #[serde(skip_serializing_if = "Option::is_none", default)]
+    pub collection: Option<Vec<String>>,
+    pub tags: Vec<Tag>,
     #[serde(skip_serializing_if = "String::is_empty", default)]
     pub title: String,
     #[serde(skip_serializing_if = "String::is_empty", default)]
     pub url: String,
     pub version: usize,
+}
+
+fn default_document_type() -> String {
+    "journalArticle".to_string()
 }
 
 use crate::data_structure::ToJson;

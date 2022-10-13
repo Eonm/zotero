@@ -63,6 +63,37 @@ pub struct CollectionMeta {
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
+pub enum IntOrBool {
+    r#Bool(bool),
+    Int(i64),
+}
+
+impl Default for IntOrBool {
+    fn default() -> IntOrBool {
+        IntOrBool::Bool(false)
+    }
+}
+
+/// A custom deserializer that deserialize parent_collection value either in bool or in Int.
+fn deserialize_meta_numChildren<'de, D>(deserializer: D) -> Result<IntOrBool, D::Error>
+where
+    D: Deserializer<'de>,
+{
+    let s: Value = serde::Deserialize::deserialize(deserializer)?;
+    if s.is_boolean() {
+        Ok(IntOrBool::Bool(
+            serde_json::from_value::<bool>(s).map_err(de::Error::custom)?,
+        ))
+    } else if s.is_number() {
+        Ok(IntOrBool::Int(
+            serde_json::from_value::<i64>(s).map_err(de::Error::custom)?,
+        ))
+    } else {
+        panic!("invalid value")
+    }
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub enum StringOrBool {
     r#Bool(bool),
     String(String),

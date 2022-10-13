@@ -24,6 +24,9 @@
 //! ```
 
 mod item_data;
+use serde::de;
+use serde::Deserializer;
+use serde_json::Value;
 pub use item_data::ArtworkData;
 pub use item_data::ArtworkDataBuilder;
 pub use item_data::AttachmentData;
@@ -210,11 +213,48 @@ pub struct Creator {
 pub struct ItemMeta {
     pub creator_summary: Option<String>,
     pub parsed_date: Option<String>,
-    pub num_children: Option<usize>,
+    #[serde(deserialize_with = "deserialize_meta_num_children", default)]
+    pub num_children: Option<SizeOrBool>,
     // The following part concerns collections
     pub num_collections: Option<usize>,
     pub num_items: Option<usize>,
 }
+
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
+pub enum SizeOrBool {
+    r#Bool(bool),
+    Size(usize),
+}
+
+impl Default for SizeOrBool {
+    fn default() -> SizeOrBool {
+        SizeOrBool::Bool(false)
+    }
+}
+
+/// A custom deserializer that deserialize parent_collection value either in bool or in Size.
+fn deserialize_meta_num_children<'de, D>(deserializer: D) -> Result<Option<SizeOrBool>, D::Error>
+where
+    D: Deserializer<'de>,
+{
+    let s: Value = serde::Deserialize::deserialize(deserializer)?;
+    if s.is_boolean() {
+        match serde_json::from_value::<bool>(s) {
+            Err(_) => Ok(None),
+            Ok(v) => Ok(Some(SizeOrBool::Bool(v)))
+        }
+    } else if s.is_number() {
+        match serde_json::from_value::<usize>(s) {
+            Err(_) => Ok(None),
+            Ok(v) => Ok(Some(SizeOrBool::Size(v)))
+        }
+    } else if s.is_null() {
+        Ok(None)
+    } else {
+        panic!("invalid type")
+    }
+}
+
 
 #[cfg(test)]
 mod test_item_deserialization {
