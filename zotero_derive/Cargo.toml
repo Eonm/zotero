@@ -1,0 +1,15 @@
+[package]
+name = "zotero_derive"
+version = "0.0.3"
+authors = ["ju6ge <judge@felixrichter.tech>"]
+license = "MIT"
+description = "Communicate with Zotero API"
+repository = "https://github.com/Eonm/zotero"
+keywords = ["zotero", "digital-humanities", "citations", "zotero-api"]
+
+[lib]
+proc-macro = true
+
+[dependencies]
+syn = "*"
+quote = "*"
