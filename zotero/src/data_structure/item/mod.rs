@@ -102,11 +102,11 @@ pub use item_data::WebpageDataBuilder;
 use serde::Deserialize;
 use serde::Serialize;
 
-use crate::data_structure::shared_fields::{Library, Links, Tagable, Tag};
+use crate::data_structure::shared_fields::{Library, Links, Tagable, Tag, Identifier};
 
 use derive_builder::Builder;
 
-use zotero_derive::Tagable;
+use zotero_derive::{Tagable};
 
 #[derive(Deserialize, Serialize, Debug, Clone, Tagable)]
 #[serde(rename_all = "camelCase", tag = "itemType")]
@@ -195,6 +195,12 @@ pub struct Item {
     pub links: Links,
     pub meta: ItemMeta,
     pub data: ItemType,
+}
+
+impl Item {
+    pub fn key(&self) -> &String {
+        &self.key
+    }
 }
 
 #[derive(Deserialize, Serialize, Default, Clone, Debug, Builder, PartialEq)]

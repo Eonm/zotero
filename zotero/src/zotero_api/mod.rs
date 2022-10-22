@@ -8,6 +8,9 @@ use std::error;
 use serde::Serialize;
 use serde_json::Value;
 
+use reqwest::header;
+use hyperx::header::{Link, LinkValue, RelationType};
+
 /// A struct representing a Zotero client.
 #[derive(Debug, PartialEq)]
 pub struct Zotero<'a> {
@@ -43,7 +46,63 @@ impl<'a> Get<'a> for Zotero<'a> {
             },
         };
 
-        Ok(res.json()?)
+        match &res.headers().get(header::LINK) {
+            None => Ok(res.json()?),
+            Some(v) => {
+                let link: Link = v.to_str().unwrap().parse()?;
+                let mut next: Option<LinkValue> = None;
+                for l in link.values() {
+                    match l.rel() {
+                        None => {}
+                        Some(reltypes) => {
+                            if reltypes.contains(&RelationType::Next) {
+                                next = Some(l.clone());
+                            }
+                        }
+                    }
+                }
+                let mut chain_responses: Vec<Value> = res.json()?;
+                while next.is_some() {
+                    let next_link = next.unwrap();
+                    next = None;
+                    let res = match &self.library_type.get_api_key() {
+                        Some(key) => {
+                            client
+                                .get(next_link.link())
+                                .bearer_auth(key)
+                                .send()?
+                        },
+                        None => {
+                            client
+                                .get(next_link.link())
+                                .send()?
+                        },
+                    };
+                    match &res.headers().get(header::LINK) {
+                        None => {
+                            next = None;
+                        }
+                        Some(v) => {
+                            let link: Link = v.to_str().unwrap().parse()?;
+                            for l in link.values() {
+                                match l.rel() {
+                                    None => {}
+                                    Some(reltypes) => {
+                                        if reltypes.contains(&RelationType::Next) {
+                                            next = Some(l.clone());
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    let mut v: Vec<Value> = res.json()?;
+                    chain_responses.append(&mut v);
+                }
+                Ok(Value::Array(chain_responses))
+            }
+        }
+
     }
 
     fn get_id(&self) -> &'a str {
@@ -202,10 +261,10 @@ impl<'a> LibraryType<'a> {
     fn get_base_url(&self) -> String {
         match self {
             LibraryType::UserLibrary { .. } => {
-                format!("{}{}{}/", consts::ZOTERO_BASE_URL, "users/", self.get_id())
+                format!("{}{}{}", consts::ZOTERO_BASE_URL, "users/", self.get_id())
             }
             LibraryType::GroupLibrary { .. } => {
-                format!("{}{}{}/", consts::ZOTERO_BASE_URL, "groups/", self.get_id())
+                format!("{}{}{}", consts::ZOTERO_BASE_URL, "groups/", self.get_id())
             }
         }
     }

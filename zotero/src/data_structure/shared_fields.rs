@@ -28,6 +28,10 @@ pub struct Tag {
     pub tag: String
 }
 
+pub trait Identifier {
+    fn key(&self) -> &String;
+}
+
 pub trait Tagable {
     fn tags(&self) -> &Vec<Tag>;
 
