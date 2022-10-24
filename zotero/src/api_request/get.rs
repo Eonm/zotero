@@ -70,6 +70,23 @@ pub trait Get<'a> {
         Ok(serde_json::from_value(response)?)
     }
 
+    /// Retreive all child items of a specific item
+    /// ```no_run
+    /// # use zotero::ZoteroInit;
+    /// # use zotero::Get;
+    /// let z = ZoteroInit::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
+    /// let items = z.get_child_items("B8ZNE3GH", None);
+    /// ```
+    fn get_child_items<I: Into<Option<&'a str>>>(
+        &self,
+        item_id: &'a str,
+        extra_params: I,
+    ) -> Result<Vec<Item>, Box<dyn error::Error>> {
+        let params: String = format!("/items/{}/children", item_id);
+        let response = self.get_request(&params, extra_params.into())?;
+        Ok(serde_json::from_value(response)?)
+    }
+
     /// Retreive top-level items in the library, excluding trashed items.
     /// ```no_run
     /// # use zotero::ZoteroInit;

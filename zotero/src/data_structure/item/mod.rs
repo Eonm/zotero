@@ -227,6 +227,26 @@ pub struct ItemMeta {
     pub num_items: Option<usize>,
 }
 
+impl ItemMeta {
+    pub fn has_children(&self) -> bool {
+        match &self.num_children {
+            None => false,
+            Some(sob) => {
+                match sob {
+                    SizeOrBool::Bool(_) => false,
+                    SizeOrBool::Size(v) => {
+                        if *v > 0 {
+                            true
+                        } else {
+                            false
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 pub enum SizeOrBool {
     r#Bool(bool),
