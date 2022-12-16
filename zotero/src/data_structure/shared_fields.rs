@@ -32,8 +32,12 @@ pub trait Identifier {
     fn key(&self) -> &String;
 }
 
-pub trait Tagable {
+pub trait ItemCommon {
+    fn title(&self) -> &str;
+
     fn tags(&self) -> &Vec<Tag>;
+
+    fn key(&self) -> &str;
 
     fn has_tag(&self, tag: String) -> bool {
         for t in self.tags() {

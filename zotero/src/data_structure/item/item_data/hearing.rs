@@ -1,13 +1,13 @@
-use crate::data_structure::shared_fields::{Tag, Tagable};
+use crate::data_structure::shared_fields::{Tag, ItemCommon};
 use crate::data_structure::item::Creator;
 use std::collections::HashMap;
 use serde::{Deserialize, Serialize};
 
 use derive_builder::Builder;
-use zotero_derive::Tagable;
+use zotero_derive::ItemCommon;
 
 /// A formal hearing or meeting report by a legislative body.
-#[derive(Default, Deserialize, Serialize, Clone, Debug, Builder, Tagable)]
+#[derive(Default, Deserialize, Serialize, Clone, Debug, Builder, ItemCommon)]
 #[serde(rename_all(deserialize = "camelCase", serialize = "camelCase"))]
 #[builder(setter(into), default)]
 pub struct HearingData {

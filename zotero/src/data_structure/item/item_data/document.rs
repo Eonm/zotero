@@ -1,13 +1,13 @@
-use crate::data_structure::shared_fields::{Tag, Tagable};
+use crate::data_structure::shared_fields::{Tag, ItemCommon};
 use crate::data_structure::item::Creator;
 use std::collections::HashMap;
 use serde::{Deserialize, Serialize};
 
 use derive_builder::Builder;
-use zotero_derive::Tagable;
+use zotero_derive::ItemCommon;
 
 /// A generic document item. This item type has a poor selection of fields and poor support in citation styles, so it should generally be avoided.
-#[derive(Default, Deserialize, Serialize, Clone, Debug, Builder, Tagable)]
+#[derive(Default, Deserialize, Serialize, Clone, Debug, Builder, ItemCommon)]
 #[serde(rename_all(deserialize = "camelCase", serialize = "camelCase"))]
 #[builder(setter(into), default)]
 pub struct DocumentData {

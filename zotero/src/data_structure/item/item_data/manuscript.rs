@@ -1,13 +1,13 @@
-use crate::data_structure::shared_fields::{Tag, Tagable};
+use crate::data_structure::shared_fields::{Tag, ItemCommon};
 use crate::data_structure::item::Creator;
 use std::collections::HashMap;
 use serde::{Deserialize, Serialize};
 
 use derive_builder::Builder;
-use zotero_derive::Tagable;
+use zotero_derive::ItemCommon;
 
 /// An unpublished manuscript. Use this type for both historical documents and modern unpublished work (e.g., unpublished manuscripts, manuscripts submitted for publication, working papers that are not widely available). Can also be used for other forms of historical or archival documents. This item type can also be adapted to fit many types of unusual items.
-#[derive(Default, Deserialize, Serialize, Clone, Debug, Builder, Tagable)]
+#[derive(Default, Deserialize, Serialize, Clone, Debug, Builder, ItemCommon)]
 #[serde(rename_all(deserialize = "camelCase", serialize = "camelCase"))]
 #[builder(setter(into), default)]
 pub struct ManuscriptData {

@@ -1,12 +1,12 @@
-use crate::data_structure::shared_fields::{Tag, Tagable};
+use crate::data_structure::shared_fields::{Tag, ItemCommon};
 use derive_builder::Builder;
 use std::collections::HashMap;
 use serde::{Deserialize, Serialize};
 
-use zotero_derive::Tagable;
+use zotero_derive::ItemCommon;
 
 /// A standalone attachment file (e.g., a PDF, JPEG, DOCX, PPTX, XLSX, or ODT file). Standalone attachment files have limited functionality in Zotero (e.g., they cannot be properly searched or cited). Always attach files to proper Zotero items.
-#[derive(Default, Deserialize, Serialize, Clone, Debug, Builder, Tagable)]
+#[derive(Default, Deserialize, Serialize, Clone, Debug, Builder, ItemCommon)]
 #[serde(rename_all(deserialize = "camelCase", serialize = "camelCase"))]
 #[builder(setter(into), default)]
 pub struct AttachmentData {

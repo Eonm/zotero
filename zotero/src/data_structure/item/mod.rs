@@ -24,6 +24,9 @@
 //! ```
 
 mod item_data;
+
+use chrono::DateTime;
+use chrono::Local;
 use serde::Deserializer;
 use serde_json::Value;
 pub use item_data::ArtworkData;
@@ -102,13 +105,13 @@ pub use item_data::WebpageDataBuilder;
 use serde::Deserialize;
 use serde::Serialize;
 
-use crate::data_structure::shared_fields::{Library, Links, Tagable, Tag, Identifier};
+use crate::data_structure::shared_fields::{Library, Links, ItemCommon, Tag, Identifier};
 
 use derive_builder::Builder;
 
-use zotero_derive::{Tagable};
+use zotero_derive::{ItemCommon};
 
-#[derive(Deserialize, Serialize, Debug, Clone, Tagable)]
+#[derive(Deserialize, Serialize, Debug, Clone, ItemCommon)]
 #[serde(rename_all = "camelCase", tag = "itemType")]
 /// An enum that holds structs used to deserialize zotero item data into rust structs.
 pub enum ItemType {
@@ -201,6 +204,253 @@ impl Item {
     pub fn key(&self) -> &String {
         &self.key
     }
+
+    pub fn title(&self) -> &str {
+        &self.data.title()
+    }
+
+    pub fn tags(&self) -> &Vec<Tag> {
+        self.data.tags()
+    }
+
+    pub fn has_tag(&self, tag: &str) -> bool {
+        for t in self.tags() {
+            if tag == t.tag {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //author function can not be implement for all structs automatically, fields do not exists everywhere
+    pub fn author(&self) -> String {
+        match &self.data {
+            ItemType::Artwork(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::Book(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::Document(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::JournalArticle(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::Report(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::MagazineArticle(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::Map(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::Letter(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::Statute(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::EncyclopediaArticle(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::Bill(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::Case(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::Hearing(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::ConferencePaper(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::ForumPost(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::Webpage(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::NewspaperArticle(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::RadioBroadcast(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::InstantMessage(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::DictionaryEntry(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::Presentation(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::Manuscript(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::BlogPost(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::TvBroadcast(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::Patent(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::Email(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::VideoRecording(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::Thesis(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::ComputerProgram(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::Podcast(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::AudioRecording(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::BookSection(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::Interview(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::Film(d) => {
+                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
+            }
+            ItemType::Attachment(_) => {
+                //Attachments are mostly Pdf with parents, for the author you need to call author() on the parent!
+                "".to_string()
+            }
+            ItemType::Note(_) => {
+                "You".to_string()
+            }
+        }
+    }
+
+    //author function can not be implement for all structs automatically, fields do not exists everywhere
+    pub fn date(&self) -> DateTime<Local> {
+        chrono::DateTime::parse_from_rfc2822(
+            match &self.data {
+                ItemType::Artwork(d) => {
+                    &d.date
+                }
+                ItemType::Book(d) => {
+                    &d.date
+                }
+                ItemType::Document(d) => {
+                    &d.date
+                }
+                ItemType::JournalArticle(d) => {
+                    &d.date
+                }
+                ItemType::Report(d) => {
+                    &d.date
+                }
+                ItemType::MagazineArticle(d) => {
+                    &d.date
+                }
+                ItemType::Map(d) => {
+                    &d.date
+                }
+                ItemType::Letter(d) => {
+                    &d.date
+                }
+                ItemType::Statute(d) => {
+                    &d.date_enacted
+                }
+                ItemType::EncyclopediaArticle(d) => {
+                    &d.date
+                }
+                ItemType::Bill(d) => {
+                    &d.date
+                }
+                ItemType::Case(d) => {
+                    &d.date_decided
+                }
+                ItemType::Hearing(d) => {
+                    &d.date
+                }
+                ItemType::ConferencePaper(d) => {
+                    &d.date
+                }
+                ItemType::ForumPost(d) => {
+                    &d.date
+                }
+                ItemType::Webpage(d) => {
+                    &d.date
+                }
+                ItemType::NewspaperArticle(d) => {
+                    &d.date
+                }
+                ItemType::RadioBroadcast(d) => {
+                    &d.date
+                }
+                ItemType::InstantMessage(d) => {
+                    &d.date
+                }
+                ItemType::DictionaryEntry(d) => {
+                    &d.date
+                }
+                ItemType::Presentation(d) => {
+                    &d.date
+                }
+                ItemType::Manuscript(d) => {
+                    &d.date
+                }
+                ItemType::BlogPost(d) => {
+                    &d.date
+                }
+                ItemType::TvBroadcast(d) => {
+                    &d.date
+                }
+                ItemType::Patent(d) => {
+                    &d.issue_date
+                }
+                ItemType::Email(d) => {
+                    &d.date
+                }
+                ItemType::VideoRecording(d) => {
+                    &d.date
+                }
+                ItemType::Thesis(d) => {
+                    &d.date
+                }
+                ItemType::ComputerProgram(d) => {
+                    &d.date
+                }
+                ItemType::Podcast(d) => {
+                    &d.access_date
+                }
+                ItemType::AudioRecording(d) => {
+                    &d.date
+                }
+                ItemType::BookSection(d) => {
+                    &d.access_date
+                }
+                ItemType::Interview(d) => {
+                    &d.date
+                }
+                ItemType::Film(d) => {
+                    &d.date
+                }
+                ItemType::Attachment(d) => {
+                    &d.date_added
+                }
+                ItemType::Note(d) => {
+                    &d.date_added
+                }
+            }).unwrap().with_timezone(&Local)
+    }
 }
 
 #[derive(Deserialize, Serialize, Default, Clone, Debug, Builder, PartialEq)]
@@ -213,6 +463,19 @@ pub struct Creator {
     pub first_name: String,
     #[serde(alias = "lastName")]
     pub last_name: String,
+}
+
+impl Creator {
+    pub fn full_name(&self) -> String {
+        format!("{} {}", self.first_name, self.last_name)
+    }
+
+    pub fn short_name(&self) -> String {
+        if self.first_name.len() == 0 {
+            return format!("{}", self.last_name)
+        }
+        format!("{}. {}", self.first_name.chars().next().unwrap(), self.last_name)
+    }
 }
 
 #[derive(Deserialize, Serialize, Debug, PartialEq, Clone)]

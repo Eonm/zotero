@@ -1,13 +1,13 @@
-use crate::data_structure::shared_fields::{Tag, Tagable};
+use crate::data_structure::shared_fields::{Tag, ItemCommon};
 use crate::data_structure::item::Creator;
 use derive_builder::Builder;
 use std::collections::HashMap;
 use serde::{Deserialize, Serialize};
 
-use zotero_derive::Tagable;
+use zotero_derive::ItemCommon;
 
 /// A legal case, either published or unpublished.
-#[derive(Default, Deserialize, Serialize, Clone, Debug, Builder, Tagable)]
+#[derive(Default, Deserialize, Serialize, Clone, Debug, Builder, ItemCommon)]
 #[serde(rename_all(deserialize = "camelCase", serialize = "camelCase"))]
 #[builder(setter(into), default)]
 pub struct CaseData {
@@ -40,8 +40,8 @@ pub struct CaseData {
     pub date_decided: String,
     #[serde(skip_serializing_if = "String::is_empty", default)]
     pub language: String,
-    #[serde(skip_serializing_if = "String::is_empty", default)]
-    pub short_title: String,
+    #[serde(skip_serializing_if = "String::is_empty", default, rename="short_title")]
+    pub title: String,
     #[serde(skip_serializing_if = "String::is_empty", default)]
     pub url: String,
     #[serde(skip_serializing_if = "String::is_empty", default)]
