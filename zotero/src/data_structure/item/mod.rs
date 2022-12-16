@@ -26,7 +26,9 @@
 mod item_data;
 
 use chrono::DateTime;
-use chrono::Local;
+use chrono::NaiveTime;
+use regex::Regex;
+use chrono::{NaiveDate, NaiveDateTime, TimeZone, Local};
 use serde::Deserializer;
 use serde_json::Value;
 pub use item_data::ArtworkData;
@@ -339,8 +341,7 @@ impl Item {
 
     //author function can not be implement for all structs automatically, fields do not exists everywhere
     pub fn date(&self) -> DateTime<Local> {
-        chrono::DateTime::parse_from_rfc2822(
-            match &self.data {
+        let date_str =             match &self.data {
                 ItemType::Artwork(d) => {
                     &d.date
                 }
@@ -449,9 +450,40 @@ impl Item {
                 ItemType::Note(d) => {
                     &d.date_added
                 }
-            }).unwrap().with_timezone(&Local)
+        };
+        convert_zotero_date_str(&date_str)
     }
 }
+
+fn convert_zotero_date_str(date_str: &str) -> DateTime<Local> {
+    let date_regex = Regex::new(r"(\d{4})-(\d{2})-(\d{2})").unwrap();
+    let date_captures = date_regex.captures(date_str);
+
+    let formatter_regex = Regex::new(r"(\d{2})/(\d{4})").unwrap();
+    let formatter_captures = formatter_regex.captures(date_str);
+
+    let expanded_date = if date_captures.is_some() {
+        // Date is in the "YYYY-MM-DD" format
+        let captures = date_captures.unwrap();
+        let year = captures[1].parse::<i32>().unwrap();
+        let month = captures[2].parse::<u32>().unwrap();
+        let day = captures[3].parse::<u32>().unwrap();
+        NaiveDateTime::new(NaiveDate::from_ymd_opt(year, month, day).unwrap(), NaiveTime::from_hms_opt(0, 0, 0).unwrap())
+    } else if formatter_captures.is_some() {
+        // Date is in the "MM/YYYY" format
+        let captures = formatter_captures.unwrap();
+        let month = captures[1].parse::<u32>().unwrap();
+        let year = captures[2].parse::<i32>().unwrap();
+        NaiveDateTime::new(NaiveDate::from_ymd_opt(year, month, 1).unwrap(), NaiveTime::from_hms_opt(0, 0, 0).unwrap())
+    } else {
+        // Unrecognized date format
+        return Local::now();
+    };
+
+    // Convert the NaiveDateTime object to a DateTime object in the local timezone
+    expanded_date.and_local_timezone(Local).unwrap()
+}
+
 
 #[derive(Deserialize, Serialize, Default, Clone, Debug, Builder, PartialEq)]
 #[serde(rename_all(deserialize = "camelCase", serialize = "camelCase"))]

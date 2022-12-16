@@ -19,3 +19,4 @@ url = "2.2.2"
 zotero_derive = { path = "../zotero_derive" }
 hyperx = { version = "1.4.0", features = ["headers"] }
 chrono = { version = "0.4.23", features = ["serde"] }
+regex = "1.7.0"
