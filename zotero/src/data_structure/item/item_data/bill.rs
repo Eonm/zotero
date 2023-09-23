@@ -8,7 +8,6 @@ use zotero_derive::ItemCommon;
 
 /// A proposed piece of legislation.
 #[derive(Default, Deserialize, Serialize, Clone, Debug, Builder, ItemCommon)]
-// #[serde(rename_all(deserialize = "camelCase", serialize = "camelCase"))]
 #[serde(rename_all(deserialize = "snake_case", serialize = "camelCase"))]
 #[builder(setter(into), default)]
 pub struct BillData {
