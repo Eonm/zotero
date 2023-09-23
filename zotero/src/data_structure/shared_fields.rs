@@ -40,12 +40,7 @@ pub trait ItemCommon {
     fn key(&self) -> &str;
 
     fn has_tag(&self, tag: String) -> bool {
-        for t in self.tags() {
-            if tag == t.tag {
-                return true;
-            }
-        }
-        return false;
+      self.tags().iter().any(|t| t.tag == tag)
     }
 }
 
