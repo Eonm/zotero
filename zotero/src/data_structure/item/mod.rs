@@ -216,12 +216,7 @@ impl Item {
     }
 
     pub fn has_tag(&self, tag: &str) -> bool {
-        for t in self.tags() {
-            if tag == t.tag {
-                return true;
-            }
-        }
-        return false;
+self.tags().iter().any(|t| t.tag == tag)
     }
 
     //author function can not be implement for all structs automatically, fields do not exists everywhere
