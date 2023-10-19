@@ -26,7 +26,7 @@ pub struct Link {
     pub r#type: String,
 }
 
-///! A struct representing a Zotero collection
+/// A struct representing a Zotero collection
 #[derive(Default, Deserialize, Serialize, Debug, Clone)]
 pub struct Collection {
     pub key: String,
@@ -37,7 +37,7 @@ pub struct Collection {
     pub data: CollectionData,
 }
 
-///! This struct can be used to create a new Zotero collection
+/// This struct can be used to create a new Zotero collection
 #[derive(Default, Deserialize, Serialize, Debug, Builder, Clone)]
 #[serde(rename_all(deserialize = "camelCase", serialize = "camelCase"))]
 #[builder(setter(into), default)]

@@ -1,3 +1,4 @@
+#[allow(clippy::assertions_on_constants)]
 extern crate zotero;
 use zotero::data_structure::item::{BookData, BookDataBuilder};
 use zotero::ZoteroInit;

@@ -207,7 +207,7 @@ impl Item {
     }
 
     pub fn title(&self) -> &str {
-        &self.data.title()
+        self.data.title()
     }
 
     pub fn tags(&self) -> &Vec<Tag> {
@@ -473,7 +473,7 @@ impl Item {
             ItemType::Attachment(d) => &d.date_added,
             ItemType::Note(d) => &d.date_added,
         };
-        convert_zotero_date_str(&date_str)
+        convert_zotero_date_str(date_str)
     }
 }
 
@@ -486,9 +486,8 @@ fn convert_zotero_date_str(date_str: &str) -> DateTime<Local> {
 
     let formatter_captures = FORMATTER_REGEX.captures(date_str);
 
-    let expanded_date = if date_captures.is_some() {
+    let expanded_date = if let Some(captures) = date_captures {
         // Date is in the "YYYY-MM-DD" format
-        let captures = date_captures.unwrap();
         let year = captures[1].parse::<i32>().unwrap();
         let month = captures[2].parse::<u32>().unwrap();
         let day = captures[3].parse::<u32>().unwrap();
@@ -496,9 +495,8 @@ fn convert_zotero_date_str(date_str: &str) -> DateTime<Local> {
             NaiveDate::from_ymd_opt(year, month, day).unwrap(),
             NaiveTime::from_hms_opt(0, 0, 0).unwrap(),
         )
-    } else if formatter_captures.is_some() {
+    } else if let Some(captures) = formatter_captures {
         // Date is in the "MM/YYYY" format
-        let captures = formatter_captures.unwrap();
         let month = captures[1].parse::<u32>().unwrap();
         let year = captures[2].parse::<i32>().unwrap();
         NaiveDateTime::new(
@@ -532,8 +530,8 @@ impl Creator {
     }
 
     pub fn short_name(&self) -> String {
-        if self.first_name.len() == 0 {
-            return format!("{}", self.last_name);
+        if self.first_name.is_empty() {
+            return self.last_name.to_string();
         }
         format!(
             "{}. {}",
@@ -561,13 +559,7 @@ impl ItemMeta {
             None => false,
             Some(sob) => match sob {
                 SizeOrBool::Bool(_) => false,
-                SizeOrBool::Size(v) => {
-                    if *v > 0 {
-                        true
-                    } else {
-                        false
-                    }
-                }
+                SizeOrBool::Size(v) => *v > 0,
             },
         }
     }
@@ -1827,8 +1819,8 @@ mod test_item_deserialization {
             creator_summary: Some("Lorem".into()),
             parsed_date: Some("25-2-2019".into()),
             num_children: Some(SizeOrBool::Size(1)),
-            num_collections: Some(1 as usize),
-            num_items: Some(0 as usize),
+            num_collections: Some(1_usize),
+            num_items: Some(0_usize),
         };
 
         let input = r#"

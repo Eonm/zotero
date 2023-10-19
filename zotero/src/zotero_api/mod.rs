@@ -105,8 +105,8 @@ impl<'a> Post<'a> for Zotero<'a> {
 
         let client = reqwest::blocking::Client::new();
         let res = client
-            .post(&url)
-            .bearer_auth(&self.library_type.get_api_key().unwrap())
+            .post(url)
+            .bearer_auth(self.library_type.get_api_key().unwrap())
             .json(&json_body)
             .send()?;
 
@@ -128,8 +128,8 @@ impl<'a> Patch<'a> for Zotero<'a> {
 
         let client = reqwest::blocking::Client::new();
         let res = client
-            .patch(&url)
-            .bearer_auth(&self.library_type.get_api_key().unwrap())
+            .patch(url)
+            .bearer_auth(self.library_type.get_api_key().unwrap())
             .json(&json_body)
             .send()?;
 
@@ -151,8 +151,8 @@ impl<'a> Delete<'a> for Zotero<'a> {
 
         let client = reqwest::blocking::Client::new();
         let res = client
-            .delete(&url)
-            .bearer_auth(&self.library_type.get_api_key().unwrap())
+            .delete(url)
+            .bearer_auth(self.library_type.get_api_key().unwrap())
             .header("If-Unmodified-Since-Version", last_version)
             .send()?;
 
@@ -252,16 +252,13 @@ impl<'a> LibraryType<'a> {
 
     fn group<S: Into<Option<&'a str>>>(group_id: &'a str, api_key: S) -> LibraryType<'a> {
         LibraryType::GroupLibrary {
-            group_id: group_id,
+            group_id,
             api_key: api_key.into(),
         }
     }
 
     fn user(user_id: &'a str, api_key: &'a str) -> LibraryType<'a> {
-        LibraryType::UserLibrary {
-            user_id: user_id,
-            api_key: api_key,
-        }
+        LibraryType::UserLibrary { user_id, api_key }
     }
 }
 

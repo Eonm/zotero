@@ -37,20 +37,20 @@ pub trait Post<'a> {
     fn get_id(&self) -> &'a str;
 
     fn create_new_item<T: Serialize>(&self, item: T) -> Result<Value, Box<dyn error::Error>> {
-        let params = format!("/items");
-        self.post_request(&params, vec![&item])
+        let params = "/items".to_string();
+        self.post_request(params, vec![&item])
     }
 
     /// Create multiple items
     fn create_new_items<T: Serialize>(&self, item: Vec<T>) -> Result<Value, Box<dyn error::Error>> {
-        let params = format!("/items");
-        self.post_request(&params, &item)
+        let params = "/items".to_string();
+        self.post_request(params, &item)
     }
 
     /// Create new collection
     fn create_new_collection<T: Serialize>(&self, item: T) -> Result<Value, Box<dyn error::Error>> {
-        let params = format!("/collections");
-        self.post_request(&params, vec![&item])
+        let params = "/collections".to_string();
+        self.post_request(params, vec![&item])
     }
 
     /// Create new collections
@@ -58,7 +58,7 @@ pub trait Post<'a> {
         &self,
         item: Vec<T>,
     ) -> Result<Value, Box<dyn error::Error>> {
-        let params = format!("/collections");
-        self.post_request(&params, &item)
+        let params = "/collections".to_string();
+        self.post_request(params, &item)
     }
 }

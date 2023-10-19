@@ -64,7 +64,7 @@ pub trait Get<'a> {
         &self,
         extra_params: I,
     ) -> Result<Vec<Item>, Box<dyn error::Error>> {
-        let params = format!("/items");
+        let params = "/items".to_string();
         let response = self.get_request(&params, extra_params.into())?;
 
         Ok(serde_json::from_value(response)?)
@@ -98,7 +98,7 @@ pub trait Get<'a> {
         &self,
         extra_params: I,
     ) -> Result<Vec<Item>, Box<dyn error::Error>> {
-        let params = format!("/items/top");
+        let params = "/items/top".to_string();
         let response = self.get_request(&params, extra_params.into())?;
         Ok(serde_json::from_value(response)?)
     }
@@ -114,7 +114,7 @@ pub trait Get<'a> {
         &self,
         extra_params: I,
     ) -> Result<Vec<Item>, Box<dyn error::Error>> {
-        let params = format!("/items/trash");
+        let params = "/items/trash".to_string();
         let response = self.get_request(&params, extra_params.into())?;
         Ok(serde_json::from_value(response)?)
     }
@@ -130,7 +130,7 @@ pub trait Get<'a> {
         &self,
         extra_params: I,
     ) -> Result<Vec<Item>, Box<dyn error::Error>> {
-        let params = format!("/publications/items");
+        let params = "/publications/items".to_string();
         let response = self.get_request(&params, extra_params.into())?;
         Ok(serde_json::from_value(response)?)
     }
@@ -170,7 +170,7 @@ pub trait Get<'a> {
             .filter(|collection| collection.data.name == collection_name)
             .collect::<Vec<Collection>>();
 
-        if filtered_collections.len() >= 1 {
+        if !filtered_collections.is_empty() {
             Ok(Some(filtered_collections[0].clone()))
         } else {
             Ok(None)
@@ -194,11 +194,11 @@ pub trait Get<'a> {
             .into_iter()
             .filter(|collection| {
                 let collection_data_name: &str = &collection.data.name;
-                collection_names.contains(&&collection_data_name)
+                collection_names.contains(&collection_data_name)
             })
             .collect::<Vec<Collection>>();
 
-        if filtered_collections.len() >= 1 {
+        if !filtered_collections.is_empty() {
             Ok(Some(filtered_collections))
         } else {
             Ok(None)
@@ -216,7 +216,7 @@ pub trait Get<'a> {
         &self,
         extra_params: I,
     ) -> Result<Vec<Collection>, Box<dyn error::Error>> {
-        let params = format!("/collections");
+        let params = "/collections".to_string();
         let response = self.get_request(&params, extra_params.into())?;
         Ok(serde_json::from_value(response)?)
     }
@@ -232,7 +232,7 @@ pub trait Get<'a> {
         &self,
         extra_params: I,
     ) -> Result<Vec<Collection>, Box<dyn error::Error>> {
-        let params = format!("/collections/top");
+        let params = "/collections/top".to_string();
         let response = self.get_request(&params, extra_params.into())?;
         Ok(serde_json::from_value(response)?)
     }
