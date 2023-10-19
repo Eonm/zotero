@@ -530,14 +530,10 @@ impl Creator {
     }
 
     pub fn short_name(&self) -> String {
-        if self.first_name.is_empty() {
-            return self.last_name.to_string();
+        match self.first_name.chars().next() {
+            Some(first_initial) => format!("{}. {}", first_initial, self.last_name),
+            None => format!("{}", self.last_name),
         }
-        format!(
-            "{}. {}",
-            self.first_name.chars().next().unwrap(),
-            self.last_name
-        )
     }
 }
 
