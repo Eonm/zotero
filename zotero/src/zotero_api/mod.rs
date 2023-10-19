@@ -358,7 +358,7 @@ mod tests {
         assert_eq!(user_library.get_api_key(), Some("abcdef"));
         assert_eq!(
             user_library.get_base_url(),
-            "https://api.zotero.org/users/123456789/"
+            "https://api.zotero.org/users/123456789"
         );
 
         let group_id = LibraryType::GroupLibrary {
@@ -370,7 +370,7 @@ mod tests {
         assert_eq!(group_id.get_api_key(), Some("abcdef"));
         assert_eq!(
             group_id.get_base_url(),
-            "https://api.zotero.org/groups/123456789/"
+            "https://api.zotero.org/groups/123456789"
         );
     }
 }
