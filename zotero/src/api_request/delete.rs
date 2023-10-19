@@ -2,7 +2,7 @@ use serde_json::value::Value;
 use std::error;
 
 extern crate url;
-use url::form_urlencoded::{byte_serialize};
+use url::form_urlencoded::byte_serialize;
 
 /// Perform delete operations on Zotero items and collections.
 pub trait Delete<'a> {
@@ -41,7 +41,14 @@ pub trait Delete<'a> {
         items_keys: Vec<S>,
         last_version: S,
     ) -> Result<Value, Box<dyn error::Error>> {
-        let params = format!("items/{}", items_keys.iter().map(|elem| elem.as_ref()).collect::<Vec<&str>>().join(" || "));
+        let params = format!(
+            "items/{}",
+            items_keys
+                .iter()
+                .map(|elem| elem.as_ref())
+                .collect::<Vec<&str>>()
+                .join(" || ")
+        );
         self.delete_request(&params, last_version.as_ref())
     }
 
@@ -99,7 +106,14 @@ pub trait Delete<'a> {
         tags_keys: Vec<S>,
         last_version: S,
     ) -> Result<Value, Box<dyn error::Error>> {
-        let params = format!("tags?tag={}", tags_keys.iter().map(|elem| byte_serialize(elem.as_ref().as_bytes()).collect()).collect::<Vec<String>>().join(" || "));
+        let params = format!(
+            "tags?tag={}",
+            tags_keys
+                .iter()
+                .map(|elem| byte_serialize(elem.as_ref().as_bytes()).collect())
+                .collect::<Vec<String>>()
+                .join(" || ")
+        );
         self.delete_request(&params, last_version.as_ref())
     }
 }

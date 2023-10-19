@@ -27,9 +27,7 @@ mod item_data;
 
 use chrono::DateTime;
 use chrono::NaiveTime;
-use once_cell::sync::Lazy;
-use regex::Regex;
-use chrono::{NaiveDate, NaiveDateTime, Local};
+use chrono::{Local, NaiveDate, NaiveDateTime};
 pub use item_data::ArtworkData;
 pub use item_data::ArtworkDataBuilder;
 pub use item_data::AttachmentData;
@@ -102,11 +100,13 @@ pub use item_data::VideoRecordingData;
 pub use item_data::VideoRecordingDataBuilder;
 pub use item_data::WebpageData;
 pub use item_data::WebpageDataBuilder;
+use once_cell::sync::Lazy;
+use regex::Regex;
 
 use serde::Deserialize;
 use serde::Serialize;
 
-use crate::data_structure::shared_fields::{Library, Links, ItemCommon, Tag};
+use crate::data_structure::shared_fields::{ItemCommon, Library, Links, Tag};
 
 use derive_builder::Builder;
 
@@ -215,247 +215,271 @@ impl Item {
     }
 
     pub fn has_tag(&self, tag: &str) -> bool {
-self.tags().iter().any(|t| t.tag == tag)
+        self.tags().iter().any(|t| t.tag == tag)
     }
 
     //author function can not be implement for all structs automatically, fields do not exists everywhere
     pub fn author(&self) -> String {
         match &self.data {
-            ItemType::Artwork(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::Book(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::Document(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::JournalArticle(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::Report(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::MagazineArticle(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::Map(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::Letter(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::Statute(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::EncyclopediaArticle(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::Bill(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::Case(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::Hearing(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::ConferencePaper(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::ForumPost(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::Webpage(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::NewspaperArticle(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::RadioBroadcast(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::InstantMessage(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::DictionaryEntry(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::Presentation(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::Manuscript(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::BlogPost(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::TvBroadcast(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::Patent(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::Email(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::VideoRecording(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::Thesis(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::ComputerProgram(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::Podcast(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::AudioRecording(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::BookSection(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::Interview(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
-            ItemType::Film(d) => {
-                d.creators.iter().map(|c| c.full_name()).collect::<Vec<String>>().join(", ")
-            }
+            ItemType::Artwork(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::Book(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::Document(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::JournalArticle(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::Report(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::MagazineArticle(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::Map(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::Letter(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::Statute(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::EncyclopediaArticle(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::Bill(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::Case(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::Hearing(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::ConferencePaper(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::ForumPost(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::Webpage(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::NewspaperArticle(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::RadioBroadcast(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::InstantMessage(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::DictionaryEntry(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::Presentation(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::Manuscript(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::BlogPost(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::TvBroadcast(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::Patent(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::Email(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::VideoRecording(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::Thesis(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::ComputerProgram(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::Podcast(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::AudioRecording(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::BookSection(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::Interview(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
+            ItemType::Film(d) => d
+                .creators
+                .iter()
+                .map(|c| c.full_name())
+                .collect::<Vec<String>>()
+                .join(", "),
             ItemType::Attachment(_) => {
                 //Attachments are mostly Pdf with parents, for the author you need to call author() on the parent!
                 "".to_string()
             }
-            ItemType::Note(_) => {
-                "You".to_string()
-            }
+            ItemType::Note(_) => "You".to_string(),
         }
     }
 
     //author function can not be implement for all structs automatically, fields do not exists everywhere
     pub fn date(&self) -> DateTime<Local> {
-        let date_str =             match &self.data {
-                ItemType::Artwork(d) => {
-                    &d.date
-                }
-                ItemType::Book(d) => {
-                    &d.date
-                }
-                ItemType::Document(d) => {
-                    &d.date
-                }
-                ItemType::JournalArticle(d) => {
-                    &d.date
-                }
-                ItemType::Report(d) => {
-                    &d.date
-                }
-                ItemType::MagazineArticle(d) => {
-                    &d.date
-                }
-                ItemType::Map(d) => {
-                    &d.date
-                }
-                ItemType::Letter(d) => {
-                    &d.date
-                }
-                ItemType::Statute(d) => {
-                    &d.date_enacted
-                }
-                ItemType::EncyclopediaArticle(d) => {
-                    &d.date
-                }
-                ItemType::Bill(d) => {
-                    &d.date
-                }
-                ItemType::Case(d) => {
-                    &d.date_decided
-                }
-                ItemType::Hearing(d) => {
-                    &d.date
-                }
-                ItemType::ConferencePaper(d) => {
-                    &d.date
-                }
-                ItemType::ForumPost(d) => {
-                    &d.date
-                }
-                ItemType::Webpage(d) => {
-                    &d.date
-                }
-                ItemType::NewspaperArticle(d) => {
-                    &d.date
-                }
-                ItemType::RadioBroadcast(d) => {
-                    &d.date
-                }
-                ItemType::InstantMessage(d) => {
-                    &d.date
-                }
-                ItemType::DictionaryEntry(d) => {
-                    &d.date
-                }
-                ItemType::Presentation(d) => {
-                    &d.date
-                }
-                ItemType::Manuscript(d) => {
-                    &d.date
-                }
-                ItemType::BlogPost(d) => {
-                    &d.date
-                }
-                ItemType::TvBroadcast(d) => {
-                    &d.date
-                }
-                ItemType::Patent(d) => {
-                    &d.issue_date
-                }
-                ItemType::Email(d) => {
-                    &d.date
-                }
-                ItemType::VideoRecording(d) => {
-                    &d.date
-                }
-                ItemType::Thesis(d) => {
-                    &d.date
-                }
-                ItemType::ComputerProgram(d) => {
-                    &d.date
-                }
-                ItemType::Podcast(d) => {
-                    &d.access_date
-                }
-                ItemType::AudioRecording(d) => {
-                    &d.date
-                }
-                ItemType::BookSection(d) => {
-                    &d.access_date
-                }
-                ItemType::Interview(d) => {
-                    &d.date
-                }
-                ItemType::Film(d) => {
-                    &d.date
-                }
-                ItemType::Attachment(d) => {
-                    &d.date_added
-                }
-                ItemType::Note(d) => {
-                    &d.date_added
-                }
+        let date_str = match &self.data {
+            ItemType::Artwork(d) => &d.date,
+            ItemType::Book(d) => &d.date,
+            ItemType::Document(d) => &d.date,
+            ItemType::JournalArticle(d) => &d.date,
+            ItemType::Report(d) => &d.date,
+            ItemType::MagazineArticle(d) => &d.date,
+            ItemType::Map(d) => &d.date,
+            ItemType::Letter(d) => &d.date,
+            ItemType::Statute(d) => &d.date_enacted,
+            ItemType::EncyclopediaArticle(d) => &d.date,
+            ItemType::Bill(d) => &d.date,
+            ItemType::Case(d) => &d.date_decided,
+            ItemType::Hearing(d) => &d.date,
+            ItemType::ConferencePaper(d) => &d.date,
+            ItemType::ForumPost(d) => &d.date,
+            ItemType::Webpage(d) => &d.date,
+            ItemType::NewspaperArticle(d) => &d.date,
+            ItemType::RadioBroadcast(d) => &d.date,
+            ItemType::InstantMessage(d) => &d.date,
+            ItemType::DictionaryEntry(d) => &d.date,
+            ItemType::Presentation(d) => &d.date,
+            ItemType::Manuscript(d) => &d.date,
+            ItemType::BlogPost(d) => &d.date,
+            ItemType::TvBroadcast(d) => &d.date,
+            ItemType::Patent(d) => &d.issue_date,
+            ItemType::Email(d) => &d.date,
+            ItemType::VideoRecording(d) => &d.date,
+            ItemType::Thesis(d) => &d.date,
+            ItemType::ComputerProgram(d) => &d.date,
+            ItemType::Podcast(d) => &d.access_date,
+            ItemType::AudioRecording(d) => &d.date,
+            ItemType::BookSection(d) => &d.access_date,
+            ItemType::Interview(d) => &d.date,
+            ItemType::Film(d) => &d.date,
+            ItemType::Attachment(d) => &d.date_added,
+            ItemType::Note(d) => &d.date_added,
         };
         convert_zotero_date_str(&date_str)
     }
 }
 
-static DATE_REGEX: Lazy<Regex> = Lazy::new(|| {
-    Regex::new(r"(\d{4})-(\d{2})-(\d{2})").unwrap()
-});
+static DATE_REGEX: Lazy<Regex> = Lazy::new(|| Regex::new(r"(\d{4})-(\d{2})-(\d{2})").unwrap());
 
-static FORMATTER_REGEX: Lazy<Regex> = Lazy::new(|| {
-    Regex::new(r"(\d{2})/(\d{4})").unwrap()
-});
+static FORMATTER_REGEX: Lazy<Regex> = Lazy::new(|| Regex::new(r"(\d{2})/(\d{4})").unwrap());
 
 fn convert_zotero_date_str(date_str: &str) -> DateTime<Local> {
     let date_captures = DATE_REGEX.captures(date_str);
@@ -468,13 +492,19 @@ fn convert_zotero_date_str(date_str: &str) -> DateTime<Local> {
         let year = captures[1].parse::<i32>().unwrap();
         let month = captures[2].parse::<u32>().unwrap();
         let day = captures[3].parse::<u32>().unwrap();
-        NaiveDateTime::new(NaiveDate::from_ymd_opt(year, month, day).unwrap(), NaiveTime::from_hms_opt(0, 0, 0).unwrap())
+        NaiveDateTime::new(
+            NaiveDate::from_ymd_opt(year, month, day).unwrap(),
+            NaiveTime::from_hms_opt(0, 0, 0).unwrap(),
+        )
     } else if formatter_captures.is_some() {
         // Date is in the "MM/YYYY" format
         let captures = formatter_captures.unwrap();
         let month = captures[1].parse::<u32>().unwrap();
         let year = captures[2].parse::<i32>().unwrap();
-        NaiveDateTime::new(NaiveDate::from_ymd_opt(year, month, 1).unwrap(), NaiveTime::from_hms_opt(0, 0, 0).unwrap())
+        NaiveDateTime::new(
+            NaiveDate::from_ymd_opt(year, month, 1).unwrap(),
+            NaiveTime::from_hms_opt(0, 0, 0).unwrap(),
+        )
     } else {
         // Unrecognized date format
         return Local::now();
@@ -483,7 +513,6 @@ fn convert_zotero_date_str(date_str: &str) -> DateTime<Local> {
     // Convert the NaiveDateTime object to a DateTime object in the local timezone
     expanded_date.and_local_timezone(Local).unwrap()
 }
-
 
 #[derive(Deserialize, Serialize, Default, Clone, Debug, Builder, PartialEq)]
 #[serde(rename_all(deserialize = "camelCase", serialize = "camelCase"))]
@@ -504,9 +533,13 @@ impl Creator {
 
     pub fn short_name(&self) -> String {
         if self.first_name.len() == 0 {
-            return format!("{}", self.last_name)
+            return format!("{}", self.last_name);
         }
-        format!("{}. {}", self.first_name.chars().next().unwrap(), self.last_name)
+        format!(
+            "{}. {}",
+            self.first_name.chars().next().unwrap(),
+            self.last_name
+        )
     }
 }
 
@@ -526,18 +559,16 @@ impl ItemMeta {
     pub fn has_children(&self) -> bool {
         match &self.num_children {
             None => false,
-            Some(sob) => {
-                match sob {
-                    SizeOrBool::Bool(_) => false,
-                    SizeOrBool::Size(v) => {
-                        if *v > 0 {
-                            true
-                        } else {
-                            false
-                        }
+            Some(sob) => match sob {
+                SizeOrBool::Bool(_) => false,
+                SizeOrBool::Size(v) => {
+                    if *v > 0 {
+                        true
+                    } else {
+                        false
                     }
                 }
-            }
+            },
         }
     }
 }

@@ -25,7 +25,7 @@ pub struct Link {
 
 #[derive(Deserialize, Serialize, Debug, Clone, PartialEq)]
 pub struct Tag {
-    pub tag: String
+    pub tag: String,
 }
 
 pub trait Identifier {
@@ -40,7 +40,7 @@ pub trait ItemCommon {
     fn key(&self) -> &str;
 
     fn has_tag(&self, tag: String) -> bool {
-      self.tags().iter().any(|t| t.tag == tag)
+        self.tags().iter().any(|t| t.tag == tag)
     }
 }
 

@@ -1,7 +1,7 @@
 extern crate zotero;
 use zotero::data_structure::item::{BookData, BookDataBuilder};
 use zotero::ZoteroInit;
-use zotero::{Get, Delete};
+use zotero::{Delete, Get};
 
 #[cfg(test)]
 mod tests {
@@ -9,11 +9,8 @@ mod tests {
 
     #[test]
     fn creating_item() {
-        let _book : BookData = BookDataBuilder::default()
-            .title("e")
-            .build()
-            .unwrap();
-        
+        let _book: BookData = BookDataBuilder::default().title("e").build().unwrap();
+
         assert!(true)
     }
 
@@ -34,7 +31,7 @@ mod tests {
         let z = ZoteroInit::set_user("123456789", "abcdefgh");
         match z.get_collection("ABREZSE", None) {
             Ok(_) => assert!(true),
-            Err(_) => assert!(true)
+            Err(_) => assert!(true),
         };
     }
 
@@ -43,7 +40,7 @@ mod tests {
         let z = ZoteroInit::set_group("123456789", None);
         match z.get_collection("ABREZSE", None) {
             Ok(_) => assert!(true),
-            Err(_) => assert!(true)
+            Err(_) => assert!(true),
         };
     }
 
@@ -52,7 +49,7 @@ mod tests {
         let z = ZoteroInit::set_user("123456789", "abcdefgh");
         match z.delete_item("ABREZSE", "2050") {
             Ok(_) => assert!(true),
-            Err(_) => assert!(true)
+            Err(_) => assert!(true),
         };
     }
 
@@ -62,7 +59,7 @@ mod tests {
         let z = ZoteroInit::set_group("123456789", None);
         match z.delete_item("ABREZSE", "2050") {
             Ok(_) => assert!(true),
-            Err(_) => assert!(true)
+            Err(_) => assert!(true),
         };
     }
 
@@ -71,7 +68,7 @@ mod tests {
         let z = ZoteroInit::set_group("123456789", "abcdefgh");
         match z.delete_item("ABREZSE", "2050") {
             Ok(_) => assert!(true),
-            Err(_) => assert!(true)
+            Err(_) => assert!(true),
         };
     }
 
@@ -80,7 +77,7 @@ mod tests {
         let z = ZoteroInit::set_group("123456789", "abcdefgh");
         match z.delete_collection("ABREZSE", "2050") {
             Ok(_) => assert!(true),
-            Err(_) => assert!(true)
+            Err(_) => assert!(true),
         };
     }
 
@@ -89,7 +86,7 @@ mod tests {
         let z = ZoteroInit::set_user("123456789", "abcdefgh");
         match z.delete_collection("ABREZSE", "2050") {
             Ok(_) => assert!(true),
-            Err(_) => assert!(true)
+            Err(_) => assert!(true),
         };
     }
 
@@ -98,7 +95,7 @@ mod tests {
         let z = ZoteroInit::set_user("123456789", "abcdefgh");
         match z.delete_items(vec!["ABREZSE"], "2050") {
             Ok(_) => assert!(true),
-            Err(_) => assert!(true)
+            Err(_) => assert!(true),
         };
     }
 
@@ -107,7 +104,7 @@ mod tests {
         let z = ZoteroInit::set_group("123456789", "abcdefgh");
         match z.delete_items(vec!["ABREZSE"], "2050") {
             Ok(_) => assert!(true),
-            Err(_) => assert!(true)
+            Err(_) => assert!(true),
         };
     }
 
@@ -116,7 +113,7 @@ mod tests {
         let z = ZoteroInit::set_group("123456789", "abcdefgh");
         match z.delete_tag("ABREZSE", "2050") {
             Ok(_) => assert!(true),
-            Err(_) => assert!(true)
+            Err(_) => assert!(true),
         };
     }
 
@@ -125,7 +122,7 @@ mod tests {
         let z = ZoteroInit::set_user("123456789", "abcdefgh");
         match z.delete_tag("ABREZSE", "2050") {
             Ok(_) => assert!(true),
-            Err(_) => assert!(true)
+            Err(_) => assert!(true),
         };
     }
 
@@ -134,7 +131,7 @@ mod tests {
         let z = ZoteroInit::set_group("123456789", "abcdefgh");
         match z.delete_tags(vec!["ABREZSE"], "2050") {
             Ok(_) => assert!(true),
-            Err(_) => assert!(true)
+            Err(_) => assert!(true),
         };
     }
 
@@ -143,7 +140,7 @@ mod tests {
         let z = ZoteroInit::set_user("123456789", "abcdefgh");
         match z.delete_tags(vec!["ABREZSE"], "2050") {
             Ok(_) => assert!(true),
-            Err(_) => assert!(true)
+            Err(_) => assert!(true),
         };
     }
 
@@ -152,16 +149,16 @@ mod tests {
         let z = ZoteroInit::set_user("123456789", "abcdefgh");
         match z.delete_search("ABREZSE", "2050") {
             Ok(_) => assert!(true),
-            Err(_) => assert!(true)
+            Err(_) => assert!(true),
         };
     }
-   
+
     #[test]
     fn delete_search_for_group() {
         let z = ZoteroInit::set_group("123456789", "abcdefgh");
         match z.delete_search("ABREZSE", "2050") {
             Ok(_) => assert!(true),
-            Err(_) => assert!(true)
+            Err(_) => assert!(true),
         };
     }
 }

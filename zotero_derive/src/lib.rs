@@ -12,7 +12,7 @@ pub fn tagable_macro_derive(input: TokenStream) -> TokenStream {
     impl_tagable_macro(&ast)
 }
 
-fn  impl_tagable_macro(ast: &syn::DeriveInput) -> TokenStream {
+fn impl_tagable_macro(ast: &syn::DeriveInput) -> TokenStream {
     let name = &ast.ident;
 
     let gen = match &ast.data {
@@ -23,36 +23,30 @@ fn  impl_tagable_macro(ast: &syn::DeriveInput) -> TokenStream {
             let mut variant_impls_tags = Vec::new();
             for v in variants {
                 let vid = &v.ident;
-                variant_impls_tags.push(
-                    quote!{
-                        #name::#vid(x) => x.tags()
-                    }
-                )
+                variant_impls_tags.push(quote! {
+                    #name::#vid(x) => x.tags()
+                })
             }
 
             // implement title fuction fo enum values for every variant
             let mut variant_impls_title = Vec::new();
             for v in variants {
                 let vid = &v.ident;
-                variant_impls_title.push(
-                    quote!{
-                        #name::#vid(x) => x.title()
-                    }
-                )
+                variant_impls_title.push(quote! {
+                    #name::#vid(x) => x.title()
+                })
             }
 
             // implement key fuction fo enum values for every variant
             let mut variant_impls_key = Vec::new();
             for v in variants {
                 let vid = &v.ident;
-                variant_impls_key.push(
-                    quote!{
-                        #name::#vid(x) => x.key()
-                    }
-                )
+                variant_impls_key.push(quote! {
+                    #name::#vid(x) => x.key()
+                })
             }
 
-            quote!{
+            quote! {
                 impl ItemCommon for #name {
                     fn title(&self) -> &str {
                         match &self {

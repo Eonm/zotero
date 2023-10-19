@@ -8,8 +8,8 @@ use std::error;
 use serde::Serialize;
 use serde_json::Value;
 
-use reqwest::header;
 use hyperx::header::{Link, LinkValue, RelationType};
+use reqwest::header;
 
 /// A struct representing a Zotero client.
 #[derive(Debug, PartialEq)]
@@ -33,17 +33,8 @@ impl<'a> Get<'a> for Zotero<'a> {
         let client = reqwest::blocking::Client::new();
 
         let res = match &self.library_type.get_api_key() {
-            Some(key) => {
-                client
-                    .get(&url)
-                    .bearer_auth(key)
-                    .send()?
-            },
-            None => {
-                client
-                    .get(&url)
-                    .send()?
-            },
+            Some(key) => client.get(&url).bearer_auth(key).send()?,
+            None => client.get(&url).send()?,
         };
 
         match &res.headers().get(header::LINK) {
@@ -66,17 +57,8 @@ impl<'a> Get<'a> for Zotero<'a> {
                     let next_link = next.unwrap();
                     next = None;
                     let res = match &self.library_type.get_api_key() {
-                        Some(key) => {
-                            client
-                                .get(next_link.link())
-                                .bearer_auth(key)
-                                .send()?
-                        },
-                        None => {
-                            client
-                                .get(next_link.link())
-                                .send()?
-                        },
+                        Some(key) => client.get(next_link.link()).bearer_auth(key).send()?,
+                        None => client.get(next_link.link()).send()?,
                     };
                     match &res.headers().get(header::LINK) {
                         None => {
@@ -102,7 +84,6 @@ impl<'a> Get<'a> for Zotero<'a> {
                 Ok(Value::Array(chain_responses))
             }
         }
-
     }
 
     fn get_id(&self) -> &'a str {

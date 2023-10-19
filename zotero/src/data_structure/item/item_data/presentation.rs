@@ -1,7 +1,7 @@
-use crate::data_structure::shared_fields::{Tag, ItemCommon};
 use crate::data_structure::item::Creator;
-use std::collections::HashMap;
+use crate::data_structure::shared_fields::{ItemCommon, Tag};
 use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
 
 use derive_builder::Builder;
 use zotero_derive::ItemCommon;

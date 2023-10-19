@@ -1,9 +1,9 @@
-use crate::data_structure::shared_fields::{Tag, ItemCommon};
 use crate::data_structure::item::Creator;
+use crate::data_structure::shared_fields::{ItemCommon, Tag};
 use std::collections::HashMap;
 
-use serde::{Deserialize, Serialize};
 use derive_builder::Builder;
+use serde::{Deserialize, Serialize};
 use zotero_derive::ItemCommon;
 
 /// An article published in a newspaper (either print or online).

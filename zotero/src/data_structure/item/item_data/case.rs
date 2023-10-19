@@ -1,8 +1,8 @@
-use crate::data_structure::shared_fields::{Tag, ItemCommon};
 use crate::data_structure::item::Creator;
+use crate::data_structure::shared_fields::{ItemCommon, Tag};
 use derive_builder::Builder;
-use std::collections::HashMap;
 use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
 
 use zotero_derive::ItemCommon;
 
@@ -40,7 +40,11 @@ pub struct CaseData {
     pub date_decided: String,
     #[serde(skip_serializing_if = "String::is_empty", default)]
     pub language: String,
-    #[serde(skip_serializing_if = "String::is_empty", default, rename="short_title")]
+    #[serde(
+        skip_serializing_if = "String::is_empty",
+        default,
+        rename = "short_title"
+    )]
     pub title: String,
     #[serde(skip_serializing_if = "String::is_empty", default)]
     pub url: String,

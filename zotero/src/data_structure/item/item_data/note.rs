@@ -1,6 +1,6 @@
-use crate::data_structure::shared_fields::{Tag, ItemCommon};
-use std::collections::HashMap;
+use crate::data_structure::shared_fields::{ItemCommon, Tag};
 use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
 
 use derive_builder::Builder;
 use zotero_derive::ItemCommon;
@@ -19,7 +19,7 @@ pub struct NoteData {
     #[builder(setter(skip))]
     pub version: usize,
     #[builder(setter(skip))]
-    #[serde(skip_serializing, default="note_title")]
+    #[serde(skip_serializing, default = "note_title")]
     pub title: String,
     #[serde(skip_serializing_if = "String::is_empty", default)]
     pub parent_item: String,

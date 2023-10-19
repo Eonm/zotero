@@ -1,6 +1,6 @@
 //! This module contains all Zotero data structures. This data structures can be used for serialization and deserialization.
 
-use serde::{Serialize};
+use serde::Serialize;
 
 pub mod collection;
 pub mod item;
