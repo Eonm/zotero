@@ -1,8 +1,7 @@
 extern crate zotero;
 use zotero::data_structure::item::{BookData, BookDataBuilder};
-use zotero::{ZoteroInit, Zotero};
-
-use zotero::{Get, Post, Patch, Delete};
+use zotero::ZoteroInit;
+use zotero::{Get, Delete};
 
 #[cfg(test)]
 mod tests {
@@ -10,7 +9,7 @@ mod tests {
 
     #[test]
     fn creating_item() {
-        let book : BookData = BookDataBuilder::default()
+        let _book : BookData = BookDataBuilder::default()
             .title("e")
             .build()
             .unwrap();
@@ -20,13 +19,13 @@ mod tests {
 
     #[test]
     fn creating_zotero_user_client() {
-        let z = ZoteroInit::set_user("123456789", "abcdefghij");      
+        let _z = ZoteroInit::set_user("123456789", "abcdefghij");
         assert!(true)
     }
 
     #[test]
     fn creating_zotero_group_client() {
-        let z = ZoteroInit::set_group("123456789", None);
+        let _z = ZoteroInit::set_group("123456789", None);
         assert!(true)
     }
 
