@@ -29,9 +29,7 @@ use chrono::DateTime;
 use chrono::NaiveTime;
 use once_cell::sync::Lazy;
 use regex::Regex;
-use chrono::{NaiveDate, NaiveDateTime, TimeZone, Local};
-use serde::Deserializer;
-use serde_json::Value;
+use chrono::{NaiveDate, NaiveDateTime, Local};
 pub use item_data::ArtworkData;
 pub use item_data::ArtworkDataBuilder;
 pub use item_data::AttachmentData;
@@ -108,11 +106,11 @@ pub use item_data::WebpageDataBuilder;
 use serde::Deserialize;
 use serde::Serialize;
 
-use crate::data_structure::shared_fields::{Library, Links, ItemCommon, Tag, Identifier};
+use crate::data_structure::shared_fields::{Library, Links, ItemCommon, Tag};
 
 use derive_builder::Builder;
 
-use zotero_derive::{ItemCommon};
+use zotero_derive::ItemCommon;
 
 #[derive(Deserialize, Serialize, Debug, Clone, ItemCommon)]
 #[serde(rename_all = "camelCase", tag = "itemType")]
@@ -517,7 +515,7 @@ impl Creator {
 pub struct ItemMeta {
     pub creator_summary: Option<String>,
     pub parsed_date: Option<String>,
-    #[serde(deserialize_with = "deserialize_meta_num_children", default)]
+    #[serde(default)]
     pub num_children: Option<SizeOrBool>,
     // The following part concerns collections
     pub num_collections: Option<usize>,
@@ -545,8 +543,9 @@ impl ItemMeta {
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
+#[serde(untagged)]
 pub enum SizeOrBool {
-    r#Bool(bool),
+    Bool(bool),
     Size(usize),
 }
 
@@ -555,30 +554,6 @@ impl Default for SizeOrBool {
         SizeOrBool::Bool(false)
     }
 }
-
-/// A custom deserializer that deserialize parent_collection value either in bool or in Size.
-fn deserialize_meta_num_children<'de, D>(deserializer: D) -> Result<Option<SizeOrBool>, D::Error>
-where
-    D: Deserializer<'de>,
-{
-    let s: Value = serde::Deserialize::deserialize(deserializer)?;
-    if s.is_boolean() {
-        match serde_json::from_value::<bool>(s) {
-            Err(_) => Ok(None),
-            Ok(v) => Ok(Some(SizeOrBool::Bool(v)))
-        }
-    } else if s.is_number() {
-        match serde_json::from_value::<usize>(s) {
-            Err(_) => Ok(None),
-            Ok(v) => Ok(Some(SizeOrBool::Size(v)))
-        }
-    } else if s.is_null() {
-        Ok(None)
-    } else {
-        panic!("invalid type")
-    }
-}
-
 
 #[cfg(test)]
 mod test_item_deserialization {
@@ -754,7 +729,7 @@ mod test_item_deserialization {
                     }
                 },
                 "meta": {
-                    "numChildren": 0
+                    "numChildren": false
                 },
                 "data": {
                     "key": "4H5SBMDE",
@@ -815,7 +790,6 @@ mod test_item_deserialization {
                     }
                 },
                 "meta": {
-                    "numChildren": 0
                 },
                 "data": {
                     "key": "SAU7PP79",
