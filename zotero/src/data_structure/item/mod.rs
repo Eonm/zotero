@@ -27,6 +27,7 @@ mod item_data;
 
 use chrono::DateTime;
 use chrono::NaiveTime;
+use once_cell::sync::Lazy;
 use regex::Regex;
 use chrono::{NaiveDate, NaiveDateTime, TimeZone, Local};
 use serde::Deserializer;
@@ -450,12 +451,18 @@ self.tags().iter().any(|t| t.tag == tag)
     }
 }
 
-fn convert_zotero_date_str(date_str: &str) -> DateTime<Local> {
-    let date_regex = Regex::new(r"(\d{4})-(\d{2})-(\d{2})").unwrap();
-    let date_captures = date_regex.captures(date_str);
+static DATE_REGEX: Lazy<Regex> = Lazy::new(|| {
+    Regex::new(r"(\d{4})-(\d{2})-(\d{2})").unwrap()
+});
 
-    let formatter_regex = Regex::new(r"(\d{2})/(\d{4})").unwrap();
-    let formatter_captures = formatter_regex.captures(date_str);
+static FORMATTER_REGEX: Lazy<Regex> = Lazy::new(|| {
+    Regex::new(r"(\d{2})/(\d{4})").unwrap()
+});
+
+fn convert_zotero_date_str(date_str: &str) -> DateTime<Local> {
+    let date_captures = DATE_REGEX.captures(date_str);
+
+    let formatter_captures = FORMATTER_REGEX.captures(date_str);
 
     let expanded_date = if date_captures.is_some() {
         // Date is in the "YYYY-MM-DD" format
