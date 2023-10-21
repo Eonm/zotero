@@ -1,0 +1,1922 @@
+[
+  {
+    "data": {
+      "DOI": "10.1145/3371109",
+      "ISSN": "2475-1421",
+      "abstractNote": "RALF JUNG, Mozilla, USA and MPI-SWS, Germany HOANG-HAI DANG, MPI-SWS, Germany JEEHOON KANG, KAIST, Korea DEREK DREYER, MPI-SWS, Germany Type systems are useful not just for the safety guarantees they provide, but also for helping compilers generate more efficient code by simplifying important program analyses. In Rust, the type system imposes a strict discipline on pointer aliasing, and it is an express goal of the Rust compiler developers to make use of that alias information for the purpose of program optimizations that reorder memory accesses. The problem is that Rust also supports unsafe code, and programmers can write unsafe code that bypasses the usual compiler checks to violate the aliasing discipline. To strike a balance between optimizations and unsafe code, the language needs to provide a set of rules such that unsafe code authors can be sure, if they are following these rules, that the compiler will preserve the semantics of their code despite all the optimizations it is doing. In this work, we propose Stacked Borrows, an operational semantics for memory accesses in Rust. Stacked Borrows defines an aliasing discipline and declares programs violating it to have undefined behavior, meaning the compiler does not have to consider such programs when performing optimizations. We give formal proofs (mechanized in Coq) showing that this rules out enough programs to enable optimizations that reorder memory accesses around unknown code and function calls, based solely on intraprocedural reasoning. We also implemented this operational model in an interpreter for Rust and ran large parts of the Rust standard library test suite in the interpreter to validate that the model permits enough real-world unsafe Rust code. CCS Concepts: • Theory of computation → Operational semantics.",
+      "accessDate": "2021-05-31T12:53:07Z",
+      "archive": "",
+      "archiveLocation": "",
+      "callNumber": "",
+      "collections": [
+        "6F2F9TJW"
+      ],
+      "creators": [
+        {
+          "creatorType": "author",
+          "firstName": "Ralf",
+          "lastName": "Jung"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "Hoang-Hai",
+          "lastName": "Dang"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "Jeehoon",
+          "lastName": "Kang"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "Derek",
+          "lastName": "Dreyer"
+        }
+      ],
+      "date": "01/2020",
+      "dateAdded": "2021-05-31T12:53:07Z",
+      "dateModified": "2022-08-28T15:33:46Z",
+      "extra": "",
+      "issue": "POPL",
+      "itemType": "journalArticle",
+      "journalAbbreviation": "Proc. ACM Program. Lang.",
+      "key": "8D9Z87BD",
+      "language": "en",
+      "libraryCatalog": "DOI.org (Crossref)",
+      "pages": "1-32",
+      "publicationTitle": "Proceedings of the ACM on Programming Languages",
+      "relations": {},
+      "rights": "",
+      "series": "",
+      "seriesText": "",
+      "seriesTitle": "",
+      "shortTitle": "Stacked borrows",
+      "tags": [
+        {
+          "tag": "plato-read"
+        }
+      ],
+      "title": "Stacked borrows: an aliasing model for Rust",
+      "url": "https://dl.acm.org/doi/10.1145/3371109",
+      "version": 303,
+      "volume": "4"
+    },
+    "key": "8D9Z87BD",
+    "library": {
+      "id": 8071408,
+      "links": {
+        "alternate": {
+          "href": "https://www.zotero.org/ju6ge",
+          "type": "text/html"
+        }
+      },
+      "name": "ju6ge",
+      "type": "user"
+    },
+    "links": {
+      "alternate": {
+        "href": "https://www.zotero.org/ju6ge/items/8D9Z87BD",
+        "type": "text/html"
+      },
+      "self": {
+        "href": "https://api.zotero.org/users/8071408/items/8D9Z87BD",
+        "type": "application/json"
+      }
+    },
+    "meta": {
+      "creatorSummary": "Jung et al.",
+      "numChildren": 1,
+      "parsedDate": "2020"
+    },
+    "version": 303
+  },
+  {
+    "data": {
+      "accessDate": "2022-04-07T11:47:04Z",
+      "charset": "",
+      "contentType": "application/pdf",
+      "dateAdded": "2022-04-07T11:47:04Z",
+      "dateModified": "2022-04-07T11:47:04Z",
+      "filename": "Chih-Tang - 1988 - Evolution of the MOS transistor-from conception to.pdf",
+      "itemType": "attachment",
+      "key": "FEUAL8TE",
+      "linkMode": "imported_url",
+      "md5": "24a363a8c94f173065f176b96a749a14",
+      "mtime": 1649332024000,
+      "note": "",
+      "parentItem": "REFYZDUZ",
+      "relations": {},
+      "tags": [],
+      "title": "IEEE Xplore Full Text PDF",
+      "url": "https://ieeexplore.ieee.org/stampPDF/getPDF.jsp?tp=&arnumber=16328&ref=aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50LzE2MzI4",
+      "version": 276
+    },
+    "key": "FEUAL8TE",
+    "library": {
+      "id": 8071408,
+      "links": {
+        "alternate": {
+          "href": "https://www.zotero.org/ju6ge",
+          "type": "text/html"
+        }
+      },
+      "name": "ju6ge",
+      "type": "user"
+    },
+    "links": {
+      "alternate": {
+        "href": "https://www.zotero.org/ju6ge/items/FEUAL8TE",
+        "type": "text/html"
+      },
+      "self": {
+        "href": "https://api.zotero.org/users/8071408/items/FEUAL8TE",
+        "type": "application/json"
+      },
+      "up": {
+        "href": "https://api.zotero.org/users/8071408/items/REFYZDUZ",
+        "type": "application/json"
+      }
+    },
+    "meta": {
+      "numChildren": false
+    },
+    "version": 276
+  },
+  {
+    "data": {
+      "accessDate": "2022-04-07T11:47:01Z",
+      "charset": "utf-8",
+      "contentType": "text/html",
+      "dateAdded": "2022-04-07T11:47:01Z",
+      "dateModified": "2022-04-07T11:47:01Z",
+      "filename": "16328.html",
+      "itemType": "attachment",
+      "key": "9FA336I7",
+      "linkMode": "imported_url",
+      "md5": "ebaa08e990dfa378cee19ffdb3bc73ca",
+      "mtime": 1649332021000,
+      "note": "",
+      "parentItem": "REFYZDUZ",
+      "relations": {},
+      "tags": [],
+      "title": "IEEE Xplore Abstract Record",
+      "url": "https://ieeexplore.ieee.org/abstract/document/16328",
+      "version": 276
+    },
+    "key": "9FA336I7",
+    "library": {
+      "id": 8071408,
+      "links": {
+        "alternate": {
+          "href": "https://www.zotero.org/ju6ge",
+          "type": "text/html"
+        }
+      },
+      "name": "ju6ge",
+      "type": "user"
+    },
+    "links": {
+      "alternate": {
+        "href": "https://www.zotero.org/ju6ge/items/9FA336I7",
+        "type": "text/html"
+      },
+      "self": {
+        "href": "https://api.zotero.org/users/8071408/items/9FA336I7",
+        "type": "application/json"
+      },
+      "up": {
+        "href": "https://api.zotero.org/users/8071408/items/REFYZDUZ",
+        "type": "application/json"
+      }
+    },
+    "meta": {},
+    "version": 276
+  },
+  {
+    "data": {
+      "DOI": "10.1109/5.16328",
+      "ISSN": "1558-2256",
+      "abstractNote": "Historical developments of the metal-oxide-semiconductor field-effect transistor (MOSFET) during the last 60 years are reviewed, from the 1928 patent disclosures of the field-effect conductivity modulation concept and the semiconductor triode structures proposed by Lilienfeld to the 1947 Shockley-originated efforts which led to the laboratory demonstration of the modern silicon. MOSFET in 1960. A survey is then made of the milestones of the past 30 years leading to the latest submicron silicon logic CMOS (complementary MOS) and BICMOS (bipolar-junction transistor CMOS combined) arrays and the three-dimensional and ferroelectric extensions of Dennard's one-transistor dynamic random access memory (DRAM) cell. The status of the submicron lithographic technologies is summarized. Future trends of memory cell density and logic gate speed are projected. Comparisons of the switching speed of the silicon MOSFET with that of silicon bipolar and GaAs field-effect transistors are reviewed. The use of high-temperature superconducting wires and GaAs-on-Si monolithic semiconductor optical clocks to break the interconnect-wiring delay barrier is discussed.<>",
+      "accessDate": "",
+      "archive": "",
+      "archiveLocation": "",
+      "callNumber": "",
+      "collections": [
+        "35EYLJK9"
+      ],
+      "creators": [
+        {
+          "creatorType": "author",
+          "firstName": "Sah",
+          "lastName": "Chih-Tang"
+        }
+      ],
+      "date": "1988-10",
+      "dateAdded": "2022-04-07T11:46:56Z",
+      "dateModified": "2022-04-07T11:46:56Z",
+      "extra": "Conference Name: Proceedings of the IEEE",
+      "issue": "10",
+      "itemType": "journalArticle",
+      "journalAbbreviation": "",
+      "key": "REFYZDUZ",
+      "language": "",
+      "libraryCatalog": "IEEE Xplore",
+      "pages": "1280-1326",
+      "publicationTitle": "Proceedings of the IEEE",
+      "relations": {},
+      "rights": "",
+      "series": "",
+      "seriesText": "",
+      "seriesTitle": "",
+      "shortTitle": "",
+      "tags": [
+        {
+          "tag": "BiCMOS integrated circuits",
+          "type": 1
+        },
+        {
+          "tag": "CMOS logic circuits",
+          "type": 1
+        },
+        {
+          "tag": "Conductivity",
+          "type": 1
+        },
+        {
+          "tag": "FETs",
+          "type": 1
+        },
+        {
+          "tag": "Ferroelectric materials",
+          "type": 1
+        },
+        {
+          "tag": "Laboratories",
+          "type": 1
+        },
+        {
+          "tag": "Logic arrays",
+          "type": 1
+        },
+        {
+          "tag": "MOSFET circuits",
+          "type": 1
+        },
+        {
+          "tag": "Silicon",
+          "type": 1
+        },
+        {
+          "tag": "Very large scale integration",
+          "type": 1
+        }
+      ],
+      "title": "Evolution of the MOS transistor-from conception to VLSI",
+      "url": "",
+      "version": 274,
+      "volume": "76"
+    },
+    "key": "REFYZDUZ",
+    "library": {
+      "id": 8071408,
+      "links": {
+        "alternate": {
+          "href": "https://www.zotero.org/ju6ge",
+          "type": "text/html"
+        }
+      },
+      "name": "ju6ge",
+      "type": "user"
+    },
+    "links": {
+      "alternate": {
+        "href": "https://www.zotero.org/ju6ge/items/REFYZDUZ",
+        "type": "text/html"
+      },
+      "self": {
+        "href": "https://api.zotero.org/users/8071408/items/REFYZDUZ",
+        "type": "application/json"
+      }
+    },
+    "meta": {
+      "creatorSummary": "Chih-Tang",
+      "numChildren": 2,
+      "parsedDate": "1988-10"
+    },
+    "version": 274
+  },
+  {
+    "data": {
+      "abstractNote": "Described is a CMOS transistor structure with a multi-layered gate electrode structure and a method of fabrication. The gate electrode structure has a three-layered metallic gate electrode and a polysilicon layer. The first metallic layer acts as a barrier to prevent the second metallic layer from reacting with an underlying dielectric. The second metallic layer acts to set the work function of the gate electrode structure. The third metallic layer acts as a barrier to prevent the second metallic layer from reacting with the polysilicon layer.\n    The method of fabricating the gate electrode structure includes forming the three metallic layers thick enough that each layer provides the barrier and work-function setting functions mentioned above, but also thin enough that a subsequent wet-etch can be performed without excessive undercutting of the metallic layers. During implant and anneal processes, the polysilicon layer acts as a protective mask over the metallic layers to protect an underlying silicon substrate from interacting with dopants used during the implant process.",
+      "accessDate": "2022-04-07T10:55:56Z",
+      "applicationNumber": "US10230944",
+      "assignee": "Intel Corp",
+      "collections": [
+        "35EYLJK9",
+        "RZB6374Z"
+      ],
+      "country": "US",
+      "creators": [
+        {
+          "creatorType": "inventor",
+          "firstName": "Robert",
+          "lastName": "Chau"
+        },
+        {
+          "creatorType": "inventor",
+          "firstName": "Mark",
+          "lastName": "Doczy"
+        },
+        {
+          "creatorType": "inventor",
+          "firstName": "Brian",
+          "lastName": "Doyle"
+        },
+        {
+          "creatorType": "inventor",
+          "firstName": "Jack",
+          "lastName": "Kavalieros"
+        }
+      ],
+      "dateAdded": "2022-04-07T10:55:56Z",
+      "dateModified": "2022-04-07T10:55:56Z",
+      "extra": "",
+      "filingDate": "2002-08-28",
+      "issueDate": "2006-02-14",
+      "issuingAuthority": "United States",
+      "itemType": "patent",
+      "key": "89Q6ZT8U",
+      "language": "en",
+      "legalStatus": "",
+      "pages": "",
+      "patentNumber": "US6998686B2",
+      "place": "",
+      "priorityNumbers": "",
+      "references": "",
+      "relations": {},
+      "rights": "",
+      "shortTitle": "",
+      "tags": [
+        {
+          "tag": "barrier",
+          "type": 1
+        },
+        {
+          "tag": "gate electrode",
+          "type": 1
+        },
+        {
+          "tag": "layer",
+          "type": 1
+        },
+        {
+          "tag": "metallic",
+          "type": 1
+        },
+        {
+          "tag": "metallic layer",
+          "type": 1
+        }
+      ],
+      "title": "Metal-gate electrode for CMOS transistor applications",
+      "url": "https://patents.google.com/patent/US6998686B2/en",
+      "version": 264
+    },
+    "key": "89Q6ZT8U",
+    "library": {
+      "id": 8071408,
+      "links": {
+        "alternate": {
+          "href": "https://www.zotero.org/ju6ge",
+          "type": "text/html"
+        }
+      },
+      "name": "ju6ge",
+      "type": "user"
+    },
+    "links": {
+      "alternate": {
+        "href": "https://www.zotero.org/ju6ge/items/89Q6ZT8U",
+        "type": "text/html"
+      },
+      "self": {
+        "href": "https://api.zotero.org/users/8071408/items/89Q6ZT8U",
+        "type": "application/json"
+      }
+    },
+    "meta": {
+      "creatorSummary": "Chau et al.",
+      "numChildren": 1,
+      "parsedDate": "2006-02-14"
+    },
+    "version": 264
+  },
+  {
+    "data": {
+      "accessDate": "2022-04-07T10:55:56Z",
+      "charset": "",
+      "contentType": "application/pdf",
+      "dateAdded": "2022-04-07T10:55:56Z",
+      "dateModified": "2022-04-07T10:55:56Z",
+      "filename": "Chau et al. - 2006 - Metal-gate electrode for CMOS transistor applicati.pdf",
+      "itemType": "attachment",
+      "key": "7U5MYRNH",
+      "linkMode": "imported_url",
+      "md5": "2f62dd36bfe4b264243d7da9081c9be8",
+      "mtime": 1649328956000,
+      "note": "",
+      "parentItem": "89Q6ZT8U",
+      "relations": {},
+      "tags": [],
+      "title": "Full Text PDF",
+      "url": "https://patentimages.storage.googleapis.com/ae/a4/a3/b11385e554211c/US6998686.pdf",
+      "version": 261
+    },
+    "key": "7U5MYRNH",
+    "library": {
+      "id": 8071408,
+      "links": {
+        "alternate": {
+          "href": "https://www.zotero.org/ju6ge",
+          "type": "text/html"
+        }
+      },
+      "name": "ju6ge",
+      "type": "user"
+    },
+    "links": {
+      "alternate": {
+        "href": "https://www.zotero.org/ju6ge/items/7U5MYRNH",
+        "type": "text/html"
+      },
+      "self": {
+        "href": "https://api.zotero.org/users/8071408/items/7U5MYRNH",
+        "type": "application/json"
+      },
+      "up": {
+        "href": "https://api.zotero.org/users/8071408/items/89Q6ZT8U",
+        "type": "application/json"
+      }
+    },
+    "meta": {
+      "numChildren": false
+    },
+    "version": 261
+  },
+  {
+    "data": {
+      "accessDate": "2022-04-07T10:48:08Z",
+      "charset": "utf-8",
+      "contentType": "text/html",
+      "dateAdded": "2022-04-07T10:48:08Z",
+      "dateModified": "2022-04-07T10:48:08Z",
+      "filename": "S0038110115000507.html",
+      "itemType": "attachment",
+      "key": "CN7IMIX5",
+      "linkMode": "imported_url",
+      "md5": "3c1add08e4eb4634d53329eea97df549",
+      "mtime": 1649328488000,
+      "note": "",
+      "parentItem": "A5RZ9PSL",
+      "relations": {},
+      "tags": [],
+      "title": "ScienceDirect Snapshot",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0038110115000507",
+      "version": 249
+    },
+    "key": "CN7IMIX5",
+    "library": {
+      "id": 8071408,
+      "links": {
+        "alternate": {
+          "href": "https://www.zotero.org/ju6ge",
+          "type": "text/html"
+        }
+      },
+      "name": "ju6ge",
+      "type": "user"
+    },
+    "links": {
+      "alternate": {
+        "href": "https://www.zotero.org/ju6ge/items/CN7IMIX5",
+        "type": "text/html"
+      },
+      "self": {
+        "href": "https://api.zotero.org/users/8071408/items/CN7IMIX5",
+        "type": "application/json"
+      },
+      "up": {
+        "href": "https://api.zotero.org/users/8071408/items/A5RZ9PSL",
+        "type": "application/json"
+      }
+    },
+    "meta": {},
+    "version": 249
+  },
+  {
+    "data": {
+      "accessDate": "2022-04-07T10:48:03Z",
+      "charset": "",
+      "contentType": "application/pdf",
+      "dateAdded": "2022-04-07T10:48:03Z",
+      "dateModified": "2022-04-07T10:48:03Z",
+      "filename": "Iwai - 2015 - Future of nano CMOS technology.pdf",
+      "itemType": "attachment",
+      "key": "3GFI7EWY",
+      "linkMode": "imported_url",
+      "md5": "70dd6b1098455940a6ae4d9375fc6958",
+      "mtime": 1649328483000,
+      "note": "",
+      "parentItem": "A5RZ9PSL",
+      "relations": {},
+      "tags": [],
+      "title": "ScienceDirect Full Text PDF",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0038110115000507/pdfft?md5=0ecbfa52ed54392a40e63294d0c11338&pid=1-s2.0-S0038110115000507-main.pdf&isDTMRedir=Y",
+      "version": 249
+    },
+    "key": "3GFI7EWY",
+    "library": {
+      "id": 8071408,
+      "links": {
+        "alternate": {
+          "href": "https://www.zotero.org/ju6ge",
+          "type": "text/html"
+        }
+      },
+      "name": "ju6ge",
+      "type": "user"
+    },
+    "links": {
+      "alternate": {
+        "href": "https://www.zotero.org/ju6ge/items/3GFI7EWY",
+        "type": "text/html"
+      },
+      "self": {
+        "href": "https://api.zotero.org/users/8071408/items/3GFI7EWY",
+        "type": "application/json"
+      },
+      "up": {
+        "href": "https://api.zotero.org/users/8071408/items/A5RZ9PSL",
+        "type": "application/json"
+      }
+    },
+    "meta": {
+      "numChildren": false
+    },
+    "version": 249
+  },
+  {
+    "data": {
+      "DOI": "10.1016/j.sse.2015.02.005",
+      "ISSN": "0038-1101",
+      "abstractNote": "Although Si MOS devices have dominated the integrated circuit applications over the four decades, it has been anticipated that the development of CMOS would reach its limits after the next decade because of the difficulties in the technologies for further downscaling and also because of some fundamental limits of MOSFETs. However, there have been no promising candidates yet, which can replace Si MOSFETs with better performance with low cost. Thus, for the moment, it seems that we have to stick to the Si MOSFET devices until their end. The downsizing is limited by the increase of off-leakage current between source and drain. In order to suppress the off-leakage current, multi-gate structures (FinFET, Tri-gate, and Si-nanowire MOSFETs) are replacing conventional planar MOSFETs, and continuous innovation of high-k/metal gate technologies has enabled EOT scaling down to 0.9nm in production. However, it was found that the multi-gate structures have a future big problem of significant conduction reduction with decrease in fin width. Also it is not easy to further decrease EOT because of the mobility and reliability degradation. Furthermore, the development of EUV (Extremely Ultra-Violet) lithography, which is supposed to be essential for sub-10nm lithography, delays significantly because of insufficient illumination intensity for production. Thus, it is now expected that the reduction rate of the gate length, which has a strong influence on the off-leakage current, will become slower in near future.",
+      "accessDate": "2022-04-07T10:48:01Z",
+      "archive": "",
+      "archiveLocation": "",
+      "callNumber": "",
+      "collections": [
+        "35EYLJK9"
+      ],
+      "creators": [
+        {
+          "creatorType": "author",
+          "firstName": "Hiroshi",
+          "lastName": "Iwai"
+        }
+      ],
+      "date": "2015-10-01",
+      "dateAdded": "2022-04-07T10:48:01Z",
+      "dateModified": "2022-04-07T10:48:01Z",
+      "extra": "",
+      "issue": "",
+      "itemType": "journalArticle",
+      "journalAbbreviation": "Solid-State Electronics",
+      "key": "A5RZ9PSL",
+      "language": "en",
+      "libraryCatalog": "ScienceDirect",
+      "pages": "56-67",
+      "publicationTitle": "Solid-State Electronics",
+      "relations": {},
+      "rights": "",
+      "series": "Selected Papers from EuroSOI'2014 Conference",
+      "seriesText": "",
+      "seriesTitle": "",
+      "shortTitle": "",
+      "tags": [
+        {
+          "tag": "CMOS",
+          "type": 1
+        },
+        {
+          "tag": "Downsizing",
+          "type": 1
+        },
+        {
+          "tag": "FinFET",
+          "type": 1
+        },
+        {
+          "tag": "High-k",
+          "type": 1
+        },
+        {
+          "tag": "MOSFET",
+          "type": 1
+        }
+      ],
+      "title": "Future of nano CMOS technology",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0038110115000507",
+      "version": 247,
+      "volume": "112"
+    },
+    "key": "A5RZ9PSL",
+    "library": {
+      "id": 8071408,
+      "links": {
+        "alternate": {
+          "href": "https://www.zotero.org/ju6ge",
+          "type": "text/html"
+        }
+      },
+      "name": "ju6ge",
+      "type": "user"
+    },
+    "links": {
+      "alternate": {
+        "href": "https://www.zotero.org/ju6ge/items/A5RZ9PSL",
+        "type": "text/html"
+      },
+      "self": {
+        "href": "https://api.zotero.org/users/8071408/items/A5RZ9PSL",
+        "type": "application/json"
+      }
+    },
+    "meta": {
+      "creatorSummary": "Iwai",
+      "numChildren": 2,
+      "parsedDate": "2015-10-01"
+    },
+    "version": 247
+  },
+  {
+    "data": {
+      "accessDate": "2022-04-07T10:47:14Z",
+      "charset": "utf-8",
+      "contentType": "text/html",
+      "dateAdded": "2022-04-07T10:47:14Z",
+      "dateModified": "2022-04-07T10:47:14Z",
+      "filename": "S0038110103000418.html",
+      "itemType": "attachment",
+      "key": "T3T45DW6",
+      "linkMode": "imported_url",
+      "md5": "25bc9ea8386af9fca6145a16ba10ebc1",
+      "mtime": 1649328434000,
+      "note": "",
+      "parentItem": "7KZ3M69Z",
+      "relations": {},
+      "tags": [],
+      "title": "ScienceDirect Snapshot",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0038110103000418",
+      "version": 245
+    },
+    "key": "T3T45DW6",
+    "library": {
+      "id": 8071408,
+      "links": {
+        "alternate": {
+          "href": "https://www.zotero.org/ju6ge",
+          "type": "text/html"
+        }
+      },
+      "name": "ju6ge",
+      "type": "user"
+    },
+    "links": {
+      "alternate": {
+        "href": "https://www.zotero.org/ju6ge/items/T3T45DW6",
+        "type": "text/html"
+      },
+      "self": {
+        "href": "https://api.zotero.org/users/8071408/items/T3T45DW6",
+        "type": "application/json"
+      },
+      "up": {
+        "href": "https://api.zotero.org/users/8071408/items/7KZ3M69Z",
+        "type": "application/json"
+      }
+    },
+    "meta": {},
+    "version": 245
+  },
+  {
+    "data": {
+      "accessDate": "2022-04-07T10:47:08Z",
+      "charset": "",
+      "contentType": "application/pdf",
+      "dateAdded": "2022-04-07T10:47:08Z",
+      "dateModified": "2022-04-07T10:47:08Z",
+      "filename": "Rim et al. - 2003 - Strained Si CMOS (SS CMOS) technology opportuniti.pdf",
+      "itemType": "attachment",
+      "key": "ATPYP5ZG",
+      "linkMode": "imported_url",
+      "md5": "e092b58c6ae0e3986e2ee3924f4fd004",
+      "mtime": 1649328428000,
+      "note": "",
+      "parentItem": "7KZ3M69Z",
+      "relations": {},
+      "tags": [],
+      "title": "ScienceDirect Full Text PDF",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0038110103000418/pdfft?md5=9343fe13420a322d663faab04ae5eebd&pid=1-s2.0-S0038110103000418-main.pdf&isDTMRedir=Y",
+      "version": 245
+    },
+    "key": "ATPYP5ZG",
+    "library": {
+      "id": 8071408,
+      "links": {
+        "alternate": {
+          "href": "https://www.zotero.org/ju6ge",
+          "type": "text/html"
+        }
+      },
+      "name": "ju6ge",
+      "type": "user"
+    },
+    "links": {
+      "alternate": {
+        "href": "https://www.zotero.org/ju6ge/items/ATPYP5ZG",
+        "type": "text/html"
+      },
+      "self": {
+        "href": "https://api.zotero.org/users/8071408/items/ATPYP5ZG",
+        "type": "application/json"
+      },
+      "up": {
+        "href": "https://api.zotero.org/users/8071408/items/7KZ3M69Z",
+        "type": "application/json"
+      }
+    },
+    "meta": {
+      "numChildren": false
+    },
+    "version": 245
+  },
+  {
+    "data": {
+      "DOI": "10.1016/S0038-1101(03)00041-8",
+      "ISSN": "0038-1101",
+      "abstractNote": "Strain-induced enhancement of current drive is a promising way to extend the advancement of CMOS performance. Fabrication of strained Si MOSFET has been demonstrated with key elements of modern day’s CMOS technology. Significant mobility and current drive enhancements were observed. Recent advancements in the SS devices are summarized, and the challenges in device physics/design issues as well as in materials/process integration are highlighted.",
+      "accessDate": "2022-04-07T10:47:07Z",
+      "archive": "",
+      "archiveLocation": "",
+      "callNumber": "",
+      "collections": [
+        "35EYLJK9"
+      ],
+      "creators": [
+        {
+          "creatorType": "author",
+          "firstName": "K.",
+          "lastName": "Rim"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "R.",
+          "lastName": "Anderson"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "D.",
+          "lastName": "Boyd"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "F.",
+          "lastName": "Cardone"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "K.",
+          "lastName": "Chan"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "H.",
+          "lastName": "Chen"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "S.",
+          "lastName": "Christansen"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "J.",
+          "lastName": "Chu"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "K.",
+          "lastName": "Jenkins"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "T.",
+          "lastName": "Kanarsky"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "S.",
+          "lastName": "Koester"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "B. H.",
+          "lastName": "Lee"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "K.",
+          "lastName": "Lee"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "V.",
+          "lastName": "Mazzeo"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "A.",
+          "lastName": "Mocuta"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "D.",
+          "lastName": "Mocuta"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "P. M.",
+          "lastName": "Mooney"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "P.",
+          "lastName": "Oldiges"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "J.",
+          "lastName": "Ott"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "P.",
+          "lastName": "Ronsheim"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "R.",
+          "lastName": "Roy"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "A.",
+          "lastName": "Steegen"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "M.",
+          "lastName": "Yang"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "H.",
+          "lastName": "Zhu"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "M.",
+          "lastName": "Ieong"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "H. -S. P.",
+          "lastName": "Wong"
+        }
+      ],
+      "date": "2003-07-01",
+      "dateAdded": "2022-04-07T10:47:07Z",
+      "dateModified": "2022-04-07T10:47:07Z",
+      "extra": "",
+      "issue": "7",
+      "itemType": "journalArticle",
+      "journalAbbreviation": "Solid-State Electronics",
+      "key": "7KZ3M69Z",
+      "language": "en",
+      "libraryCatalog": "ScienceDirect",
+      "pages": "1133-1139",
+      "publicationTitle": "Solid-State Electronics",
+      "relations": {},
+      "rights": "",
+      "series": "3rd International Workshop on Ultimate Integration of Silicon March 7-8, 2002, Munich, Germany",
+      "seriesText": "",
+      "seriesTitle": "",
+      "shortTitle": "Strained Si CMOS (SS CMOS) technology",
+      "tags": [],
+      "title": "Strained Si CMOS (SS CMOS) technology: opportunities and challenges",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0038110103000418",
+      "version": 243,
+      "volume": "47"
+    },
+    "key": "7KZ3M69Z",
+    "library": {
+      "id": 8071408,
+      "links": {
+        "alternate": {
+          "href": "https://www.zotero.org/ju6ge",
+          "type": "text/html"
+        }
+      },
+      "name": "ju6ge",
+      "type": "user"
+    },
+    "links": {
+      "alternate": {
+        "href": "https://www.zotero.org/ju6ge/items/7KZ3M69Z",
+        "type": "text/html"
+      },
+      "self": {
+        "href": "https://api.zotero.org/users/8071408/items/7KZ3M69Z",
+        "type": "application/json"
+      }
+    },
+    "meta": {
+      "creatorSummary": "Rim et al.",
+      "numChildren": 2,
+      "parsedDate": "2003-07-01"
+    },
+    "version": 243
+  },
+  {
+    "data": {
+      "accessDate": "2022-04-07T10:45:51Z",
+      "charset": "utf-8",
+      "contentType": "text/html",
+      "dateAdded": "2022-04-07T10:45:51Z",
+      "dateModified": "2022-04-07T10:45:51Z",
+      "filename": "748187.html",
+      "itemType": "attachment",
+      "key": "4GJN5Z58",
+      "linkMode": "imported_url",
+      "md5": "358c8e2a7759782d166d63f2ecc4a5cd",
+      "mtime": 1649328351000,
+      "note": "",
+      "parentItem": "QPIZIRZV",
+      "relations": {},
+      "tags": [],
+      "title": "IEEE Xplore Abstract Record",
+      "url": "https://ieeexplore.ieee.org/abstract/document/748187",
+      "version": 237
+    },
+    "key": "4GJN5Z58",
+    "library": {
+      "id": 8071408,
+      "links": {
+        "alternate": {
+          "href": "https://www.zotero.org/ju6ge",
+          "type": "text/html"
+        }
+      },
+      "name": "ju6ge",
+      "type": "user"
+    },
+    "links": {
+      "alternate": {
+        "href": "https://www.zotero.org/ju6ge/items/4GJN5Z58",
+        "type": "text/html"
+      },
+      "self": {
+        "href": "https://api.zotero.org/users/8071408/items/4GJN5Z58",
+        "type": "application/json"
+      },
+      "up": {
+        "href": "https://api.zotero.org/users/8071408/items/QPIZIRZV",
+        "type": "application/json"
+      }
+    },
+    "meta": {},
+    "version": 237
+  },
+  {
+    "data": {
+      "accessDate": "2022-04-07T10:45:46Z",
+      "charset": "",
+      "contentType": "application/pdf",
+      "dateAdded": "2022-04-07T10:45:46Z",
+      "dateModified": "2022-04-07T10:45:46Z",
+      "filename": "Iwai - 1999 - CMOS technology-year 2010 and beyond.pdf",
+      "itemType": "attachment",
+      "key": "BUUJ9LZX",
+      "linkMode": "imported_url",
+      "md5": "5fe340e5c6e6c9783a0acf9c5a0e3a1f",
+      "mtime": 1649328346000,
+      "note": "",
+      "parentItem": "QPIZIRZV",
+      "relations": {},
+      "tags": [],
+      "title": "IEEE Xplore Full Text PDF",
+      "url": "https://ieeexplore.ieee.org/stampPDF/getPDF.jsp?tp=&arnumber=748187&ref=aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50Lzc0ODE4Nw==",
+      "version": 237
+    },
+    "key": "BUUJ9LZX",
+    "library": {
+      "id": 8071408,
+      "links": {
+        "alternate": {
+          "href": "https://www.zotero.org/ju6ge",
+          "type": "text/html"
+        }
+      },
+      "name": "ju6ge",
+      "type": "user"
+    },
+    "links": {
+      "alternate": {
+        "href": "https://www.zotero.org/ju6ge/items/BUUJ9LZX",
+        "type": "text/html"
+      },
+      "self": {
+        "href": "https://api.zotero.org/users/8071408/items/BUUJ9LZX",
+        "type": "application/json"
+      },
+      "up": {
+        "href": "https://api.zotero.org/users/8071408/items/QPIZIRZV",
+        "type": "application/json"
+      }
+    },
+    "meta": {
+      "numChildren": false
+    },
+    "version": 237
+  },
+  {
+    "data": {
+      "DOI": "10.1109/4.748187",
+      "ISSN": "1558-173X",
+      "abstractNote": "MOS large-scale-integration circuits (LSIs), having advanced remarkably during the past 25 years, are expected to continue to progress well into the next century. The progress has been driven by the downsizing of the components in an LSI, such as MOSFETs. However, even before the downsizing of MOSFETs reaches its fundamental limit, the downsizing is expected to encounter severe technological and economic problems at the beginning of next century when the minimum feature size of LSIs is going to shift to 0.1 and sub-0.1 /spl mu/m. In this paper, the anticipated difficulties and some concepts for 0.1- and sub-0.1 /spl mu/m LSIs are explained based on the research of the downsizing MOSFET into such a dimension, and a further concept for deep sub-0.1-/spl mu/m LSIs is described.",
+      "accessDate": "",
+      "archive": "",
+      "archiveLocation": "",
+      "callNumber": "",
+      "collections": [
+        "35EYLJK9"
+      ],
+      "creators": [
+        {
+          "creatorType": "author",
+          "firstName": "H.",
+          "lastName": "Iwai"
+        }
+      ],
+      "date": "1999-03",
+      "dateAdded": "2022-04-07T10:45:45Z",
+      "dateModified": "2022-04-07T10:45:45Z",
+      "extra": "Conference Name: IEEE Journal of Solid-State Circuits",
+      "issue": "3",
+      "itemType": "journalArticle",
+      "journalAbbreviation": "",
+      "key": "QPIZIRZV",
+      "language": "",
+      "libraryCatalog": "IEEE Xplore",
+      "pages": "357-366",
+      "publicationTitle": "IEEE Journal of Solid-State Circuits",
+      "relations": {},
+      "rights": "",
+      "series": "",
+      "seriesText": "",
+      "seriesTitle": "",
+      "shortTitle": "",
+      "tags": [
+        {
+          "tag": "CMOS integrated circuits",
+          "type": 1
+        },
+        {
+          "tag": "CMOS technology",
+          "type": 1
+        },
+        {
+          "tag": "Calculators",
+          "type": 1
+        },
+        {
+          "tag": "Costs",
+          "type": 1
+        },
+        {
+          "tag": "Economics",
+          "type": 1
+        },
+        {
+          "tag": "Integrated circuit technology",
+          "type": 1
+        },
+        {
+          "tag": "Large scale integration",
+          "type": 1
+        },
+        {
+          "tag": "MOSFET circuits",
+          "type": 1
+        },
+        {
+          "tag": "Microprocessors",
+          "type": 1
+        },
+        {
+          "tag": "Random access memory",
+          "type": 1
+        }
+      ],
+      "title": "CMOS technology-year 2010 and beyond",
+      "url": "",
+      "version": 235,
+      "volume": "34"
+    },
+    "key": "QPIZIRZV",
+    "library": {
+      "id": 8071408,
+      "links": {
+        "alternate": {
+          "href": "https://www.zotero.org/ju6ge",
+          "type": "text/html"
+        }
+      },
+      "name": "ju6ge",
+      "type": "user"
+    },
+    "links": {
+      "alternate": {
+        "href": "https://www.zotero.org/ju6ge/items/QPIZIRZV",
+        "type": "text/html"
+      },
+      "self": {
+        "href": "https://api.zotero.org/users/8071408/items/QPIZIRZV",
+        "type": "application/json"
+      }
+    },
+    "meta": {
+      "creatorSummary": "Iwai",
+      "numChildren": 2,
+      "parsedDate": "1999-03"
+    },
+    "version": 235
+  },
+  {
+    "data": {
+      "accessDate": "2022-04-07T10:16:33Z",
+      "charset": "utf-8",
+      "contentType": "text/html",
+      "dateAdded": "2022-04-07T10:16:33Z",
+      "dateModified": "2022-04-07T10:16:33Z",
+      "filename": "S0168900215002624.html",
+      "itemType": "attachment",
+      "key": "BJ6TPLC9",
+      "linkMode": "imported_url",
+      "md5": "94fadf0a2cea61b215d7c2fd1a4d4ed2",
+      "mtime": 1649326593000,
+      "note": "",
+      "parentItem": "B3UH8WU9",
+      "relations": {},
+      "tags": [],
+      "title": "ScienceDirect Snapshot",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0168900215002624",
+      "version": 227
+    },
+    "key": "BJ6TPLC9",
+    "library": {
+      "id": 8071408,
+      "links": {
+        "alternate": {
+          "href": "https://www.zotero.org/ju6ge",
+          "type": "text/html"
+        }
+      },
+      "name": "ju6ge",
+      "type": "user"
+    },
+    "links": {
+      "alternate": {
+        "href": "https://www.zotero.org/ju6ge/items/BJ6TPLC9",
+        "type": "text/html"
+      },
+      "self": {
+        "href": "https://api.zotero.org/users/8071408/items/BJ6TPLC9",
+        "type": "application/json"
+      },
+      "up": {
+        "href": "https://api.zotero.org/users/8071408/items/B3UH8WU9",
+        "type": "application/json"
+      }
+    },
+    "meta": {},
+    "version": 227
+  },
+  {
+    "data": {
+      "accessDate": "2022-04-07T10:16:30Z",
+      "charset": "utf-8",
+      "contentType": "text/html",
+      "dateAdded": "2022-04-07T10:16:30Z",
+      "dateModified": "2022-04-07T10:16:30Z",
+      "filename": "5543985.html",
+      "itemType": "attachment",
+      "key": "F6W8DPSJ",
+      "linkMode": "imported_url",
+      "md5": "7f35353d6c83a651674e320d42346607",
+      "mtime": 1649326590000,
+      "note": "",
+      "parentItem": "FCPHW8NU",
+      "relations": {},
+      "tags": [],
+      "title": "IEEE Xplore Abstract Record",
+      "url": "https://ieeexplore.ieee.org/abstract/document/5543985",
+      "version": 227
+    },
+    "key": "F6W8DPSJ",
+    "library": {
+      "id": 8071408,
+      "links": {
+        "alternate": {
+          "href": "https://www.zotero.org/ju6ge",
+          "type": "text/html"
+        }
+      },
+      "name": "ju6ge",
+      "type": "user"
+    },
+    "links": {
+      "alternate": {
+        "href": "https://www.zotero.org/ju6ge/items/F6W8DPSJ",
+        "type": "text/html"
+      },
+      "self": {
+        "href": "https://api.zotero.org/users/8071408/items/F6W8DPSJ",
+        "type": "application/json"
+      },
+      "up": {
+        "href": "https://api.zotero.org/users/8071408/items/FCPHW8NU",
+        "type": "application/json"
+      }
+    },
+    "meta": {},
+    "version": 227
+  },
+  {
+    "data": {
+      "accessDate": "2022-04-07T10:16:28Z",
+      "charset": "",
+      "contentType": "application/pdf",
+      "dateAdded": "2022-04-07T10:16:28Z",
+      "dateModified": "2022-04-07T10:16:28Z",
+      "filename": "Hemperek et al. - 2015 - A Monolithic Active Pixel Sensor for ionizing radi.pdf",
+      "itemType": "attachment",
+      "key": "FRNCXV2U",
+      "linkMode": "imported_url",
+      "md5": "2e747164e1171b0b9865b17f625cb0c3",
+      "mtime": 1649326588000,
+      "note": "",
+      "parentItem": "B3UH8WU9",
+      "relations": {},
+      "tags": [],
+      "title": "ScienceDirect Full Text PDF",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0168900215002624/pdfft?md5=354e7a22f9eec17b4a2bf9aea4664a29&pid=1-s2.0-S0168900215002624-main.pdf&isDTMRedir=Y",
+      "version": 227
+    },
+    "key": "FRNCXV2U",
+    "library": {
+      "id": 8071408,
+      "links": {
+        "alternate": {
+          "href": "https://www.zotero.org/ju6ge",
+          "type": "text/html"
+        }
+      },
+      "name": "ju6ge",
+      "type": "user"
+    },
+    "links": {
+      "alternate": {
+        "href": "https://www.zotero.org/ju6ge/items/FRNCXV2U",
+        "type": "text/html"
+      },
+      "self": {
+        "href": "https://api.zotero.org/users/8071408/items/FRNCXV2U",
+        "type": "application/json"
+      },
+      "up": {
+        "href": "https://api.zotero.org/users/8071408/items/B3UH8WU9",
+        "type": "application/json"
+      }
+    },
+    "meta": {
+      "numChildren": false
+    },
+    "version": 227
+  },
+  {
+    "data": {
+      "DOI": "10.1016/j.nima.2015.02.052",
+      "ISSN": "0168-9002",
+      "abstractNote": "An improved SOI-MAPS (Silicon On Insulator Monolithic Active Pixel Sensor) for ionizing radiation based on thick-film High Voltage SOI technology (HV-SOI) has been developed. Similar to existing Fully Depleted SOI-based (FD-SOI) MAPS, a buried silicon oxide inter-dielectric (BOX) layer is used to separate the CMOS electronics from the handle wafer which is used as a depleted charge collection layer. FD-SOI MAPS suffers from radiation damage such as transistor threshold voltage shifts due to charge traps in the oxide layers and charge states created at the silicon oxide boundaries (back gate effect). The X-FAB 180-nm HV-SOI technology offers an additional isolation by deep non-depleted implant between the BOX layer and the active circuitry which mitigates this problem. Therefore we see in this technology a high potential to implement radiation-tolerant MAPS with fast charge collection property. The design and measurement results from a first prototype are presented including charge collection in neutron irradiated samples.",
+      "accessDate": "2022-04-07T10:16:26Z",
+      "archive": "",
+      "archiveLocation": "",
+      "callNumber": "",
+      "collections": [
+        "35EYLJK9"
+      ],
+      "creators": [
+        {
+          "creatorType": "author",
+          "firstName": "Tomasz",
+          "lastName": "Hemperek"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "Tetsuichi",
+          "lastName": "Kishishita"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "Hans",
+          "lastName": "Krüger"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "Norbert",
+          "lastName": "Wermes"
+        }
+      ],
+      "date": "2015-10-01",
+      "dateAdded": "2022-04-07T10:16:26Z",
+      "dateModified": "2022-04-07T10:16:26Z",
+      "extra": "",
+      "issue": "",
+      "itemType": "journalArticle",
+      "journalAbbreviation": "Nuclear Instruments and Methods in Physics Research Section A: Accelerators, Spectrometers, Detectors and Associated Equipment",
+      "key": "B3UH8WU9",
+      "language": "en",
+      "libraryCatalog": "ScienceDirect",
+      "pages": "8-12",
+      "publicationTitle": "Nuclear Instruments and Methods in Physics Research Section A: Accelerators, Spectrometers, Detectors and Associated Equipment",
+      "relations": {},
+      "rights": "",
+      "series": "Proceedings of the 10th International Conference on Radiation Effects on Semiconductor Materials Detectors and Devices",
+      "seriesText": "",
+      "seriesTitle": "",
+      "shortTitle": "",
+      "tags": [
+        {
+          "tag": "Pixel",
+          "type": 1
+        },
+        {
+          "tag": "Radiation hard",
+          "type": 1
+        },
+        {
+          "tag": "SOI",
+          "type": 1
+        },
+        {
+          "tag": "Sensor",
+          "type": 1
+        }
+      ],
+      "title": "A Monolithic Active Pixel Sensor for ionizing radiation using a 180nm HV-SOI process",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0168900215002624",
+      "version": 226,
+      "volume": "796"
+    },
+    "key": "B3UH8WU9",
+    "library": {
+      "id": 8071408,
+      "links": {
+        "alternate": {
+          "href": "https://www.zotero.org/ju6ge",
+          "type": "text/html"
+        }
+      },
+      "name": "ju6ge",
+      "type": "user"
+    },
+    "links": {
+      "alternate": {
+        "href": "https://www.zotero.org/ju6ge/items/B3UH8WU9",
+        "type": "text/html"
+      },
+      "self": {
+        "href": "https://api.zotero.org/users/8071408/items/B3UH8WU9",
+        "type": "application/json"
+      }
+    },
+    "meta": {
+      "creatorSummary": "Hemperek et al.",
+      "numChildren": 2,
+      "parsedDate": "2015-10-01"
+    },
+    "version": 226
+  },
+  {
+    "data": {
+      "accessDate": "2022-04-07T10:16:25Z",
+      "charset": "",
+      "contentType": "application/pdf",
+      "dateAdded": "2022-04-07T10:16:25Z",
+      "dateModified": "2022-04-07T10:16:25Z",
+      "filename": "Hölke et al. - 2010 - A 200V Partial SOI 0.18µm CMOS technology.pdf",
+      "itemType": "attachment",
+      "key": "QYAE9ASM",
+      "linkMode": "imported_url",
+      "md5": "00aff92d936d72e0a90f36f9e609fcc2",
+      "mtime": 1649326585000,
+      "note": "",
+      "parentItem": "FCPHW8NU",
+      "relations": {},
+      "tags": [],
+      "title": "IEEE Xplore Full Text PDF",
+      "url": "https://ieeexplore.ieee.org/stampPDF/getPDF.jsp?tp=&arnumber=5543985&ref=aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50LzU1NDM5ODU=",
+      "version": 227
+    },
+    "key": "QYAE9ASM",
+    "library": {
+      "id": 8071408,
+      "links": {
+        "alternate": {
+          "href": "https://www.zotero.org/ju6ge",
+          "type": "text/html"
+        }
+      },
+      "name": "ju6ge",
+      "type": "user"
+    },
+    "links": {
+      "alternate": {
+        "href": "https://www.zotero.org/ju6ge/items/QYAE9ASM",
+        "type": "text/html"
+      },
+      "self": {
+        "href": "https://api.zotero.org/users/8071408/items/QYAE9ASM",
+        "type": "application/json"
+      },
+      "up": {
+        "href": "https://api.zotero.org/users/8071408/items/FCPHW8NU",
+        "type": "application/json"
+      }
+    },
+    "meta": {
+      "numChildren": false
+    },
+    "version": 227
+  },
+  {
+    "data": {
+      "DOI": "",
+      "ISBN": "",
+      "abstractNote": "A novel 0.18μm 200V integrated technology based on Partial SOI and lateral Super Junctions devices is presented. The dielectric isolation inherent in SOI allows simple and area-efficient integration of electrically floating CMOS and HV devices while removing all substrate carrier injection-related parasitic effects. The Super Junctions give a competitively low on-resistance of HVMOS and provide a wide-range breakdown voltage-scaling capability.",
+      "accessDate": "",
+      "archive": "",
+      "archiveLocation": "",
+      "callNumber": "",
+      "collections": [
+        "35EYLJK9"
+      ],
+      "conferenceName": "2010 22nd International Symposium on Power Semiconductor Devices IC's (ISPSD)",
+      "creators": [
+        {
+          "creatorType": "author",
+          "firstName": "Alexander",
+          "lastName": "Hölke"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "Deb Kumar",
+          "lastName": "Pal"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "Yang",
+          "lastName": "Hao"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "Kee Kia",
+          "lastName": "Yaw"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "Elizabeth",
+          "lastName": "Kho"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "Gabriel",
+          "lastName": "Kittler"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "Uta",
+          "lastName": "Kuniss"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "Jörg",
+          "lastName": "Gessner"
+        }
+      ],
+      "date": "2010-06",
+      "dateAdded": "2022-04-07T10:16:23Z",
+      "dateModified": "2022-04-07T10:16:23Z",
+      "extra": "ISSN: 1946-0201",
+      "itemType": "conferencePaper",
+      "key": "FCPHW8NU",
+      "language": "",
+      "libraryCatalog": "IEEE Xplore",
+      "pages": "257-260",
+      "place": "",
+      "proceedingsTitle": "2010 22nd International Symposium on Power Semiconductor Devices IC's (ISPSD)",
+      "publisher": "",
+      "relations": {},
+      "rights": "",
+      "series": "",
+      "shortTitle": "",
+      "tags": [
+        {
+          "tag": "Breakdown voltage",
+          "type": 1
+        },
+        {
+          "tag": "CMOS process",
+          "type": 1
+        },
+        {
+          "tag": "CMOS technology",
+          "type": 1
+        },
+        {
+          "tag": "Dielectric devices",
+          "type": 1
+        },
+        {
+          "tag": "Dielectric substrates",
+          "type": 1
+        },
+        {
+          "tag": "Diodes",
+          "type": 1
+        },
+        {
+          "tag": "Foundries",
+          "type": 1
+        },
+        {
+          "tag": "Power semiconductor devices",
+          "type": 1
+        },
+        {
+          "tag": "Semiconductor device doping",
+          "type": 1
+        },
+        {
+          "tag": "Ultrasonic imaging",
+          "type": 1
+        }
+      ],
+      "title": "A 200V Partial SOI 0.18µm CMOS technology",
+      "url": "",
+      "version": 226,
+      "volume": ""
+    },
+    "key": "FCPHW8NU",
+    "library": {
+      "id": 8071408,
+      "links": {
+        "alternate": {
+          "href": "https://www.zotero.org/ju6ge",
+          "type": "text/html"
+        }
+      },
+      "name": "ju6ge",
+      "type": "user"
+    },
+    "links": {
+      "alternate": {
+        "href": "https://www.zotero.org/ju6ge/items/FCPHW8NU",
+        "type": "text/html"
+      },
+      "self": {
+        "href": "https://api.zotero.org/users/8071408/items/FCPHW8NU",
+        "type": "application/json"
+      }
+    },
+    "meta": {
+      "creatorSummary": "Hölke et al.",
+      "numChildren": 2,
+      "parsedDate": "2010-06"
+    },
+    "version": 226
+  },
+  {
+    "data": {
+      "accessDate": "2022-04-07T10:08:57Z",
+      "charset": "utf-8",
+      "contentType": "text/html",
+      "dateAdded": "2022-04-07T10:08:57Z",
+      "dateModified": "2022-04-07T10:08:57Z",
+      "filename": "5637007.html",
+      "itemType": "attachment",
+      "key": "J6FI5P58",
+      "linkMode": "imported_url",
+      "md5": "84eb6e651e55f4a6ebb8bdf0033d7fdd",
+      "mtime": 1649326137000,
+      "note": "",
+      "parentItem": "FK6M7VIP",
+      "relations": {},
+      "tags": [],
+      "title": "IEEE Xplore Abstract Record",
+      "url": "https://ieeexplore.ieee.org/abstract/document/5637007",
+      "version": 224
+    },
+    "key": "J6FI5P58",
+    "library": {
+      "id": 8071408,
+      "links": {
+        "alternate": {
+          "href": "https://www.zotero.org/ju6ge",
+          "type": "text/html"
+        }
+      },
+      "name": "ju6ge",
+      "type": "user"
+    },
+    "links": {
+      "alternate": {
+        "href": "https://www.zotero.org/ju6ge/items/J6FI5P58",
+        "type": "text/html"
+      },
+      "self": {
+        "href": "https://api.zotero.org/users/8071408/items/J6FI5P58",
+        "type": "application/json"
+      },
+      "up": {
+        "href": "https://api.zotero.org/users/8071408/items/FK6M7VIP",
+        "type": "application/json"
+      }
+    },
+    "meta": {},
+    "version": 224
+  },
+  {
+    "data": {
+      "accessDate": "2022-04-07T10:08:53Z",
+      "charset": "",
+      "contentType": "application/pdf",
+      "dateAdded": "2022-04-07T10:08:53Z",
+      "dateModified": "2022-04-07T10:08:53Z",
+      "filename": "Fritzsch et al. - 2010 - Optimization of trench manufacturing for a new hig.pdf",
+      "itemType": "attachment",
+      "key": "UHZVEQQB",
+      "linkMode": "imported_url",
+      "md5": "a25b9a9422b54a22416b3878a194dd23",
+      "mtime": 1649326133000,
+      "note": "",
+      "parentItem": "FK6M7VIP",
+      "relations": {},
+      "tags": [],
+      "title": "IEEE Xplore Full Text PDF",
+      "url": "https://ieeexplore.ieee.org/stampPDF/getPDF.jsp?tp=&arnumber=5637007&ref=aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50LzU2MzcwMDc=",
+      "version": 224
+    },
+    "key": "UHZVEQQB",
+    "library": {
+      "id": 8071408,
+      "links": {
+        "alternate": {
+          "href": "https://www.zotero.org/ju6ge",
+          "type": "text/html"
+        }
+      },
+      "name": "ju6ge",
+      "type": "user"
+    },
+    "links": {
+      "alternate": {
+        "href": "https://www.zotero.org/ju6ge/items/UHZVEQQB",
+        "type": "text/html"
+      },
+      "self": {
+        "href": "https://api.zotero.org/users/8071408/items/UHZVEQQB",
+        "type": "application/json"
+      },
+      "up": {
+        "href": "https://api.zotero.org/users/8071408/items/FK6M7VIP",
+        "type": "application/json"
+      }
+    },
+    "meta": {
+      "numChildren": false
+    },
+    "version": 224
+  },
+  {
+    "data": {
+      "DOI": "10.1109/ISIE.2010.5637007",
+      "ISBN": "",
+      "abstractNote": "Deep trenches for device insulation in a high-voltage process in thick SOI were fabricated using different manufacturing technologies. The trenches have been investigated by current-voltage-characteristics. In comparison to the conventional produced trenches alternatively fabricated samples reach a remarkable increase of the breakdown voltages accompanied by a decline of the leakage current in the order of several magnitudes. Respecting other process parameters a trench fabrication method has been selected which enables the manufacturing of reliable single trenches suitable for operating voltages up to 650 V. The new trench can be implied within a prospective X-FAB process. A reduction of area consumption is possible in many designs by replacing double trenches by single trenches. The future high-voltage X-FAB process will include new primitive devices which are currently designed and characterized. In this work new diode types with characteristic properties are presented.",
+      "accessDate": "",
+      "archive": "",
+      "archiveLocation": "",
+      "callNumber": "",
+      "collections": [
+        "35EYLJK9"
+      ],
+      "conferenceName": "2010 IEEE International Symposium on Industrial Electronics",
+      "creators": [
+        {
+          "creatorType": "author",
+          "firstName": "Matthias",
+          "lastName": "Fritzsch"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "Michael",
+          "lastName": "Schramm"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "Klaus",
+          "lastName": "Erler"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "Steffen",
+          "lastName": "Heinz"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "John T.",
+          "lastName": "Horstmann"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "Uwe",
+          "lastName": "Eckoldt"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "Gabriel",
+          "lastName": "Kittler"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "Ralf",
+          "lastName": "Lerner"
+        },
+        {
+          "creatorType": "author",
+          "firstName": "Klaus",
+          "lastName": "Schottmann"
+        }
+      ],
+      "date": "2010-07",
+      "dateAdded": "2022-04-07T10:08:51Z",
+      "dateModified": "2022-04-07T10:08:51Z",
+      "extra": "ISSN: 2163-5145",
+      "itemType": "conferencePaper",
+      "key": "FK6M7VIP",
+      "language": "",
+      "libraryCatalog": "IEEE Xplore",
+      "pages": "974-978",
+      "place": "",
+      "proceedingsTitle": "2010 IEEE International Symposium on Industrial Electronics",
+      "publisher": "",
+      "relations": {},
+      "rights": "",
+      "series": "",
+      "shortTitle": "",
+      "tags": [
+        {
+          "tag": "Current measurement",
+          "type": 1
+        },
+        {
+          "tag": "Insulation",
+          "type": 1
+        },
+        {
+          "tag": "Leakage current",
+          "type": 1
+        },
+        {
+          "tag": "Semiconductor diodes",
+          "type": 1
+        },
+        {
+          "tag": "Temperature",
+          "type": 1
+        },
+        {
+          "tag": "Temperature measurement",
+          "type": 1
+        },
+        {
+          "tag": "Voltage measurement",
+          "type": 1
+        }
+      ],
+      "title": "Optimization of trench manufacturing for a new high-voltage semiconductor technology",
+      "url": "",
+      "version": 222,
+      "volume": ""
+    },
+    "key": "FK6M7VIP",
+    "library": {
+      "id": 8071408,
+      "links": {
+        "alternate": {
+          "href": "https://www.zotero.org/ju6ge",
+          "type": "text/html"
+        }
+      },
+      "name": "ju6ge",
+      "type": "user"
+    },
+    "links": {
+      "alternate": {
+        "href": "https://www.zotero.org/ju6ge/items/FK6M7VIP",
+        "type": "text/html"
+      },
+      "self": {
+        "href": "https://api.zotero.org/users/8071408/items/FK6M7VIP",
+        "type": "application/json"
+      }
+    },
+    "meta": {
+      "creatorSummary": "Fritzsch et al.",
+      "numChildren": 2,
+      "parsedDate": "2010-07"
+    },
+    "version": 222
+  },
+  {
+    "data": {
+      "accessDate": "2022-04-06T12:11:52Z",
+      "charset": "",
+      "collections": [
+        "35EYLJK9"
+      ],
+      "contentType": "application/pdf",
+      "dateAdded": "2022-04-06T12:11:52Z",
+      "dateModified": "2022-04-06T12:11:52Z",
+      "filename": "Coilcraft_lpr6235-1214787.pdf",
+      "itemType": "attachment",
+      "key": "XDIBUXRD",
+      "linkMode": "imported_url",
+      "md5": "b17df42420f00335ebb3a396f2f74673",
+      "mtime": 1649247112000,
+      "note": "",
+      "relations": {},
+      "tags": [],
+      "title": "Coilcraft_lpr6235-1214787.pdf",
+      "url": "https://www.mouser.de/datasheet/2/597/Coilcraft_lpr6235-1214787.pdf",
+      "version": 221
+    },
+    "key": "XDIBUXRD",
+    "library": {
+      "id": 8071408,
+      "links": {
+        "alternate": {
+          "href": "https://www.zotero.org/ju6ge",
+          "type": "text/html"
+        }
+      },
+      "name": "ju6ge",
+      "type": "user"
+    },
+    "links": {
+      "alternate": {
+        "href": "https://www.zotero.org/ju6ge/items/XDIBUXRD",
+        "type": "text/html"
+      },
+      "self": {
+        "href": "https://api.zotero.org/users/8071408/items/XDIBUXRD",
+        "type": "application/json"
+      }
+    },
+    "meta": {
+      "numChildren": false
+    },
+    "version": 221
+  }
+]
