@@ -1,7 +1,7 @@
-#[allow(clippy::assertions_on_constants)]
-use zotero_data::item::{BookData, BookDataBuilder};
 use zotero_api::ZoteroInit;
 use zotero_api::{Delete, Get};
+#[allow(clippy::assertions_on_constants)]
+use zotero_data::item::{BookData, BookDataBuilder};
 
 #[cfg(test)]
 mod tests {

@@ -1,7 +1,7 @@
-use zotero_data::collection::Collection;
-use zotero_data::item::Item;
 use serde_json::value::Value;
 use std::error;
+use zotero_data::collection::Collection;
+use zotero_data::item::Item;
 
 /// Perform get operations on Zotero items and collections.
 /// ```no_run
