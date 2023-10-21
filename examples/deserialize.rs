@@ -2,7 +2,7 @@ use std::fs::File;
 use std::env;
 use std::io::{Read, Write};
 
-use zotero::data_structure::item::Item;
+use zotero_data::item::Item;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
