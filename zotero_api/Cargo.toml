@@ -13,13 +13,17 @@ license.workspace = true
 
 [dependencies]
 zotero_data = { workspace = true }
-reqwest = { version = "0.11.11", features = ["blocking", "json"] }
 serde_json = { workspace = true }
 serde = { workspace = true }
 derive_builder = { workspace = true }
 url = { workspace = true }
 zotero_derive = { workspace = true }
-hyperx = { workspace = true }
 chrono = { workspace = true }
 regex = { workspace = true }
 once_cell = { workspace = true }
+http = "0.2.9"
+bytes = { version = "1.5.0", features = ["serde"] }
+
+[dev-dependencies]
+reqwest = { version = "0.11.11", features = ["blocking", "json"] }
+tokio = { version = "1.33.0", features = ["full"] }

@@ -29,19 +29,15 @@ mod tests {
     #[test]
     fn get_operation_for_user() {
         let z = ZoteroInit::set_user("123456789", "abcdefgh");
-        match z.get_collection("ABREZSE", None) {
-            Ok(_) => assert!(true),
-            Err(_) => assert!(true),
-        };
+        let req = z.get_collection("ABREZSE", None);
+        assert_eq!(req.uri(), "https://api.zotero.org/users/123456789/collections/ABREZSE")
     }
 
     #[test]
     fn get_operation_for_group() {
         let z = ZoteroInit::set_group("123456789", None);
-        match z.get_collection("ABREZSE", None) {
-            Ok(_) => assert!(true),
-            Err(_) => assert!(true),
-        };
+        let req =  z.get_collection("ABREZSE", None);
+        assert_eq!(req.uri(), "https://api.zotero.org/groups/123456789/collections/ABREZSE")
     }
 
     #[test]
