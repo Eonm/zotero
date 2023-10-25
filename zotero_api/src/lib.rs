@@ -135,6 +135,32 @@ impl<'a> Zotero<'a> {
 //            }
 //        }
 //    }
+//
+    /// Create a Zotero client for a group library. According to group policy API key might be optional.
+    /// ```rust
+    /// # use zotero_api::ZoteroInit;
+    /// // With an API key
+    /// let z = Zotero::set_group("123456789", "bZARysJ579K5SdmYuaAJ");
+    ///
+    /// // Without API key
+    /// let z = Zotero::set_group("123456789", None);
+    /// ```
+    pub fn set_group<S: Into<Option<&'a str>>>(group_id: &'a str, api_key: S) -> Zotero<'a> {
+        Zotero {
+            library_type: LibraryType::group(group_id, api_key),
+        }
+    }
+
+    /// Create a Zotero client for a user library.
+    /// ```rust
+    /// # use zotero_api::ZoteroInit;
+    /// let z = Zotero::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
+    /// ```
+    pub fn set_user(user_id: &'a str, api_key: &'a str) -> Zotero<'a> {
+        Zotero {
+            library_type: LibraryType::user(user_id, api_key),
+        }
+    }
 }
 
 impl<'a> ZoteroApi<'a> for Zotero<'a> {
@@ -148,77 +174,6 @@ impl<'a> ZoteroApi<'a> for Zotero<'a> {
 
     fn get_base_url(&self) -> String {
         self.library_type.get_base_url()
-    }
-}
-
-//impl<'a> Patch<'a> for Zotero<'a> {
-//    fn patch_request<T: Serialize>(
-//        &self,
-//        params: &str,
-//        json_body: T,
-//    ) -> Result<Value, Box<dyn error::Error>> {
-//        let url = format!("{}{}", self.library_type.get_base_url(), params);
-//
-//        let client = reqwest::blocking::Client::new();
-//        let res = client
-//            .patch(url)
-//            .bearer_auth(self.library_type.get_api_key().unwrap())
-//            .json(&json_body)
-//            .send()?;
-//
-//        Ok(res.json()?)
-//    }
-//
-//    fn get_id(&self) -> &'a str {
-//        self.library_type.get_id()
-//    }
-//}
-
-
-/// Create a Zotero client for a group library or a user library.
-/// ```no_run
-/// # use zotero_api::{ZoteroInit, Zotero};
-/// # use zotero_api::Get;
-/// let z : Zotero = ZoteroInit::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
-///
-/// // Perform some operation with Zotero
-///
-/// let items = z.get_items(None);
-///
-/// for item in items {
-///     println!("{:#?}", item)
-/// }
-/// ```
-#[derive(Debug, PartialEq)]
-pub struct ZoteroInit<'a> {
-    pub library_type: Option<LibraryType<'a>>,
-}
-
-impl<'a> ZoteroInit<'a> {
-    /// Create a Zotero client for a group library. According to group policy API key might be optional.
-    /// ```rust
-    /// # use zotero_api::ZoteroInit;
-    /// // With an API key
-    /// let z = ZoteroInit::set_group("123456789", "bZARysJ579K5SdmYuaAJ");
-    ///
-    /// // Without API key
-    /// let z = ZoteroInit::set_group("123456789", None);
-    /// ```
-    pub fn set_group<S: Into<Option<&'a str>>>(group_id: &'a str, api_key: S) -> Zotero<'a> {
-        Zotero {
-            library_type: LibraryType::group(group_id, api_key),
-        }
-    }
-
-    /// Create a Zotero client for a user library.
-    /// ```rust
-    /// # use zotero_api::ZoteroInit;
-    /// let z = ZoteroInit::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
-    /// ```
-    pub fn set_user(user_id: &'a str, api_key: &'a str) -> Zotero<'a> {
-        Zotero {
-            library_type: LibraryType::user(user_id, api_key),
-        }
     }
 }
 
