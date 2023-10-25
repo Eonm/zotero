@@ -1,5 +1,4 @@
-use zotero_api::ZoteroInit;
-use zotero_api::{Delete, Get};
+use zotero_api::{Zotero, ZoteroApi};
 #[allow(clippy::assertions_on_constants)]
 use zotero_data::item::{BookData, BookDataBuilder};
 
@@ -16,145 +15,131 @@ mod tests {
 
     #[test]
     fn creating_zotero_user_client() {
-        let _z = ZoteroInit::set_user("123456789", "abcdefghij");
+        let _z = Zotero::set_user("123456789", "abcdefghij");
         assert!(true)
     }
 
     #[test]
     fn creating_zotero_group_client() {
-        let _z = ZoteroInit::set_group("123456789", None);
+        let _z = Zotero::set_group("123456789", None);
         assert!(true)
     }
 
     #[test]
     fn get_operation_for_user() {
-        let z = ZoteroInit::set_user("123456789", "abcdefgh");
+        let z = Zotero::set_user("123456789", "abcdefgh");
         let req = z.get_collection("ABREZSE", None);
         assert_eq!(req.uri(), "https://api.zotero.org/users/123456789/collections/ABREZSE")
     }
 
     #[test]
     fn get_operation_for_group() {
-        let z = ZoteroInit::set_group("123456789", None);
+        let z = Zotero::set_group("123456789", None);
         let req =  z.get_collection("ABREZSE", None);
         assert_eq!(req.uri(), "https://api.zotero.org/groups/123456789/collections/ABREZSE")
     }
 
     #[test]
     fn delete_operation_for_user() {
-        let z = ZoteroInit::set_user("123456789", "abcdefgh");
-        match z.delete_item("ABREZSE", "2050") {
-            Ok(_) => assert!(true),
-            Err(_) => assert!(true),
-        };
+        let z = Zotero::set_user("123456789", "abcdefgh");
+        let req =  z.delete_item("ABREZSE", "2050");
+        assert_eq!(req.method(), "DELETE");
+        assert_eq!(req.headers().contains_key("Authorization"), true);
     }
 
     #[test]
-    #[should_panic]
     fn delete_operation_for_group_no_api_key() {
-        let z = ZoteroInit::set_group("123456789", None);
-        match z.delete_item("ABREZSE", "2050") {
-            Ok(_) => assert!(true),
-            Err(_) => assert!(true),
-        };
+        let z = Zotero::set_group("123456789", None);
+        let req = z.delete_item("ABREZSE", "2050");
+        assert_eq!(req.method(), "DELETE");
+        assert_eq!(req.headers().contains_key("Authorization"), false);
     }
 
     #[test]
     fn delete_operation_for_group() {
-        let z = ZoteroInit::set_group("123456789", "abcdefgh");
-        match z.delete_item("ABREZSE", "2050") {
-            Ok(_) => assert!(true),
-            Err(_) => assert!(true),
-        };
+        let z = Zotero::set_group("123456789", "abcdefgh");
+        let req = z.delete_item("ABREZSE", "2050");
+        assert_eq!(req.method(), "DELETE");
+        assert_eq!(req.headers().contains_key("Authorization"), true);
     }
 
     #[test]
     fn delete_collection_for_group() {
-        let z = ZoteroInit::set_group("123456789", "abcdefgh");
-        match z.delete_collection("ABREZSE", "2050") {
-            Ok(_) => assert!(true),
-            Err(_) => assert!(true),
-        };
+        let z = Zotero::set_group("123456789", "abcdefgh");
+        let req = z.delete_collection("ABREZSE", "2050");
+        assert_eq!(req.method(), "DELETE");
+        assert_eq!(req.headers().contains_key("Authorization"), true);
     }
 
     #[test]
     fn delete_collection_for_user() {
-        let z = ZoteroInit::set_user("123456789", "abcdefgh");
-        match z.delete_collection("ABREZSE", "2050") {
-            Ok(_) => assert!(true),
-            Err(_) => assert!(true),
-        };
+        let z = Zotero::set_user("123456789", "abcdefgh");
+        let req = z.delete_collection("ABREZSE", "2050");
+        assert_eq!(req.method(), "DELETE");
+        assert_eq!(req.headers().contains_key("Authorization"), true);
     }
 
     #[test]
     fn delete_items_for_user() {
-        let z = ZoteroInit::set_user("123456789", "abcdefgh");
-        match z.delete_items(vec!["ABREZSE"], "2050") {
-            Ok(_) => assert!(true),
-            Err(_) => assert!(true),
-        };
+        let z = Zotero::set_user("123456789", "abcdefgh");
+        let req = z.delete_items(vec!["ABREZSE"], "2050");
+        assert_eq!(req.method(), "DELETE");
+        assert_eq!(req.headers().contains_key("Authorization"), true);
     }
 
     #[test]
     fn delete_items_for_group() {
-        let z = ZoteroInit::set_group("123456789", "abcdefgh");
-        match z.delete_items(vec!["ABREZSE"], "2050") {
-            Ok(_) => assert!(true),
-            Err(_) => assert!(true),
-        };
+        let z = Zotero::set_group("123456789", "abcdefgh");
+        let req = z.delete_items(vec!["ABREZSE"], "2050");
+        assert_eq!(req.method(), "DELETE");
+        assert_eq!(req.headers().contains_key("Authorization"), true);
     }
 
     #[test]
     fn delete_tag_for_group() {
-        let z = ZoteroInit::set_group("123456789", "abcdefgh");
-        match z.delete_tag("ABREZSE", "2050") {
-            Ok(_) => assert!(true),
-            Err(_) => assert!(true),
-        };
+        let z = Zotero::set_group("123456789", "abcdefgh");
+        let req = z.delete_tag("ABREZSE", "2050");
+        assert_eq!(req.method(), "DELETE");
+        assert_eq!(req.headers().contains_key("Authorization"), true);
     }
 
     #[test]
     fn delete_tag_for_user() {
-        let z = ZoteroInit::set_user("123456789", "abcdefgh");
-        match z.delete_tag("ABREZSE", "2050") {
-            Ok(_) => assert!(true),
-            Err(_) => assert!(true),
-        };
+        let z = Zotero::set_user("123456789", "abcdefgh");
+        let req = z.delete_tag("ABREZSE", "2050");
+        assert_eq!(req.method(), "DELETE");
+        assert_eq!(req.headers().contains_key("Authorization"), true);
     }
 
     #[test]
     fn delete_tags_for_group() {
-        let z = ZoteroInit::set_group("123456789", "abcdefgh");
-        match z.delete_tags(vec!["ABREZSE"], "2050") {
-            Ok(_) => assert!(true),
-            Err(_) => assert!(true),
-        };
+        let z = Zotero::set_group("123456789", "abcdefgh");
+        let req = z.delete_tags(vec!["ABREZSE"], "2050");
+        assert_eq!(req.method(), "DELETE");
+        assert_eq!(req.headers().contains_key("Authorization"), true);
     }
 
     #[test]
     fn delete_tags_for_user() {
-        let z = ZoteroInit::set_user("123456789", "abcdefgh");
-        match z.delete_tags(vec!["ABREZSE"], "2050") {
-            Ok(_) => assert!(true),
-            Err(_) => assert!(true),
-        };
+        let z = Zotero::set_user("123456789", "abcdefgh");
+        let req = z.delete_tags(vec!["ABREZSE"], "2050");
+        assert_eq!(req.method(), "DELETE");
+        assert_eq!(req.headers().contains_key("Authorization"), true);
     }
 
     #[test]
     fn delete_search_for_user() {
-        let z = ZoteroInit::set_user("123456789", "abcdefgh");
-        match z.delete_search("ABREZSE", "2050") {
-            Ok(_) => assert!(true),
-            Err(_) => assert!(true),
-        };
+        let z = Zotero::set_user("123456789", "abcdefgh");
+        let req = z.delete_search("ABREZSE", "2050");
+        assert_eq!(req.method(), "DELETE");
+        assert_eq!(req.headers().contains_key("Authorization"), true);
     }
 
     #[test]
     fn delete_search_for_group() {
-        let z = ZoteroInit::set_group("123456789", "abcdefgh");
-        match z.delete_search("ABREZSE", "2050") {
-            Ok(_) => assert!(true),
-            Err(_) => assert!(true),
-        };
+        let z = Zotero::set_group("123456789", "abcdefgh");
+        let req = z.delete_search("ABREZSE", "2050");
+        assert_eq!(req.method(), "DELETE");
+        assert_eq!(req.headers().contains_key("Authorization"), true);
     }
 }

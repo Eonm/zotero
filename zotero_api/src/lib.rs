@@ -10,11 +10,11 @@
 //! ## Creating items and collections
 //!
 //! ```no_run
-//! use zotero_api::ZoteroInit;
+//! use zotero_api::Zotero;
 //! use zotero_api::Post;
 //! use zotero_data::item::{BookData, BookDataBuilder, Creator, CreatorBuilder};
 //!
-//! let z = ZoteroInit::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
+//! let z = Zotero::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
 //!
 //! let creators : Vec<Creator> = vec![
 //!     CreatorBuilder::default()
@@ -38,12 +38,12 @@
 //! ## Updating items and collections
 //!
 //! ```no_run
-//! use zotero_api::ZoteroInit;
+//! use zotero_api::Zotero;
 //! use zotero_api::Patch;
 //! use zotero_api::Get;
 //! use zotero_data::item::ItemType;
 //!
-//! let z = ZoteroInit::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
+//! let z = Zotero::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
 //! let item = z.get_item("Q8GNE36F", None);
 //! if let Ok(mut result) = item {
 //!     if let ItemType::Book(bookdata) = &mut result.data {
@@ -68,77 +68,9 @@ pub struct Zotero<'a> {
 }
 
 impl<'a> Zotero<'a> {
-//    fn get_request<S: AsRef<str> + std::fmt::Display>(
-//        &self,
-//        params: S,
-//        extra_params: Option<&str>,
-//    ) -> Result<Value, Box<dyn error::Error>> {
-//        let base_url = self.library_type.get_base_url();
-//
-//        let url = match extra_params {
-//            None => format!("{}{}", base_url, params),
-//            Some(extra_par) => format!("{}{}?{}", base_url, params, extra_par),
-//        };
-//
-//        let client = reqwest::blocking::Client::new();
-//
-//        let res = match &self.library_type.get_api_key() {
-//            Some(key) => client.get(&url).bearer_auth(key).send()?,
-//            None => client.get(&url).send()?,
-//        };
-//
-//        match &res.headers().get(header::LINK) {
-//            None => Ok(res.json()?),
-//            Some(v) => {
-//                let link: Link = v.to_str().unwrap().parse()?;
-//                let mut next: Option<LinkValue> = None;
-//                for l in link.values() {
-//                    match l.rel() {
-//                        None => {}
-//                        Some(reltypes) => {
-//                            if reltypes.contains(&RelationType::Next) {
-//                                next = Some(l.clone());
-//                            }
-//                        }
-//                    }
-//                }
-//                let mut chain_responses: Vec<Value> = res.json()?;
-//                while next.is_some() {
-//                    let next_link = next.unwrap();
-//                    next = None;
-//                    let res = match &self.library_type.get_api_key() {
-//                        Some(key) => client.get(next_link.link()).bearer_auth(key).send()?,
-//                        None => client.get(next_link.link()).send()?,
-//                    };
-//                    match &res.headers().get(header::LINK) {
-//                        None => {
-//                            next = None;
-//                        }
-//                        Some(v) => {
-//                            let link: Link = v.to_str().unwrap().parse()?;
-//                            for l in link.values() {
-//                                match l.rel() {
-//                                    None => {}
-//                                    Some(reltypes) => {
-//                                        if reltypes.contains(&RelationType::Next) {
-//                                            next = Some(l.clone());
-//                                        }
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }
-//                    let mut v: Vec<Value> = res.json()?;
-//                    chain_responses.append(&mut v);
-//                }
-//                Ok(Value::Array(chain_responses))
-//            }
-//        }
-//    }
-//
     /// Create a Zotero client for a group library. According to group policy API key might be optional.
     /// ```rust
-    /// # use zotero_api::ZoteroInit;
+    /// # use zotero_api::Zotero;
     /// // With an API key
     /// let z = Zotero::set_group("123456789", "bZARysJ579K5SdmYuaAJ");
     ///
@@ -153,7 +85,7 @@ impl<'a> Zotero<'a> {
 
     /// Create a Zotero client for a user library.
     /// ```rust
-    /// # use zotero_api::ZoteroInit;
+    /// # use zotero_api::Zotero;
     /// let z = Zotero::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
     /// ```
     pub fn set_user(user_id: &'a str, api_key: &'a str) -> Zotero<'a> {
@@ -168,8 +100,8 @@ impl<'a> ZoteroApi<'a> for Zotero<'a> {
         self.library_type.get_id()
     }
 
-    fn get_api_key(&self) -> &'a str {
-        self.library_type.get_api_key().unwrap()
+    fn get_api_key(&self) -> Option<&'a str> {
+        self.library_type.get_api_key()
     }
 
     fn get_base_url(&self) -> String {
@@ -241,7 +173,7 @@ mod tests {
             },
         };
 
-        let result_0 = ZoteroInit::set_group("123456", None);
+        let result_0 = Zotero::set_group("123456", None);
         assert_eq!(result_0, expected_struct0);
 
         let expected_struct1 = Zotero {
@@ -251,7 +183,7 @@ mod tests {
             },
         };
 
-        let result_1 = ZoteroInit::set_user("123456", "abc");
+        let result_1 = Zotero::set_user("123456", "abc");
         assert_eq!(result_1, expected_struct1);
     }
 
@@ -264,7 +196,7 @@ mod tests {
             },
         };
 
-        let result_0 = ZoteroInit::set_group("456", Some("123"));
+        let result_0 = Zotero::set_group("456", Some("123"));
 
         assert_eq!(result_0, expected_struct0);
 
@@ -275,7 +207,7 @@ mod tests {
             },
         };
 
-        let result_1 = ZoteroInit::set_group("456", "123");
+        let result_1 = Zotero::set_group("456", "123");
 
         assert_eq!(result_1, expected_struct1);
 
@@ -286,7 +218,7 @@ mod tests {
             },
         };
 
-        let result_2 = ZoteroInit::set_group("456", None);
+        let result_2 = Zotero::set_group("456", None);
 
         assert_eq!(result_2, expected_struct2);
     }
