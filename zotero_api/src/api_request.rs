@@ -8,6 +8,16 @@ pub trait ZoteroApi<'a> {
     fn get_id(&self) -> &'a str;
     fn get_api_key(&self) -> Option<&'a str>;
 
+    fn request_uri(&self, method: &str, uri: String) -> Request<Bytes> {
+        let mut builder = Request::builder()
+            .method(method)
+            .uri(uri);
+        if let Some(api_key) = self.get_api_key() {
+            builder = builder.header(AUTHORIZATION, format!("Bearer {}", api_key));
+        }
+        builder.body(Bytes::new()).unwrap()
+    }
+
     fn request<I: Into<Option<&'a str>>, T: Serialize>(
         &self,
         method: &str,

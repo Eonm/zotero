@@ -58,8 +58,32 @@
 
 mod api_request;
 mod consts;
+mod reqwest_impl;
+
+use async_trait::async_trait;
+use serde::Deserialize;
+use thiserror::Error;
 
 pub use crate::api_request::ZoteroApi;
+
+#[derive(Debug, Error)]
+pub enum ZoteroApiError {
+    #[error("Error generating Http request: {0}")]
+    RequestCreationError(String),
+    #[error("Request Error: {0}")]
+    RequestError(String),
+    #[error("Parse Response Error: {0}")]
+    ParseResponseError(String),
+}
+
+pub trait ZoteroApiExecutor {
+    fn execute<'a, T: Deserialize<'a>, Z: ZoteroApi<'a>>(self, zotero_api: &Z) -> Result<T, ZoteroApiError>;
+}
+
+#[async_trait]
+pub trait ZoteroApiAsyncExecutor {
+    async fn execute<'a, T: Deserialize<'a>, Z: ZoteroApi<'a>>(self, zotero_api: &Z) -> Result<T, ZoteroApiError>;
+}
 
 /// A struct representing a Zotero client.
 #[derive(Debug, PartialEq)]
