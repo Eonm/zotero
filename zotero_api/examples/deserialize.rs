@@ -1,5 +1,5 @@
-use std::fs::File;
 use std::env;
+use std::fs::File;
 use std::io::{Read, Write};
 
 use zotero_data::item::Item;

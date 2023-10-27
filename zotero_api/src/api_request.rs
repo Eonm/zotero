@@ -1,6 +1,6 @@
-use http::{header::AUTHORIZATION, Request, header::HeaderValue};
-use serde::Serialize;
 use bytes::Bytes;
+use http::{header::HeaderValue, header::AUTHORIZATION, Request};
+use serde::Serialize;
 use url::form_urlencoded::byte_serialize;
 
 pub trait ZoteroApi<'a> {
@@ -9,9 +9,7 @@ pub trait ZoteroApi<'a> {
     fn get_api_key(&self) -> Option<&'a str>;
 
     fn request_uri(&self, method: &str, uri: String) -> Request<Bytes> {
-        let mut builder = Request::builder()
-            .method(method)
-            .uri(uri);
+        let mut builder = Request::builder().method(method).uri(uri);
         if let Some(api_key) = self.get_api_key() {
             builder = builder.header(AUTHORIZATION, format!("Bearer {}", api_key));
         }
@@ -23,22 +21,22 @@ pub trait ZoteroApi<'a> {
         method: &str,
         params: String,
         extra_params: I,
-        data: Option<&T>
+        data: Option<&T>,
     ) -> Request<Bytes> {
         let extra_params: Option<&str> = extra_params.into();
-        let mut builder = Request::builder()
-            .method(method)
-            .uri(match extra_params {
-                None => format!("{}{}", self.get_base_url(), params),
-                Some(extra_params) => format!("{}{}?{}", self.get_base_url(), params, extra_params),
-            });
+        let mut builder = Request::builder().method(method).uri(match extra_params {
+            None => format!("{}{}", self.get_base_url(), params),
+            Some(extra_params) => format!("{}{}?{}", self.get_base_url(), params, extra_params),
+        });
         if let Some(api_key) = self.get_api_key() {
             builder = builder.header(AUTHORIZATION, format!("Bearer {}", api_key));
         }
-        builder.body(Bytes::from(match data {
+        builder
+            .body(Bytes::from(match data {
                 Some(data) => serde_json::to_vec(data).unwrap(),
                 None => Vec::new(),
-        })).unwrap()
+            }))
+            .unwrap()
     }
 
     /// Generate Api request to retrieve key information.
@@ -51,10 +49,10 @@ pub trait ZoteroApi<'a> {
     fn get_api_key_info<I: Into<Option<&'a str>>>(
         &self,
         extra_params: I,
-    ) -> Option<Request<Bytes>>  {
+    ) -> Option<Request<Bytes>> {
         if let Some(api_key) = self.get_api_key() {
             let params = format!("/keys/{}", api_key);
-            Some(self.request::<_,()>("GET", params, extra_params, None))
+            Some(self.request::<_, ()>("GET", params, extra_params, None))
         } else {
             None
         }
@@ -73,7 +71,7 @@ pub trait ZoteroApi<'a> {
         extra_params: I,
     ) -> Request<Bytes> {
         let params: String = format!("/items/{}", item_id);
-        self.request::<_,()>("GET", params, extra_params, None)
+        self.request::<_, ()>("GET", params, extra_params, None)
     }
 
     /// Generate Api request to retreive all items in the library, excluding trashed items.
@@ -83,12 +81,9 @@ pub trait ZoteroApi<'a> {
     /// let z = Zotero::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
     /// let items_request = z.get_items(None);
     /// ```
-    fn get_items<I: Into<Option<&'a str>>>(
-        &self,
-        extra_params: I,
-    ) -> Request<Bytes> {
+    fn get_items<I: Into<Option<&'a str>>>(&self, extra_params: I) -> Request<Bytes> {
         let params = "/items".to_string();
-        self.request::<_,()>("GET", params, extra_params, None)
+        self.request::<_, ()>("GET", params, extra_params, None)
     }
 
     /// Generate Api request to retreive all child items of a specific item
@@ -104,7 +99,7 @@ pub trait ZoteroApi<'a> {
         extra_params: I,
     ) -> Request<Bytes> {
         let params: String = format!("/items/{}/children", item_id);
-        self.request::<_,()>("GET", params, extra_params, None)
+        self.request::<_, ()>("GET", params, extra_params, None)
     }
 
     /// Generate Api request to retreive top-level items in the library, excluding trashed items.
@@ -114,12 +109,9 @@ pub trait ZoteroApi<'a> {
     /// let z = Zotero::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
     /// let top_items_request = z.get_top_items(None);
     /// ```
-    fn get_top_items<I: Into<Option<&'a str>>>(
-        &self,
-        extra_params: I,
-    ) -> Request<Bytes> {
+    fn get_top_items<I: Into<Option<&'a str>>>(&self, extra_params: I) -> Request<Bytes> {
         let params = "/items/top".to_string();
-        self.request::<_,()>("GET", params, extra_params, None)
+        self.request::<_, ()>("GET", params, extra_params, None)
     }
 
     /// Generate Api request to retreive items in the trash.
@@ -129,12 +121,9 @@ pub trait ZoteroApi<'a> {
     /// let z = Zotero::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
     /// let trashed_items_request = z.get_trashed_items(None);
     /// ```
-    fn get_trashed_items<I: Into<Option<&'a str>>>(
-        &self,
-        extra_params: I,
-    ) -> Request<Bytes> {
+    fn get_trashed_items<I: Into<Option<&'a str>>>(&self, extra_params: I) -> Request<Bytes> {
         let params = "/items/trash".to_string();
-        self.request::<_,()>("GET", params, extra_params, None)
+        self.request::<_, ()>("GET", params, extra_params, None)
     }
 
     /// Generate Api request to retreive items in "My publications".
@@ -144,12 +133,9 @@ pub trait ZoteroApi<'a> {
     /// let z = Zotero::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
     /// let my_publications_request = z.get_publications(None);
     /// ```
-    fn get_publications<I: Into<Option<&'a str>>>(
-        &self,
-        extra_params: I,
-    ) -> Request<Bytes> {
+    fn get_publications<I: Into<Option<&'a str>>>(&self, extra_params: I) -> Request<Bytes> {
         let params = "/publications/items".to_string();
-        self.request::<_,()>("GET", params, extra_params, None)
+        self.request::<_, ()>("GET", params, extra_params, None)
     }
 
     /// Generate Api request to retreive a collection by it's id.
@@ -165,9 +151,8 @@ pub trait ZoteroApi<'a> {
         extra_params: I,
     ) -> Request<Bytes> {
         let params = format!("/collections/{}", collection_id);
-        self.request::<_,()>("GET", params, extra_params, None)
+        self.request::<_, ()>("GET", params, extra_params, None)
     }
-
 
     /// Generate Api request to retreive all collections.
     /// ```no_run
@@ -176,12 +161,9 @@ pub trait ZoteroApi<'a> {
     /// let z = Zotero::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
     /// let collections_request = z.get_collections(None);
     /// ```
-    fn get_collections<I: Into<Option<&'a str>>>(
-        &self,
-        extra_params: I,
-    ) -> Request<Bytes> {
+    fn get_collections<I: Into<Option<&'a str>>>(&self, extra_params: I) -> Request<Bytes> {
         let params = "/collections".to_string();
-        self.request::<_,()>("GET", params, extra_params, None)
+        self.request::<_, ()>("GET", params, extra_params, None)
     }
 
     /// Generate Api request to retreive top level collections.
@@ -191,12 +173,9 @@ pub trait ZoteroApi<'a> {
     /// let z = Zotero::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
     /// let top_collections_request = z.get_top_collections(None);
     /// ```
-    fn get_top_collections<I: Into<Option<&'a str>>>(
-        &self,
-        extra_params: I,
-    ) -> Request<Bytes> {
+    fn get_top_collections<I: Into<Option<&'a str>>>(&self, extra_params: I) -> Request<Bytes> {
         let params = "/collections/top".to_string();
-        self.request::<_,()>("GET", params, extra_params, None)
+        self.request::<_, ()>("GET", params, extra_params, None)
     }
 
     /// Generate Api request to retreive all items for a given collection
@@ -212,7 +191,7 @@ pub trait ZoteroApi<'a> {
         extra_params: I,
     ) -> Request<Bytes> {
         let params = format!("/collections/{}/items", collection_id);
-        self.request::<_,()>("GET", params, extra_params, None)
+        self.request::<_, ()>("GET", params, extra_params, None)
     }
 
     /// Generate Api request to retreive top-level items for a given collection
@@ -229,7 +208,7 @@ pub trait ZoteroApi<'a> {
         extra_params: I,
     ) -> Request<Bytes> {
         let params = format!("/collection/{}/items/{}", collection_id, item_id);
-        self.request::<_,()>("GET", params, extra_params, None)
+        self.request::<_, ()>("GET", params, extra_params, None)
     }
 
     /// Generate Api request to delete a Zotero item.
@@ -245,8 +224,11 @@ pub trait ZoteroApi<'a> {
         last_version: S,
     ) -> Request<Bytes> {
         let params = format!("items/{}", item_key);
-        let mut req = self.request::<_,()>("DELETE", params, None, None);
-        req.headers_mut().insert("If-Unmodified-Since-Version", HeaderValue::from_str(&last_version.to_string()).unwrap());
+        let mut req = self.request::<_, ()>("DELETE", params, None, None);
+        req.headers_mut().insert(
+            "If-Unmodified-Since-Version",
+            HeaderValue::from_str(&last_version.to_string()).unwrap(),
+        );
         req
     }
 
@@ -270,8 +252,11 @@ pub trait ZoteroApi<'a> {
                 .collect::<Vec<&str>>()
                 .join(" || ")
         );
-        let mut req = self.request::<_,()>("DELETE", params, None, None);
-        req.headers_mut().insert("If-Unmodified-Since-Version", HeaderValue::from_str(&last_version.to_string()).unwrap());
+        let mut req = self.request::<_, ()>("DELETE", params, None, None);
+        req.headers_mut().insert(
+            "If-Unmodified-Since-Version",
+            HeaderValue::from_str(&last_version.to_string()).unwrap(),
+        );
         req
     }
 
@@ -288,8 +273,11 @@ pub trait ZoteroApi<'a> {
         last_version: S,
     ) -> Request<Bytes> {
         let params = format!("collections/{}", item_key);
-        let mut req = self.request::<_,()>("DELETE", params, None, None);
-        req.headers_mut().insert("If-Unmodified-Since-Version", HeaderValue::from_str(&last_version.to_string()).unwrap());
+        let mut req = self.request::<_, ()>("DELETE", params, None, None);
+        req.headers_mut().insert(
+            "If-Unmodified-Since-Version",
+            HeaderValue::from_str(&last_version.to_string()).unwrap(),
+        );
         req
     }
 
@@ -300,8 +288,11 @@ pub trait ZoteroApi<'a> {
         last_version: S,
     ) -> Request<Bytes> {
         let params = format!("searches?searchKey={}", search_key);
-        let mut req = self.request::<_,()>("DELETE", params, None, None);
-        req.headers_mut().insert("If-Unmodified-Since-Version", HeaderValue::from_str(&last_version.to_string()).unwrap());
+        let mut req = self.request::<_, ()>("DELETE", params, None, None);
+        req.headers_mut().insert(
+            "If-Unmodified-Since-Version",
+            HeaderValue::from_str(&last_version.to_string()).unwrap(),
+        );
         req
     }
 
@@ -318,8 +309,11 @@ pub trait ZoteroApi<'a> {
         last_version: S,
     ) -> Request<Bytes> {
         let params = format!("tags?tag={}", tag_key);
-        let mut req = self.request::<_,()>("DELETE", params, None, None);
-        req.headers_mut().insert("If-Unmodified-Since-Version", HeaderValue::from_str(&last_version.to_string()).unwrap());
+        let mut req = self.request::<_, ()>("DELETE", params, None, None);
+        req.headers_mut().insert(
+            "If-Unmodified-Since-Version",
+            HeaderValue::from_str(&last_version.to_string()).unwrap(),
+        );
         req
     }
 
@@ -343,8 +337,11 @@ pub trait ZoteroApi<'a> {
                 .collect::<Vec<String>>()
                 .join(" || ")
         );
-        let mut req = self.request::<_,()>("DELETE", params, None, None);
-        req.headers_mut().insert("If-Unmodified-Since-Version", HeaderValue::from_str(&last_version.to_string()).unwrap());
+        let mut req = self.request::<_, ()>("DELETE", params, None, None);
+        req.headers_mut().insert(
+            "If-Unmodified-Since-Version",
+            HeaderValue::from_str(&last_version.to_string()).unwrap(),
+        );
         req
     }
 
@@ -367,10 +364,7 @@ pub trait ZoteroApi<'a> {
     }
 
     /// Generate Api request to create new collections
-    fn create_new_collections<T: Serialize>(
-        &self,
-        item: Vec<T>,
-    ) -> Request<Bytes> {
+    fn create_new_collections<T: Serialize>(&self, item: Vec<T>) -> Request<Bytes> {
         let params = "/collections".to_string();
         self.request("POST", params, None, Some(&item))
     }

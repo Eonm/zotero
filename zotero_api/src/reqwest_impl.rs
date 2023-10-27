@@ -1,19 +1,28 @@
 use async_trait::async_trait;
 use bytes::Bytes;
 use http::header;
-use hyperx::header::{LinkValue, RelationType, Link};
+use hyperx::header::{Link, LinkValue, RelationType};
 use serde_json::Value;
 
-use crate::{ZoteroApiExecutor, ZoteroApiError, ZoteroApiAsyncExecutor};
+use crate::{ZoteroApiAsyncExecutor, ZoteroApiError, ZoteroApiExecutor};
 
 impl ZoteroApiExecutor for http::Request<Bytes> {
-    fn execute<'a, T: serde::Deserialize<'a>, Z: crate::ZoteroApi<'a>>(self, zotero_api: &Z) -> Result<T, crate::ZoteroApiError> {
+    fn execute<'a, T: serde::Deserialize<'a>, Z: crate::ZoteroApi<'a>>(
+        self,
+        zotero_api: &Z,
+    ) -> Result<T, crate::ZoteroApiError> {
         let client = reqwest::blocking::Client::new();
 
-        let res = client.execute(self.try_into().unwrap()).map_err(|err| ZoteroApiError::RequestError(err.to_string()))?;
+        let res = client
+            .execute(self.try_into().unwrap())
+            .map_err(|err| ZoteroApiError::RequestError(err.to_string()))?;
 
         match &res.headers().get(header::LINK) {
-            None => Ok(T::deserialize(res.json::<Value>().map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))?).map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))?),
+            None => Ok(T::deserialize(
+                res.json::<Value>()
+                    .map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))?,
+            )
+            .map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))?),
             Some(v) => {
                 let link: Link = v.to_str().unwrap().parse().unwrap();
                 let mut next: Option<LinkValue> = None;
@@ -27,12 +36,16 @@ impl ZoteroApiExecutor for http::Request<Bytes> {
                         }
                     }
                 }
-                let mut chain_responses: Vec<Value> = res.json().map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))?;
+                let mut chain_responses: Vec<Value> = res
+                    .json()
+                    .map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))?;
                 while next.is_some() {
                     let next_link = next.unwrap();
                     next = None;
                     let uri: String = next_link.link().to_string();
-                    let res = client.execute(zotero_api.request_uri("GET", uri).try_into().unwrap()).map_err(|err| ZoteroApiError::RequestError(err.to_string()))?;
+                    let res = client
+                        .execute(zotero_api.request_uri("GET", uri).try_into().unwrap())
+                        .map_err(|err| ZoteroApiError::RequestError(err.to_string()))?;
                     match &res.headers().get(header::LINK) {
                         None => {
                             next = None;
@@ -51,10 +64,13 @@ impl ZoteroApiExecutor for http::Request<Bytes> {
                             }
                         }
                     }
-                    let mut v: Vec<Value> = res.json().map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))?;
+                    let mut v: Vec<Value> = res
+                        .json()
+                        .map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))?;
                     chain_responses.append(&mut v);
                 }
-                Ok(T::deserialize(Value::Array(chain_responses)).map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))?)
+                Ok(T::deserialize(Value::Array(chain_responses))
+                    .map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))?)
             }
         }
     }
@@ -62,13 +78,24 @@ impl ZoteroApiExecutor for http::Request<Bytes> {
 
 #[async_trait]
 impl ZoteroApiAsyncExecutor for http::Request<Bytes> {
-    async fn execute<'a, T: serde::Deserialize<'a>, Z: crate::ZoteroApi<'a>  + std::marker::Sync>(self, zotero_api: &Z) -> Result<T, crate::ZoteroApiError> {
+    async fn execute<'a, T: serde::Deserialize<'a>, Z: crate::ZoteroApi<'a> + std::marker::Sync>(
+        self,
+        zotero_api: &Z,
+    ) -> Result<T, crate::ZoteroApiError> {
         let client = reqwest::Client::new();
 
-        let res = client.execute(self.try_into().unwrap()).await.map_err(|err| ZoteroApiError::RequestError(err.to_string()))?;
+        let res = client
+            .execute(self.try_into().unwrap())
+            .await
+            .map_err(|err| ZoteroApiError::RequestError(err.to_string()))?;
 
         match &res.headers().get(header::LINK) {
-            None => Ok(T::deserialize(res.json::<Value>().await.map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))?).map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))?),
+            None => Ok(T::deserialize(
+                res.json::<Value>()
+                    .await
+                    .map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))?,
+            )
+            .map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))?),
             Some(v) => {
                 let link: Link = v.to_str().unwrap().parse().unwrap();
                 let mut next: Option<LinkValue> = None;
@@ -82,12 +109,18 @@ impl ZoteroApiAsyncExecutor for http::Request<Bytes> {
                         }
                     }
                 }
-                let mut chain_responses: Vec<Value> = res.json().await.map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))?;
+                let mut chain_responses: Vec<Value> = res
+                    .json()
+                    .await
+                    .map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))?;
                 while next.is_some() {
                     let next_link = next.unwrap();
                     next = None;
                     let uri: String = next_link.link().to_string();
-                    let res = client.execute(zotero_api.request_uri("GET", uri).try_into().unwrap()).await.map_err(|err| ZoteroApiError::RequestError(err.to_string()))?;
+                    let res = client
+                        .execute(zotero_api.request_uri("GET", uri).try_into().unwrap())
+                        .await
+                        .map_err(|err| ZoteroApiError::RequestError(err.to_string()))?;
                     match &res.headers().get(header::LINK) {
                         None => {
                             next = None;
@@ -106,10 +139,14 @@ impl ZoteroApiAsyncExecutor for http::Request<Bytes> {
                             }
                         }
                     }
-                    let mut v: Vec<Value> = res.json().await.map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))?;
+                    let mut v: Vec<Value> = res
+                        .json()
+                        .await
+                        .map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))?;
                     chain_responses.append(&mut v);
                 }
-                Ok(T::deserialize(Value::Array(chain_responses)).map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))?)
+                Ok(T::deserialize(Value::Array(chain_responses))
+                    .map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))?)
             }
         }
     }

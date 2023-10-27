@@ -29,20 +29,26 @@ mod tests {
     fn get_operation_for_user() {
         let z = Zotero::set_user("123456789", "abcdefgh");
         let req = z.get_collection("ABREZSE", None);
-        assert_eq!(req.uri(), "https://api.zotero.org/users/123456789/collections/ABREZSE")
+        assert_eq!(
+            req.uri(),
+            "https://api.zotero.org/users/123456789/collections/ABREZSE"
+        )
     }
 
     #[test]
     fn get_operation_for_group() {
         let z = Zotero::set_group("123456789", None);
-        let req =  z.get_collection("ABREZSE", None);
-        assert_eq!(req.uri(), "https://api.zotero.org/groups/123456789/collections/ABREZSE")
+        let req = z.get_collection("ABREZSE", None);
+        assert_eq!(
+            req.uri(),
+            "https://api.zotero.org/groups/123456789/collections/ABREZSE"
+        )
     }
 
     #[test]
     fn delete_operation_for_user() {
         let z = Zotero::set_user("123456789", "abcdefgh");
-        let req =  z.delete_item("ABREZSE", "2050");
+        let req = z.delete_item("ABREZSE", "2050");
         assert_eq!(req.method(), "DELETE");
         assert_eq!(req.headers().contains_key("Authorization"), true);
     }

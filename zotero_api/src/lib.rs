@@ -77,12 +77,18 @@ pub enum ZoteroApiError {
 }
 
 pub trait ZoteroApiExecutor {
-    fn execute<'a, T: Deserialize<'a>, Z: ZoteroApi<'a>>(self, zotero_api: &Z) -> Result<T, ZoteroApiError>;
+    fn execute<'a, T: Deserialize<'a>, Z: ZoteroApi<'a>>(
+        self,
+        zotero_api: &Z,
+    ) -> Result<T, ZoteroApiError>;
 }
 
 #[async_trait]
 pub trait ZoteroApiAsyncExecutor {
-    async fn execute<'a, T: Deserialize<'a>, Z: ZoteroApi<'a> + std::marker::Sync>(self, zotero_api: &Z) -> Result<T, ZoteroApiError>;
+    async fn execute<'a, T: Deserialize<'a>, Z: ZoteroApi<'a> + std::marker::Sync>(
+        self,
+        zotero_api: &Z,
+    ) -> Result<T, ZoteroApiError>;
 }
 
 /// A struct representing a Zotero client.
