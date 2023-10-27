@@ -82,7 +82,7 @@ pub trait ZoteroApiExecutor {
 
 #[async_trait]
 pub trait ZoteroApiAsyncExecutor {
-    async fn execute<'a, T: Deserialize<'a>, Z: ZoteroApi<'a>>(self, zotero_api: &Z) -> Result<T, ZoteroApiError>;
+    async fn execute<'a, T: Deserialize<'a>, Z: ZoteroApi<'a> + std::marker::Sync>(self, zotero_api: &Z) -> Result<T, ZoteroApiError>;
 }
 
 /// A struct representing a Zotero client.
