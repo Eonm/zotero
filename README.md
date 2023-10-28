@@ -15,14 +15,10 @@
 
 ## Creating items and collections
 
-```rust
-extern crate zotero;
-use zotero::ZoteroInit;
-use zotero::Post;
-use zotero::data_structure::item::{BookData, BookDataBuilder, Creator, CreatorBuilder};
-
-let z = ZoteroInit::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
-
+``` rust
+use zotero_api::{Zotero, ZoteroApi, ZoteroApiExecutor};
+use zotero_data::item::{BookData, BookDataBuilder, Creator, CreatorBuilder};
+let z = Zotero::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
 let creators : Vec<Creator> = vec![
     CreatorBuilder::default()
         .creator_type("author")
@@ -31,36 +27,39 @@ let creators : Vec<Creator> = vec![
         .build()
         .unwrap()
 ];
-
 let new_book : BookData = BookDataBuilder::default()
     .title("Sample_2")
     .creators(creators)
     .item_type("book")
     .build()
     .unwrap();
-    
-z.create_new_item(new_book);
+let _: Result<(), _> = z.create_new_item(new_book).execute(&z);
 ```
 
 ## Updating items and collections
 
-```rust
-extern crate zotero;
-use zotero::ZoteroInit;
-use zotero::Patch;
-use zotero::Get;
-use zotero::data_structure::item::ItemType;
-
-let z = ZoteroInit::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
-
-let item = z.get_item("Q8GNE36F", None);
-
+``` rust
+use zotero_api::{Zotero, ZoteroApi, ZoteroApiExecutor};
+use zotero_data::item::ItemType;
+let z = Zotero::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
+let item: Result<ItemType, _> = z.get_item("Q8GNE36F", None).execute(&z);
 if let Ok(mut result) = item {
-    if let ItemType::Book(bookdata) = &mut result.data {
+    if let ItemType::Book(bookdata) = &mut result {
         bookdata.title = "A new title".to_string();
         bookdata.publisher = "A new publisher".to_string();
-        z.update_item(&bookdata.key, &bookdata);
+        let _: Result<(),_> =z.update_item(&bookdata.key, &bookdata).execute(&z);
     };
-    println!("{:?}", serde_json::to_string(&result.data));
+
+    println!("{:?}", serde_json::to_string(&result));
 };
+```
+
+## Async Support
+``` rust
+use zotero_api::{Zotero, ZoteroApi, ZoteroApiAsyncExecutor};
+use zotero_data::Item;
+
+let z = Zotero::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
+let item_result: Result<Item, _> = z.get_item("Q8GNE36F", None).execute(&z).await;
+println!("{item_result:#?}")
 ```

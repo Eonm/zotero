@@ -41,8 +41,7 @@ pub trait ZoteroApi<'a> {
 
     /// Generate Api request to retrieve key information.
     /// ```no_run
-    /// # use zotero_api::Zotero;
-    /// # use zotero_api::Get;
+    /// # use zotero_api::{Zotero, ZoteroApi};
     /// let z = Zotero::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
     /// let key_info_request = z.get_api_key_info("bZARysJ579K5SdmYuaAJ");
     /// ```
@@ -60,8 +59,7 @@ pub trait ZoteroApi<'a> {
 
     /// Generate Api request to retreive specific item in the library by it's ID.
     /// ```no_run
-    /// # use zotero_api::Zotero;
-    /// # use zotero_api::Get;
+    /// # use zotero_api::{Zotero, ZoteroApi};
     /// let z = Zotero::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
     /// let item_request = z.get_item("B8ZNE3GH", None);
     /// ```
@@ -76,8 +74,7 @@ pub trait ZoteroApi<'a> {
 
     /// Generate Api request to retreive all items in the library, excluding trashed items.
     /// ```no_run
-    /// # use zotero_api::Zotero;
-    /// # use zotero_api::Get;
+    /// # use zotero_api::{Zotero, ZoteroApi};
     /// let z = Zotero::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
     /// let items_request = z.get_items(None);
     /// ```
@@ -88,8 +85,7 @@ pub trait ZoteroApi<'a> {
 
     /// Generate Api request to retreive all child items of a specific item
     /// ```no_run
-    /// # use zotero_api::Zotero;
-    /// # use zotero_api::Get;
+    /// # use zotero_api::{Zotero, ZoteroApi};
     /// let z = Zotero::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
     /// let items_request = z.get_child_items("B8ZNE3GH", None);
     /// ```
@@ -104,8 +100,7 @@ pub trait ZoteroApi<'a> {
 
     /// Generate Api request to retreive top-level items in the library, excluding trashed items.
     /// ```no_run
-    /// # use zotero_api::Zotero;
-    /// # use zotero_api::Get;
+    /// # use zotero_api::{Zotero, ZoteroApi};
     /// let z = Zotero::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
     /// let top_items_request = z.get_top_items(None);
     /// ```
@@ -116,8 +111,7 @@ pub trait ZoteroApi<'a> {
 
     /// Generate Api request to retreive items in the trash.
     /// ```no_run
-    /// # use zotero_api::Zotero;
-    /// # use zotero_api::Get;
+    /// # use zotero_api::{Zotero, ZoteroApi};
     /// let z = Zotero::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
     /// let trashed_items_request = z.get_trashed_items(None);
     /// ```
@@ -128,8 +122,7 @@ pub trait ZoteroApi<'a> {
 
     /// Generate Api request to retreive items in "My publications".
     /// ```no_run
-    /// # use zotero_api::Zotero;
-    /// # use zotero_api::Get;
+    /// # use zotero_api::{Zotero, ZoteroApi};
     /// let z = Zotero::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
     /// let my_publications_request = z.get_publications(None);
     /// ```
@@ -140,8 +133,7 @@ pub trait ZoteroApi<'a> {
 
     /// Generate Api request to retreive a collection by it's id.
     /// ```no_run
-    /// # use zotero_api::Zotero;
-    /// # use zotero_api::Get;
+    /// # use zotero_api::{Zotero, ZoteroApi};
     /// let z = Zotero::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
     /// let collection_request = z.get_collection("AYVWED", None);
     /// ```
@@ -156,8 +148,7 @@ pub trait ZoteroApi<'a> {
 
     /// Generate Api request to retreive all collections.
     /// ```no_run
-    /// # use zotero_api::Zotero;
-    /// # use zotero_api::Get;
+    /// # use zotero_api::{Zotero, ZoteroApi};
     /// let z = Zotero::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
     /// let collections_request = z.get_collections(None);
     /// ```
@@ -168,8 +159,7 @@ pub trait ZoteroApi<'a> {
 
     /// Generate Api request to retreive top level collections.
     /// ```no_run
-    /// # use zotero_api::Zotero;
-    /// # use zotero_api::Get;
+    /// # use zotero_api::{Zotero, ZoteroApi};
     /// let z = Zotero::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
     /// let top_collections_request = z.get_top_collections(None);
     /// ```
@@ -180,8 +170,7 @@ pub trait ZoteroApi<'a> {
 
     /// Generate Api request to retreive all items for a given collection
     /// ```no_run
-    /// # use zotero_api::Zotero;
-    /// # use zotero_api::Get;
+    /// # use zotero_api::{Zotero, ZoteroApi};
     /// let z = Zotero::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
     /// let collection_items_request = z.get_collection_items("AYVWED", None);
     /// ```
@@ -196,8 +185,7 @@ pub trait ZoteroApi<'a> {
 
     /// Generate Api request to retreive top-level items for a given collection
     /// ```no_run
-    /// # use zotero_api::Zotero;
-    /// # use zotero_api::Get;
+    /// # use zotero_api::{Zotero, ZoteroApi};
     /// let z = Zotero::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
     /// let collection_top_items_request = z.get_collection_top_items("AYVWED", "B8ZNE3GH", None);
     /// ```
@@ -213,8 +201,7 @@ pub trait ZoteroApi<'a> {
 
     /// Generate Api request to delete a Zotero item.
     /// ```no_run
-    /// # use zotero_api::Zotero;
-    /// # use zotero_api::Delete;
+    /// # use zotero_api::{Zotero, ZoteroApi};
     /// let z = Zotero::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
     /// let delete_req = z.delete_item("PJTUB2WE", "2050");
     /// ```
@@ -234,8 +221,7 @@ pub trait ZoteroApi<'a> {
 
     /// Generate Api request to delete a Zotero item.
     /// ```no_run
-    /// # use zotero_api::Zotero;
-    /// # use zotero_api::Delete;
+    /// # use zotero_api::{Zotero, ZoteroApi};
     /// let z = Zotero::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
     /// let delete_req = z.delete_items(vec!["PJTUB2WE", "YXT5PJU9"], "2050");
     /// ```
@@ -262,8 +248,7 @@ pub trait ZoteroApi<'a> {
 
     /// Generate Api request to delete a Zotero collection.
     /// ```no_run
-    /// # use zotero_api::Zotero;
-    /// # use zotero_api::Delete;
+    /// # use zotero_api::{Zotero, ZoteroApi};
     /// let z = Zotero::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
     /// let delete_req = z.delete_collection("TYQDGEZR", "2050");
     /// ```
@@ -298,8 +283,7 @@ pub trait ZoteroApi<'a> {
 
     /// Generate Api request to delete a Zotero tag.
     /// ```no_run
-    /// # use zotero_api::Zotero;
-    /// # use zotero_api::Delete;
+    /// # use zotero_api::{Zotero, ZoteroApi};
     /// let z = Zotero::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
     /// let delete_req = z.delete_tag("history", "2050");
     /// ```
@@ -319,8 +303,7 @@ pub trait ZoteroApi<'a> {
 
     /// Generate Api request to delete multiple Zotero tags.
     /// ```no_run
-    /// # use zotero_api::Zotero;
-    /// # use zotero_api::Delete;
+    /// # use zotero_api::{Zotero, ZoteroApi};
     /// let z = Zotero::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
     /// let delete_req = z.delete_tags(vec!["history", "philosophy", "art"], "2050");
     /// ```
@@ -371,19 +354,17 @@ pub trait ZoteroApi<'a> {
 
     /// Generate Api request to update a zotero item.
     /// ```no_run
-    /// # use zotero_api::Zotero;
-    /// # use zotero_api::Patch;
-    /// # use zotero_api::Get;
+    /// # use zotero_api::{Zotero, ZoteroApi, ZoteroApiExecutor, ZoteroApiError};
     /// # use zotero_data::item::ItemType;
     /// let z = Zotero::set_user("123456789", "bZARysJ579K5SdmYuaAJ");
-    /// let remote_item = z.get_item("B8ZNE3GH", None);
+    /// let remote_item: Result<ItemType, ZoteroApiError> = z.get_item("B8ZNE3GH", None).execute(&z);
     ///
     /// if let Ok(mut result) = remote_item {
-    ///     if let ItemType::Book(bookdata) = &mut result.data {
+    ///     if let ItemType::Book(bookdata) = &mut result {
     ///         bookdata.title = "A new title".to_string();
     ///         bookdata.publisher = "Doe editions".to_string();
     ///         bookdata.creators = vec!();
-    ///         z.update_item(&bookdata.key, &bookdata);
+    ///         let _: Result<(), _> = z.update_item(&bookdata.key, &bookdata).execute(&z);
     ///     };
     /// };
     ///```

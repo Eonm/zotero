@@ -25,8 +25,12 @@ http = "0.2.9"
 bytes = { version = "1.5.0", features = ["serde"] }
 thiserror = "1.0.50"
 async-trait = "0.1.74"
-reqwest = { version = "0.11.11", features = ["blocking", "json"] }
-hyperx = "*"
+reqwest = { version = "0.11.11", features = ["blocking", "json"], optional = true }
+hyperx = { version = "*", optional  = true}
+
+[features]
+default = [ "reqwest" ]
+reqwest = [ "dep:reqwest", "dep:hyperx"]
 
 [dev-dependencies]
 tokio = { version = "1.33.0", features = ["full"] }
