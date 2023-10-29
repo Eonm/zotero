@@ -17,6 +17,10 @@ impl ZoteroApiExecutor for http::Request<Bytes> {
             .execute(self.try_into().unwrap())
             .map_err(|err| ZoteroApiError::RequestError(err.to_string()))?;
 
+        if res.status().as_u16() == 403 {
+            return Err(ZoteroApiError::AuthenticationError(res.text().unwrap()));
+        }
+
         match &res.headers().get(header::LINK) {
             None => Ok(T::deserialize(
                 res.json::<Value>()
@@ -88,6 +92,10 @@ impl ZoteroApiAsyncExecutor for http::Request<Bytes> {
             .execute(self.try_into().unwrap())
             .await
             .map_err(|err| ZoteroApiError::RequestError(err.to_string()))?;
+
+        if res.status().as_u16() == 403 {
+            return Err(ZoteroApiError::AuthenticationError(res.text().await.unwrap()));
+        }
 
         match &res.headers().get(header::LINK) {
             None => Ok(T::deserialize(

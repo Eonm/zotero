@@ -54,6 +54,8 @@
 
 mod api_request;
 mod consts;
+
+#[cfg(feature = "reqwest")]
 mod reqwest_impl;
 
 use async_trait::async_trait;
@@ -66,6 +68,8 @@ pub use crate::api_request::ZoteroApi;
 pub enum ZoteroApiError {
     #[error("Error generating Http request: {0}")]
     RequestCreationError(String),
+    #[error("Authentication Error: {0}")]
+    AuthenticationError(String),
     #[error("Request Error: {0}")]
     RequestError(String),
     #[error("Parse Response Error: {0}")]
