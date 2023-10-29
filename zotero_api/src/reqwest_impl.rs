@@ -94,7 +94,9 @@ impl ZoteroApiAsyncExecutor for http::Request<Bytes> {
             .map_err(|err| ZoteroApiError::RequestError(err.to_string()))?;
 
         if res.status().as_u16() == 403 {
-            return Err(ZoteroApiError::AuthenticationError(res.text().await.unwrap()));
+            return Err(ZoteroApiError::AuthenticationError(
+                res.text().await.unwrap(),
+            ));
         }
 
         match &res.headers().get(header::LINK) {
