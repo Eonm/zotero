@@ -532,7 +532,7 @@ impl Creator {
     pub fn short_name(&self) -> String {
         match self.first_name.chars().next() {
             Some(first_initial) => format!("{}. {}", first_initial, self.last_name),
-            None => format!("{}", self.last_name),
+            None => self.last_name.to_string(),
         }
     }
 }

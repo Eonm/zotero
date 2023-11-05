@@ -214,7 +214,7 @@ pub trait ZoteroApi<'a> {
         let mut req = self.request::<_, ()>("DELETE", params, None, None);
         req.headers_mut().insert(
             "If-Unmodified-Since-Version",
-            HeaderValue::from_str(&last_version.to_string()).unwrap(),
+            HeaderValue::from_str(last_version.as_ref()).unwrap(),
         );
         req
     }
@@ -241,7 +241,7 @@ pub trait ZoteroApi<'a> {
         let mut req = self.request::<_, ()>("DELETE", params, None, None);
         req.headers_mut().insert(
             "If-Unmodified-Since-Version",
-            HeaderValue::from_str(&last_version.to_string()).unwrap(),
+            HeaderValue::from_str(last_version.as_ref()).unwrap(),
         );
         req
     }
@@ -261,7 +261,7 @@ pub trait ZoteroApi<'a> {
         let mut req = self.request::<_, ()>("DELETE", params, None, None);
         req.headers_mut().insert(
             "If-Unmodified-Since-Version",
-            HeaderValue::from_str(&last_version.to_string()).unwrap(),
+            HeaderValue::from_str(last_version.as_ref()).unwrap(),
         );
         req
     }
@@ -276,7 +276,7 @@ pub trait ZoteroApi<'a> {
         let mut req = self.request::<_, ()>("DELETE", params, None, None);
         req.headers_mut().insert(
             "If-Unmodified-Since-Version",
-            HeaderValue::from_str(&last_version.to_string()).unwrap(),
+            HeaderValue::from_str(last_version.as_ref()).unwrap(),
         );
         req
     }
@@ -296,7 +296,7 @@ pub trait ZoteroApi<'a> {
         let mut req = self.request::<_, ()>("DELETE", params, None, None);
         req.headers_mut().insert(
             "If-Unmodified-Since-Version",
-            HeaderValue::from_str(&last_version.to_string()).unwrap(),
+            HeaderValue::from_str(last_version.as_ref()).unwrap(),
         );
         req
     }
@@ -323,7 +323,7 @@ pub trait ZoteroApi<'a> {
         let mut req = self.request::<_, ()>("DELETE", params, None, None);
         req.headers_mut().insert(
             "If-Unmodified-Since-Version",
-            HeaderValue::from_str(&last_version.to_string()).unwrap(),
+            HeaderValue::from_str(last_version.as_ref()).unwrap(),
         );
         req
     }
