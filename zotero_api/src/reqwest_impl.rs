@@ -1,7 +1,6 @@
 use async_trait::async_trait;
 use bytes::Bytes;
-use http::header;
-use hyperx::header::{Link, LinkValue, RelationType};
+use hyperx::header::{Link, RelationType};
 use serde_json::Value;
 
 use crate::{ZoteroApiAsyncExecutor, ZoteroApiError, ZoteroApiExecutor};
@@ -18,63 +17,43 @@ impl ZoteroApiExecutor for http::Request<Bytes> {
             .map_err(|err| ZoteroApiError::RequestError(err.to_string()))?;
 
         if res.status().as_u16() == 403 {
-            return Err(ZoteroApiError::AuthenticationError(res.text().unwrap()));
+            return Err(ZoteroApiError::AuthenticationError(
+                res.text().unwrap_or("".to_string()),
+            ));
         }
 
-        match &res.headers().get(header::LINK) {
-            None => Ok(T::deserialize(
-                res.json::<Value>()
-                    .map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))?,
-            )
-            .map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))?),
-            Some(v) => {
-                let link: Link = v.to_str().unwrap().parse().unwrap();
-                let mut next: Option<LinkValue> = None;
-                for l in link.values() {
-                    match l.rel() {
-                        None => {}
-                        Some(reltypes) => {
-                            if reltypes.contains(&RelationType::Next) {
-                                next = Some(l.clone());
-                            }
-                        }
-                    }
-                }
-                let mut chain_responses: Vec<Value> = res
-                    .json()
-                    .map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))?;
-                while next.is_some() {
-                    let next_link = next.unwrap();
-                    next = None;
-                    let uri: String = next_link.link().to_string();
+        let mut next_page = get_next_page(res.headers().clone());
+
+        let response = res
+            .json::<Value>()
+            .map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))?;
+
+        match next_page {
+            None => {
+                return T::deserialize(response)
+                    .map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))
+            }
+            Some(_) => {
+                let mut responses: Vec<Value> = vec![];
+                responses.push(response);
+
+                // follow pagination if any
+                while let Some(np) = next_page {
                     let res = client
-                        .execute(zotero_api.request_uri("GET", uri).try_into().unwrap())
+                        .execute(zotero_api.request_uri("GET", np).try_into().unwrap())
                         .map_err(|err| ZoteroApiError::RequestError(err.to_string()))?;
-                    match &res.headers().get(header::LINK) {
-                        None => {
-                            next = None;
-                        }
-                        Some(v) => {
-                            let link: Link = v.to_str().unwrap().parse().unwrap();
-                            for l in link.values() {
-                                match l.rel() {
-                                    None => {}
-                                    Some(reltypes) => {
-                                        if reltypes.contains(&RelationType::Next) {
-                                            next = Some(l.clone());
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    let mut v: Vec<Value> = res
+
+                    next_page = get_next_page(res.headers().clone());
+
+                    let mut response: Vec<Value> = res
                         .json()
                         .map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))?;
-                    chain_responses.append(&mut v);
+
+                    responses.append(&mut response);
                 }
-                Ok(T::deserialize(Value::Array(chain_responses))
-                    .map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))?)
+
+                T::deserialize(Value::Array(responses))
+                    .map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))
             }
         }
     }
@@ -95,69 +74,66 @@ impl ZoteroApiAsyncExecutor for http::Request<Bytes> {
 
         if res.status().as_u16() == 403 {
             return Err(ZoteroApiError::AuthenticationError(
-                res.text().await.unwrap(),
+                res.text().await.unwrap_or("".to_string()),
             ));
         }
 
-        match &res.headers().get(header::LINK) {
-            None => Ok(T::deserialize(
-                res.json::<Value>()
-                    .await
-                    .map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))?,
-            )
-            .map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))?),
-            Some(v) => {
-                let link: Link = v.to_str().unwrap().parse().unwrap();
-                let mut next: Option<LinkValue> = None;
-                for l in link.values() {
-                    match l.rel() {
-                        None => {}
-                        Some(reltypes) => {
-                            if reltypes.contains(&RelationType::Next) {
-                                next = Some(l.clone());
-                            }
-                        }
-                    }
-                }
-                let mut chain_responses: Vec<Value> = res
-                    .json()
-                    .await
-                    .map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))?;
-                while next.is_some() {
-                    let next_link = next.unwrap();
-                    next = None;
-                    let uri: String = next_link.link().to_string();
+        let mut next_page = get_next_page(res.headers().clone());
+
+        let response = res
+            .json::<Value>()
+            .await
+            .map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))?;
+
+        match next_page {
+            None => {
+                return T::deserialize(response)
+                    .map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))
+            }
+            Some(_) => {
+                let mut responses: Vec<Value> = vec![];
+                responses.push(response);
+
+                // follow pagination if any
+                while let Some(np) = next_page {
                     let res = client
-                        .execute(zotero_api.request_uri("GET", uri).try_into().unwrap())
+                        .execute(zotero_api.request_uri("GET", np).try_into().unwrap())
                         .await
                         .map_err(|err| ZoteroApiError::RequestError(err.to_string()))?;
-                    match &res.headers().get(header::LINK) {
-                        None => {
-                            next = None;
-                        }
-                        Some(v) => {
-                            let link: Link = v.to_str().unwrap().parse().unwrap();
-                            for l in link.values() {
-                                match l.rel() {
-                                    None => {}
-                                    Some(reltypes) => {
-                                        if reltypes.contains(&RelationType::Next) {
-                                            next = Some(l.clone());
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    let mut v: Vec<Value> = res
+
+                    next_page = get_next_page(res.headers().clone());
+
+                    let mut response: Vec<Value> = res
                         .json()
                         .await
                         .map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))?;
-                    chain_responses.append(&mut v);
+
+                    responses.append(&mut response);
                 }
-                Ok(T::deserialize(Value::Array(chain_responses))
-                    .map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))?)
+
+                T::deserialize(Value::Array(responses))
+                    .map_err(|err| ZoteroApiError::ParseResponseError(err.to_string()))
             }
         }
     }
+}
+
+fn get_next_page(headers: reqwest::header::HeaderMap) -> Option<String> {
+    headers.get(reqwest::header::LINK).and_then(|link_header| {
+        link_header
+            .to_str()
+            .unwrap_or("")
+            .parse()
+            .ok()
+            .and_then(|link: Link| {
+                link.values()
+                    .iter()
+                    .find(|link_value| {
+                        link_value
+                            .rel()
+                            .map_or(false, |rel| rel.contains(&RelationType::Next))
+                    })
+                    .map(|link_value| link_value.link().to_string())
+            })
+    })
 }
