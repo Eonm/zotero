@@ -9,7 +9,7 @@ readme = "README.md"
 repository = "https://github.com/Eonm/zotero"
 authors = [
     "ju6ge <judge@felixrichter.tech>",
-    "enom <eon.mathis@gmail.com>"
+    "Eonm <eon.mathis@gmail.com>"
 ]
 keywords = ["zotero", "digital-humanities", "citations", "zotero-api"]
 license = "MIT"
