@@ -1,11 +1,12 @@
 [package]
 name = "zotero_derive"
-version = "0.0.3"
-authors = ["ju6ge <judge@felixrichter.tech>"]
-license = "MIT"
-description = "Communicate with Zotero API"
-repository = "https://github.com/Eonm/zotero"
-keywords = ["zotero", "digital-humanities", "citations", "zotero-api"]
+version.workspace = true
+edition.workspace = true
+readme.workspace = true
+repository.workspace = true
+#publish.workspace = true
+authors.workspace = true
+license.workspace = true
 
 [lib]
 proc-macro = true
